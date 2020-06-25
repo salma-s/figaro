@@ -1,7 +1,35 @@
+
 import FreeCAD
 import Part
 import Drawing
 import shutil
+
+# -----------------------------------
+#   Document Object IDs and Types
+# -----------------------------------
+boxes = []
+cylinders = []
+fusions = []
+shapes = []
+
+BOX = 'Box'
+CYLINDER = 'Cylinder'
+FUSION = 'Fusion'
+SHAPE = 'Shape'
+
+# Create id for the document object type and add it to the respective list
+def generateID(objectType): 
+	if objectType == BOX:
+		id = BOX + str(len(boxes)+1 )
+		boxes.append(id)
+	elif objectType == CYLINDER:
+		id = CYLINDER + str(len(cylinders)+1 )
+		cylinders.append(id)
+	elif objectType == FUSION:
+		id = FUSION + str(len(fusions)+1 )
+		fusions.append(id)
+	return id
+
 
 # -------------------------
 #   Building Blocks
@@ -21,7 +49,6 @@ def cylinder(doc, id, dimensions):
 	doc.getObject(id).Height=dimensions[1]
 	doc.getObject(id).Angle=dimensions[2]
 
-
 # -------------------------
 #   Fusion
 # -------------------------
@@ -36,29 +63,28 @@ def fuseCut(doc, fuseID, baseID, toolID):
 	doc.getObject(fuseID).Base = doc.getObject(baseID)
 	doc.getObject(fuseID).Tool = doc.getObject(toolID)
 
-
 # -------------------------
 #   Build Shape
 # -------------------------
 
 def shape(doc):
 	# Create three boxes and a cylinder
-	box(doc, "Box", [100, 100, 100])
-	box(doc, "Box1", [90, 40, 100])
-	box(doc, "Box2", [20, 85, 100])
-	cylinder(doc, "Cylinder", [80, 100, 360])
+	box(doc, generateID(BOX), [100, 100, 100])
+	box(doc, generateID(BOX), [90, 40, 100])
+	box(doc, generateID(BOX), [20, 85, 100])
+	cylinder(doc, generateID(CYLINDER), [80, 100, 360])
 
 	# Fuse two boxes and the cylinder
-	fusePart(doc, "Fusion", "Box1", "Cylinder")
-	fusePart(doc, "Fusion1", "Box2", "Fusion")
-	fuseCut(doc, "Shape", "Box", "Fusion1")
+	fusePart(doc, generateID(FUSION), "Box2", "Cylinder1")
+	fusePart(doc, generateID(FUSION), "Box3", "Fusion1")
+	fuseCut(doc, "Shape", "Box1", "Fusion2")
 
 def circularShape(doc): 
-	box(doc, "Box", [100, 100, 100])
-	cylinder(doc, "Cylinder", [40, 100, 360])
-	doc.getObject("Cylinder").Placement = FreeCAD.Placement(App.Vector(50,50,0), App.Rotation(0,0,0))	
-	fuseCut(doc, "Shape", "Box", "Cylinder")
+	box(doc, generateID(BOX), [100, 100, 100])
+	cylinder(doc, generateID(CYLINDER), [40, 100, 360])
 
+	doc.getObject("Cylinder1").Placement = FreeCAD.Placement(App.Vector(50,50,0), App.Rotation(0,0,0))	
+	fuseCut(doc, "Shape", "Box1", "Cylinder1")
 
 # -------------------------
 #   Generate Drawings
@@ -136,7 +162,6 @@ def exportDrawing(path):
 
 def exportFreeCAD(doc, path):
     doc.saveAs(path)
-
 
 # -------------   Main    -------------
 
