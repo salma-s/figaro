@@ -3,48 +3,62 @@ import Part
 import Drawing
 import shutil
 
+# -------------------------
+#   Building Blocks
+# -------------------------
+
+# dimensions = [length, width, height]
+def box(doc, id, dimensions):
+	doc.addObject("Part::Box", id)
+	doc.getObject(id).Length=dimensions[0]
+	doc.getObject(id).Width=dimensions[1]
+	doc.getObject(id).Height=dimensions[2]
+
+# dimensions = [radius, height, angle]
+def cylinder(doc, id, dimensions):
+	doc.addObject("Part::Cylinder", id)
+	doc.getObject(id).Radius=dimensions[0]
+	doc.getObject(id).Height=dimensions[1]
+	doc.getObject(id).Angle=dimensions[2]
+
+
+# -------------------------
+#   Fusion
+# -------------------------
+
+def fusePart(doc, fuseID, baseID, toolID):
+	doc.addObject("Part::Fuse", fuseID)
+	doc.getObject(fuseID).Base = doc.getObject(baseID)
+	doc.getObject(fuseID).Tool = doc.getObject(toolID)
+
+def fuseCut(doc, fuseID, baseID, toolID):
+	doc.addObject("Part::Cut", fuseID)
+	doc.getObject(fuseID).Base = doc.getObject(baseID)
+	doc.getObject(fuseID).Tool = doc.getObject(toolID)
+
+
+
+
+# -------------------------
+#   Build Shape
+# -------------------------
+
 def shape(doc):
 	# Create three boxes and a cylinder
-	doc.addObject("Part::Box","Box")
-	doc.Box.Length=100.00
-	doc.Box.Width=100.00
-	doc.Box.Height=100.00
-	
-
-	doc.addObject("Part::Box","Box1")
-	doc.Box1.Length=90.00
-	doc.Box1.Width=40.00
-	doc.Box1.Height=100.00
-	
-
-	doc.addObject("Part::Box","Box2")
-	doc.Box2.Length=20.00
-	doc.Box2.Width=85.00
-	doc.Box2.Height=100.00
-	
-
-	doc.addObject("Part::Cylinder","Cylinder")
-	doc.Cylinder.Radius=80.00
-	doc.Cylinder.Height=100.00
-	doc.Cylinder.Angle=360.00
-	
+	box(doc, "Box", [100, 100, 100])
+	box(doc, "Box1", [90, 40, 100])
+	box(doc, "Box2", [20, 85, 100])
+	cylinder(doc, "Cylinder", [80, 100, 360])
 
 	# Fuse two boxes and the cylinder
-	doc.addObject("Part::Fuse","Fusion")
-	doc.Fusion.Base = doc.Cylinder
-	doc.Fusion.Tool = doc.Box1
-	
+	fusePart(doc, "Fusion", "Box1", "Cylinder")
+	fusePart(doc, "Fusion1", "Box2", "Fusion")
+	fuseCut(doc, "Shape", "Box", "Fusion1")
 
-	doc.addObject("Part::Fuse","Fusion1")
-	doc.Fusion1.Base = doc.Box2
-	doc.Fusion1.Tool = doc.Fusion
-	
 
-	# Cut the fused shapes from the first box
-	doc.addObject("Part::Cut","Shape")
-	doc.Shape.Base = doc.Box 
-	doc.Shape.Tool = doc.Fusion1
-
+# -------------------------
+#   Generate Drawing
+# -------------------------
 
 def draw(doc):
 	# Insert a Page object and assign a template
@@ -80,12 +94,21 @@ def draw(doc):
 	doc.ViewIso.Y = 140.0
 	doc.Page.addObject(doc.ViewIso)
 
+# -------------------------
+#   Exports
+# -------------------------
+
+# Will not work for macros
+
 def exportDrawing(path):
     drawingSVGPath = doc.Page.PageResult
     shutil.copyfile(drawingSVGPath, path)
 
 def exportFreeCAD(doc, path):
     doc.saveAs(path)
+
+
+# -------------   Main    -------------
 
 doc = FreeCAD.newDocument()
 shape(doc)
