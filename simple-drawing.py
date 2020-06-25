@@ -55,44 +55,88 @@ def shape(doc):
 	fusePart(doc, "Fusion1", "Box2", "Fusion")
 	fuseCut(doc, "Shape", "Box", "Fusion1")
 
+def circularShape(doc): 
+	# Create three boxes and a cylinder
+	doc.addObject("Part::Box","Box")
+	doc.Box.Length=100.00
+	doc.Box.Width=100.00
+	doc.Box.Height=100.00
+	
+	doc.addObject("Part::Cylinder","Cylinder")
+	doc.Cylinder.Radius=40.00
+	doc.Cylinder.Height=100.00
+	doc.Cylinder.Angle=360.00
+	doc.Cylinder.Placement = App.Placement(App.Vector(50,50,0), App.Rotation(0,0,0))
+
+	# Cut the fused shapes from the first box
+	doc.addObject("Part::Cut","Shape")
+	doc.Shape.Base = App.ActiveDocument.Box 
+	doc.Shape.Tool = App.ActiveDocument.Cylinder
+
 
 # -------------------------
-#   Generate Drawing
+#   Generate Drawings
 # -------------------------
 
-def draw(doc):
+def draw(doc, templatePath):
 	# Insert a Page object and assign a template
-	doc.addObject('Drawing::FeaturePage','Page')
-	doc.Page.Template = 'Templates/A1_Landscape_plain.svg'
+	page = doc.addObject('TechDraw::DrawPage', 'Isometric')
+
+	template = doc.addObject('TechDraw::DrawSVGTemplate','Template')
+	template.Template = templatePath
+	page.Template = doc.Template
+	
+	# Create a third view on the same object but isometric view
+	viewIso = doc.addObject('TechDraw::DrawViewPart','ViewIso')
+	page.addView(viewIso)
+	doc.ViewIso.Source = [doc.Shape]
+	doc.ViewIso.Direction = (-1.0,-2.0,2.0)
+	doc.ViewIso.X = 120.0
+	doc.ViewIso.Y = 150.0
+	doc.ViewIso.Scale = 1.20
+	doc.ViewIso.Rotation = 108.5
+	doc.ViewIso.HardHidden = False 
 	
 
-	# Create a view on the Shape object, define the position and scale and assign it to a Page
-	doc.addObject('Drawing::FeatureViewPart','View')
-	doc.View.Source = doc.Shape
-	doc.View.Direction = (0.0,0.0,1.0)
-	doc.View.X = 10.0
-	doc.View.Y = 10.0
-	doc.Page.addObject(doc.View)
+	# Insert a Page object and assign a template
+	page2 = doc.addObject('TechDraw::DrawPage', 'Orthographic')
+	page2.Template = FreeCAD.ActiveDocument.Template
 	
+	# Create a view on the Shape object, define the position and scale and assign it to a Page
+	# Front View
+	frontView = doc.addObject('TechDraw::DrawViewPart','FrontView')
+	page2.addView(frontView)
+	doc.FrontView.Source = [doc.Shape]
+	doc.FrontView.HardHidden=True
+	doc.FrontView.Direction = (0.0,-1.0,0.0)
+	doc.FrontView.X = 100.0
+	doc.FrontView.Y = 120.0
+	doc.FrontView.Scale = 0.8
+	doc.FrontView.Rotation = 90.0
 
 	# Create a second view on the same object but this time the view is rotated by 90 degrees.
-	doc.addObject('Drawing::FeatureViewPart','ViewRot')
-	doc.ViewRot.Source = doc.Shape
-	doc.ViewRot.Direction = (0.0,0.0,1.0)
-	doc.ViewRot.X = 290.0
-	doc.ViewRot.Y = 30.0
-	doc.ViewRot.Scale = 1.0
-	doc.ViewRot.Rotation = 90.0
-	doc.Page.addObject(doc.ViewRot)
-	
+	# Right View
+	rightView = doc.addObject('TechDraw::DrawViewPart','RightView')
+	page2.addView(rightView)
+	doc.RightView.Source = [doc.Shape]    
+	doc.RightView.HardHidden=True
+	doc.RightView.Direction = (0.0,0.0,1.0)
+	doc.RightView.X = 230.0
+	doc.RightView.Y = 120.0
+	doc.RightView.Scale = 0.8
+	doc.RightView.Rotation = 90.0
 
-	# Create a third view on the same object but isometric view
-	doc.addObject('Drawing::FeatureViewPart','ViewIso')
-	doc.ViewIso.Source = doc.Shape
-	doc.ViewIso.Direction = (1.0,1.0,1.0)
-	doc.ViewIso.X = 335.0
-	doc.ViewIso.Y = 140.0
-	doc.Page.addObject(doc.ViewIso)
+	# Create a second view on the same object but this time the view is rotated by 90 degrees.
+	# Top View
+	topView = doc.addObject('TechDraw::DrawViewPart','TopView')
+	page2.addView(topView)
+	doc.TopView.Source = [doc.Shape]
+	doc.TopView.HardHidden=True
+	doc.TopView.Direction = (-1.0,0.0,0.0)
+	doc.TopView.X = 100.0
+	doc.TopView.Y = 230.0
+	doc.TopView.Scale = 0.8
+	doc.TopView.Rotation = 90.0
 
 # -------------------------
 #   Exports
@@ -112,7 +156,7 @@ def exportFreeCAD(doc, path):
 
 doc = FreeCAD.newDocument()
 shape(doc)
-draw(doc)
+draw(doc, 'Templates/A1_Landscape_plain.svg')
 doc.recompute()
 
 exportDrawing('./Output/output.svg')
