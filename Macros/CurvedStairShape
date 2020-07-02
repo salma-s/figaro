@@ -1,0 +1,105 @@
+import FreeCAD
+import Part
+import TechDraw
+
+# Create three boxes and a cylinder
+App.ActiveDocument.addObject("Part::Box","Box")
+App.ActiveDocument.Box.Length=100.00
+App.ActiveDocument.Box.Width=100.00
+App.ActiveDocument.Box.Height=100.00
+
+App.ActiveDocument.addObject("Part::Box","Box1")
+App.ActiveDocument.Box1.Length=40.00
+App.ActiveDocument.Box1.Width=100.00
+App.ActiveDocument.Box1.Height=90.00
+App.ActiveDocument.Box1.Placement = App.Placement(App.Vector(60,0,10), App.Rotation(0,0,0))
+
+App.ActiveDocument.addObject("Part::Box","Box2")
+App.ActiveDocument.Box2.Length=85.00
+App.ActiveDocument.Box2.Width=100.00
+App.ActiveDocument.Box2.Height=20.00
+App.ActiveDocument.Box2.Placement = App.Placement(App.Vector(15,0,80), App.Rotation(0,0,0))
+
+App.ActiveDocument.addObject("Part::Cylinder","Cylinder")
+App.ActiveDocument.Cylinder.Radius=80.00
+App.ActiveDocument.Cylinder.Height=100.00
+App.ActiveDocument.Cylinder.Angle=360.00
+App.ActiveDocument.Cylinder.Placement = App.Placement(App.Vector(100,0,100), App.Rotation(90,90,0))
+
+# Fuse two boxes and the cylinder
+App.ActiveDocument.addObject("Part::Fuse","Fusion")
+App.ActiveDocument.Fusion.Base = App.ActiveDocument.Cylinder
+App.ActiveDocument.Fusion.Tool = App.ActiveDocument.Box1
+
+App.ActiveDocument.addObject("Part::Fuse","Fusion1")
+App.ActiveDocument.Fusion1.Base = App.ActiveDocument.Box2
+App.ActiveDocument.Fusion1.Tool = App.ActiveDocument.Fusion
+
+# Cut the fused shapes from the first box
+App.ActiveDocument.addObject("Part::Cut","Shape")
+App.ActiveDocument.Shape.Base = App.ActiveDocument.Box 
+App.ActiveDocument.Shape.Tool = App.ActiveDocument.Fusion1
+
+
+# Insert a Page object and assign a template
+page = App.ActiveDocument.addObject('TechDraw::DrawPage','Page')
+template = FreeCAD.ActiveDocument.addObject('TechDraw::DrawSVGTemplate','Template')
+template.Template = App.getResourceDir()+'Mod/Drawing/Templates/A3_Landscape.svg'
+page.Template = FreeCAD.ActiveDocument.Template
+
+# Create an isometric view
+viewIso = App.ActiveDocument.addObject('TechDraw::DrawViewPart','ViewIso')
+page.addView(viewIso)
+App.ActiveDocument.ViewIso.Source = [App.ActiveDocument.Shape]
+App.ActiveDocument.ViewIso.Direction = (1.0,-1.0,1.0)
+App.ActiveDocument.ViewIso.X = 120.0
+App.ActiveDocument.ViewIso.Y = 150.0
+App.ActiveDocument.ViewIso.Scale = 1.20
+App.ActiveDocument.ViewIso.Rotation = 0.0
+App.ActiveDocument.ViewIso.HardHidden = False 
+
+
+# Insert a Page object and assign a template
+page2 = App.ActiveDocument.addObject('TechDraw::DrawPage','Page2')
+page2.Template = FreeCAD.ActiveDocument.Template
+
+# Create a view on the Shape object, define the position and scale and assign it to a Page
+# Front View
+frontView = App.ActiveDocument.addObject('TechDraw::DrawViewPart','FrontView')
+page2.addView(frontView)
+App.ActiveDocument.FrontView.Source = [App.ActiveDocument.Shape]
+App.ActiveDocument.FrontView.HardHidden=True
+App.ActiveDocument.FrontView.Direction = (0.0,-1.0,0.0)
+App.ActiveDocument.FrontView.X = 100.0
+App.ActiveDocument.FrontView.Y = 120.0
+App.ActiveDocument.FrontView.Scale = 0.8
+App.ActiveDocument.FrontView.Rotation = 0.0
+dvp = App.ActiveDocument.FrontView
+
+
+# Create a second view on the same object but this time the view is rotated by 90 degrees.
+# Right View
+rightView = App.ActiveDocument.addObject('TechDraw::DrawViewPart','RightView')
+page2.addView(rightView)
+App.ActiveDocument.RightView.Source = [App.ActiveDocument.Shape]    
+App.ActiveDocument.RightView.HardHidden=True
+App.ActiveDocument.RightView.Direction = (1.0,0.0,0.0)
+App.ActiveDocument.RightView.X = 230.0
+App.ActiveDocument.RightView.Y = 120.0
+App.ActiveDocument.RightView.Scale = 0.8
+App.ActiveDocument.RightView.Rotation = 0.0
+
+# Create a second view on the same object but this time the view is rotated by 90 degrees.
+# Top View
+topView = App.ActiveDocument.addObject('TechDraw::DrawViewPart','TopView')
+page2.addView(topView)
+App.ActiveDocument.TopView.Source = [App.ActiveDocument.Shape]
+App.ActiveDocument.TopView.HardHidden=True
+App.ActiveDocument.TopView.Direction = (0.0,0.0,1.0)
+App.ActiveDocument.TopView.X = 100.0
+App.ActiveDocument.TopView.Y = 230.0
+App.ActiveDocument.TopView.Scale = 0.8
+App.ActiveDocument.TopView.Rotation = 0.0
+
+
+App.ActiveDocument.recompute()
