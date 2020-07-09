@@ -71,7 +71,6 @@ def circularShape(doc, id):
 	place(doc, 'Cylinder1', [50,50,0], [0,0,0])
 	fuseCut(doc, id, "Box1", "Cylinder1")
 
-
 def place(doc, id, t, r):
 	doc.getObject(id).Placement = FreeCAD.Placement(App.Vector(t[0], t[1], t[2]), App.Rotation(r[0], r[1], r[2]))	 
 

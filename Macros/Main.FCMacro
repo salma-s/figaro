@@ -8,6 +8,7 @@ import shutil
 from Cuboid import Cuboid
 from Cylinder import Cylinder
 
+print(sys.path)
 # -----------------------------------
 #   Document Object IDs and Types
 # -----------------------------------
