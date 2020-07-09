@@ -4,32 +4,33 @@ import Part
 import Drawing
 import TechDraw
 import shutil
+import importlib
+
+# -----------------------------
+# Reload modules ** for development only**
+import Cuboid
+import Cylinder
+import HoleInBox
+importlib.reload(Cuboid)
+importlib.reload(Cylinder)
+importlib.reload(HoleInBox)
+# -----------------------------
 
 from Cuboid import Cuboid
 from Cylinder import Cylinder
+from HoleInBox import HoleInBox
 
 # -----------------------------------
 #   Document Object IDs and Types
 # -----------------------------------
-boxes = []
-cylinders = []
 fusions = []
 shapes = []
-
-BOX = 'Box'
-CYLINDER = 'Cylinder'
 FUSION = 'Fusion'
 SHAPE = 'Shape'
 
 # Create id for the document object type and add it to the respective list
 def generateID(objectType): 
-	if objectType == BOX:
-		id = BOX + str(len(boxes)+1 )
-		boxes.append(id)
-	elif objectType == CYLINDER:
-		id = CYLINDER + str(len(cylinders)+1 )
-		cylinders.append(id)
-	elif objectType == FUSION:
+	if objectType == FUSION:
 		id = FUSION + str(len(fusions)+1 )
 		fusions.append(id)
 	return id
@@ -52,7 +53,7 @@ def fuseCut(doc, fuseID, baseID, toolID):
 #   Build Shape
 # -------------------------
 
-def shape(doc):
+def stairShape(doc):
 	# Create three boxes and a cylinder
 	Cuboid(doc, [100, 100, 100])
 	Cuboid(doc, [90, 40, 100])
@@ -63,14 +64,6 @@ def shape(doc):
 	fusePart(doc, generateID(FUSION), "Box2", "Cylinder1")
 	fusePart(doc, generateID(FUSION), "Box3", "Fusion1")
 	fuseCut(doc, "Shape", "Box1", "Fusion2")
-
-def circularShape(doc, id): 
-	Cuboid(doc, [100, 100, 100])
-	Cylinder(doc, [30, 100, 360])
-
-	place(doc, 'Cylinder1', [50,50,0], [0,0,0])
-	fuseCut(doc, id, "Box1", "Cylinder1")
-
 
 def place(doc, id, t, r):
 	doc.getObject(id).Placement = FreeCAD.Placement(App.Vector(t[0], t[1], t[2]), App.Rotation(r[0], r[1], r[2]))	 
@@ -220,10 +213,9 @@ def exportFreeCAD(doc, path):
 # -------------   Main    -------------
 
 doc = FreeCAD.newDocument()
-
-#generateCube(doc, 2, [50,100,270])
-circularShape(doc, "Shape")
-draw(doc, 'Templates/A1_Landscape_plain.svg', "Shape")
+object = HoleInBox(doc, [33,33,33])
+print(object.id)
+draw(doc, 'Templates/A1_Landscape_plain.svg', object.id)
 doc.recompute()
 
 style = 4

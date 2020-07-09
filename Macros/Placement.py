@@ -1,4 +1,4 @@
 class Placement:
-    def __init__(self, transf, rot):
-        self.transf = transf
+    def __init__(self, trans, rot):
+        self.trans = trans
         self.rot = rot
