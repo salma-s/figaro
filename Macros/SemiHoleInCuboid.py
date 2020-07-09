@@ -4,22 +4,21 @@ from Cuboid import Cuboid
 from Cylinder import Cylinder
 import FreeCAD
 
-class HoleInBox(Shape):
+class SemiHoleInCuboid(Shape):
     NEXT_ID = 1
 
     def __init__(self, doc, dimension):
-        id = "HoleInBox" + str(HoleInBox.NEXT_ID)
+        id = "SemiHoleInCuboid" + str(SemiHoleInCuboid.NEXT_ID)
         super().__init__(id, dimension)
         
         cube = Cuboid(doc, [dimension[0], dimension[1], dimension[2]])
-
-        # TODO: make rotation random
-        pos = Placement([dimension[0]/2, dimension[1]/2, 0], [0, 0, 0])
-        cylinder = Cylinder(doc, [0.3*dimension[0], dimension[2], 360], pos)
+        cylinder = Cylinder(doc, [dimension[0]/2, dimension[2], 360], Placement([dimension[0]/2, dimension[1], 0], [0, 0, 0]))
         
-        # Cut cylinder
+        # Cut hole from cube
         doc.addObject("Part::Cut", id)
         doc.getObject(id).Base = doc.getObject(cube.id)
         doc.getObject(id).Tool = doc.getObject(cylinder.id)
 
-        HoleInBox.NEXT_ID += 1
+        SemiHoleInCuboid.NEXT_ID += 1
+
+

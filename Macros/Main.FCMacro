@@ -8,17 +8,15 @@ import importlib
 
 # -----------------------------
 # Reload modules ** for development only**
-import Cuboid
-import Cylinder
-import HoleInBox
-importlib.reload(Cuboid)
-importlib.reload(Cylinder)
-importlib.reload(HoleInBox)
+
 # -----------------------------
 
 from Cuboid import Cuboid
 from Cylinder import Cylinder
 from HoleInBox import HoleInBox
+from Wedge import Wedge
+from SemiHoleInCuboid import SemiHoleInCuboid
+from QuarterHoleInCuboid import QuarterHoleInCuboid
 
 # -----------------------------------
 #   Document Object IDs and Types
@@ -213,8 +211,7 @@ def exportFreeCAD(doc, path):
 # -------------   Main    -------------
 
 doc = FreeCAD.newDocument()
-object = HoleInBox(doc, [33,33,33])
-print(object.id)
+object = QuarterHoleInCuboid(doc, [100,100,100])
 draw(doc, 'Templates/A1_Landscape_plain.svg', object.id)
 doc.recompute()
 
