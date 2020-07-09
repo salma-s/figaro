@@ -42,7 +42,7 @@ App.ActiveDocument.ViewIso.HardHidden = False
 page2 = App.ActiveDocument.addObject('TechDraw::DrawPage','Page2')
 page2.Template = FreeCAD.ActiveDocument.Template
 
-# Create a view on the Shape object, define the position and scale and assign it to a Page
+# Create orthographic views on the Shape object, define the positions and scale and assign them to a Page
 # Front View
 frontView = App.ActiveDocument.addObject('TechDraw::DrawViewPart','FrontView')
 page2.addView(frontView)
@@ -55,8 +55,6 @@ App.ActiveDocument.FrontView.Scale = 0.8
 App.ActiveDocument.FrontView.Rotation = 0.0
 dvp = App.ActiveDocument.FrontView
 
-
-# Create a second view on the same object but this time the view is rotated by 90 degrees.
 # Right View
 rightView = App.ActiveDocument.addObject('TechDraw::DrawViewPart','RightView')
 page2.addView(rightView)
@@ -68,7 +66,6 @@ App.ActiveDocument.RightView.Y = 120.0
 App.ActiveDocument.RightView.Scale = 0.8
 App.ActiveDocument.RightView.Rotation = 0.0
 
-# Create a second view on the same object but this time the view is rotated by 90 degrees.
 # Top View
 topView = App.ActiveDocument.addObject('TechDraw::DrawViewPart','TopView')
 page2.addView(topView)
