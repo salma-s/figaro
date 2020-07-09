@@ -19,6 +19,8 @@ from SemiHoleInCuboid import SemiHoleInCuboid
 from QuarterHoleInCuboid import QuarterHoleInCuboid
 from SemiCircle import SemiCircle
 from HoleInDoor import HoleInDoor
+from QuarterCircle import QuarterCircle
+from HoleInWedge import HoleInWedge
 
 # -----------------------------------
 #   Document Object IDs and Types
@@ -213,35 +215,35 @@ def exportFreeCAD(doc, path):
 # -------------   Main    -------------
 
 doc = FreeCAD.newDocument()
-object = HoleInDoor(doc, [100,100,100])
+object = HoleInWedge(doc, [100,100,100])
 draw(doc, 'Templates/A1_Landscape_plain.svg', object.id)
 doc.recompute()
 
-style = 4
-weight = 0.35
-darkGrey = (50.0, 50.0, 50.0, 1.0)
-
-dvp = doc.FrontView
-start = FreeCAD.Vector (0.0, 55.0, 0.0)
-end = FreeCAD.Vector(0.0, -55.0, 0.0)
-dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
-
-
-dvp = doc.RightView
-start = FreeCAD.Vector (0.0, 55.0, 0.0)
-end = FreeCAD.Vector(0.0, -55.0, 0.0)
-dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
-
-
-dvp = doc.TopView
-start = FreeCAD.Vector (0.0, 55.0, 0.0)
-end = FreeCAD.Vector(0.0, -55.0, 0.0)
-dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
-
-
-start = FreeCAD.Vector (55.0, 0.0, 0.0)
-end = FreeCAD.Vector (-55.0, 0.0, 0.0)
-dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
+#style = 4
+#weight = 0.35
+#darkGrey = (50.0, 50.0, 50.0, 1.0)
+#
+#dvp = doc.FrontView
+#start = FreeCAD.Vector (0.0, 55.0, 0.0)
+#end = FreeCAD.Vector(0.0, -55.0, 0.0)
+#dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
+#
+#
+#dvp = doc.RightView
+#start = FreeCAD.Vector (0.0, 55.0, 0.0)
+#end = FreeCAD.Vector(0.0, -55.0, 0.0)
+#dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
+#
+#
+#dvp = doc.TopView
+#start = FreeCAD.Vector (0.0, 55.0, 0.0)
+#end = FreeCAD.Vector(0.0, -55.0, 0.0)
+#dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
+#
+#
+#start = FreeCAD.Vector (55.0, 0.0, 0.0)
+#end = FreeCAD.Vector (-55.0, 0.0, 0.0)
+#dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
 
 
 #exportDrawing('./Output/output.svg')
