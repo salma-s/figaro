@@ -53,28 +53,23 @@ def fuseCut(doc, fuseID, baseID, toolID):
 	doc.getObject(fuseID).Base = doc.getObject(baseID)
 	doc.getObject(fuseID).Tool = doc.getObject(toolID)
 
-# -------------------------
-#   Build Shape
-# -------------------------
-
-def stairShape(doc):
-	# Create three boxes and a cylinder
-	Cuboid(doc, [100, 100, 100])
-	Cuboid(doc, [90, 40, 100])
-	Cuboid(doc, [20, 85, 100])
-	Cylinder(doc, [80, 100, 360])
-
-	# Fuse two boxes and the cylinder
-	fusePart(doc, generateID(FUSION), "Box2", "Cylinder1")
-	fusePart(doc, generateID(FUSION), "Box3", "Fusion1")
-	fuseCut(doc, "Shape", "Box1", "Fusion2")
-
 def right(doc, base, new, unit, k):
 	doc.getObject(new).Placement = FreeCAD.Placement(App.Vector(k*unit, 0, 0), App.Rotation(0,0,0))	
 	id = generateID(FUSION) 
 	fusePart(doc, id, base, new)
 	return id
 
+def behind(doc, base, new, unit, k):
+	doc.getObject(new).Placement = FreeCAD.Placement(App.Vector(0, k*unit, 0), App.Rotation(0,0,0))	
+	id = generateID(FUSION) 
+	fusePart(doc, id, base, new)
+	return id
+
+def top(doc, base, new, unit, k):
+	doc.getObject(new).Placement = FreeCAD.Placement(App.Vector(0, 0, k*unit), App.Rotation(0,0,0))	
+	id = generateID(FUSION) 
+	fusePart(doc, id, base, new)
+	return id
 
 def algo(doc, n):
 	shapes = []
@@ -85,87 +80,30 @@ def algo(doc, n):
 	factory = ShapeFactory(doc, unit)
 	for i in range(n*n*n):
 		randomShape = factory.generateRandomShape()
-		boxes.append(randomShape.id)
+		shapes.append(randomShape.id)
+	print(shapes)
 	
 	for i in range(0, n*n*n, n):
 		shape = shapes[i]
 		for j in range(1, n):
 			shape = right(doc, shape, shapes[i + j], unit, j)
 		columns.append(shape)
-		
+	
+	for i in range (0, n*n, n):
+		column = columns[i]
+		for j in range(1, n):	
+			column = behind(doc, column, columns[i + j], unit, j)
+		layers.append(column)
+	
+	final = layers[0]
+	for i in range (1, n):
+		final = top(doc, final, layers[i], unit, i)
+	
+	return final
+
 
 def place(doc, id, t, r):
-	doc.getObject(id).Placement = FreeCAD.Placement(App.Vector(t[0], t[1], t[2]), App.Rotation(r[0], r[1], r[2]))	 
-
-
-# creates n x n cube
-def oldAlgorithm(doc, n):
-	boxes = []
-	rows = []
-	layers = [] # n layers
-	unit = [100,100,100]	
-
-	factory = ShapeFactory(doc, unit[0])
-	
-	# create box units
-	for i in range(n*n*n):
-		randomShape = factory.generateRandomShape()
-		boxes.append(randomShape.id)
-	print(boxes)
-		
-	# a cube layer = n rows of n boxes 	
-	j = 0
-	for i in range(0, n*n*n, n):
-		base = boxes[i]	
-		for k in range(1, n):
-			base = placeRight(doc, base, boxes[i+1], unit, k, False);
-		rows.append(base)
-		j += 1
-
-	j = 0	
-	# create n diff layers:
-	for i in range(0, n*n, n):
-		base = rows[i]	
-		for k in range(1, n):
-			base = placeInFront(doc, base, rows[i+1], unit, k, False);
-		layers.append(base)
-		j += 1
-	
-	base = layers[0]
-	x = placeOnTop(doc, base, layers[1], unit, 1, False)
-	placeOnTop(doc, x, layers[2], unit, 1, True)
-	
-		
-
-def placeInFront(doc, baseID, id, unit, k, isFinal):
-	place(doc, id, [0,k*-1*unit[1],0], [0,0,0])
-	if (isFinal == True):
-		fusePart(doc, 'Shape', baseID, id)
-		return ''
-	newID = generateID(FUSION)
-	fusePart(doc, newID, baseID, id)
-
-	return newID
-
-def placeRight(doc, baseID, id, unit, k, isFinal):
-	place(doc, id, [k*unit[0],0,0], [0,0,0])
-	if (isFinal == True):
-		fusePart(doc, 'Shape', baseID, id)
-		return ''
-	newID = generateID(FUSION)
-	fusePart(doc, newID, baseID, id)
-
-	return newID
-
-def placeOnTop(doc, baseID, id, unit, k, isFinal):
-	place(doc, id, [0,0,k*unit[2]], [0,0,0])
-	if (isFinal == True):
-		fusePart(doc, 'Shape', baseID, id)
-		return ''
-	newID = generateID(FUSION)
-	fusePart(doc, newID, baseID, id)
-
-	return newID
+	doc.getObject(id).Placement = FreeCAD.Placement(App.Vector(t[0], t[1], t[2]), App.Rotation(r[0], r[1], r[2]))
 
 # -------------------------
 #   Generate Drawings
@@ -245,38 +183,9 @@ def exportFreeCAD(doc, path):
     doc.saveAs(path)
 
 # -------------   Main    -------------
-
 doc = FreeCAD.newDocument()
-object = oldAlgorithm(doc, 3)
-#draw(doc, 'Templates/A1_Landscape_plain.svg', 'Shape')
+finalObjectID = algo(doc, 3)
+draw(doc, 'Templates/A1_Landscape_plain.svg', finalObjectID)
 doc.recompute()
 
-#style = 4
-#weight = 0.35
-#darkGrey = (50.0, 50.0, 50.0, 1.0)
-#
-#dvp = doc.FrontView
-#start = FreeCAD.Vector (0.0, 55.0, 0.0)
-#end = FreeCAD.Vector(0.0, -55.0, 0.0)
-#dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
-#
-#
-#dvp = doc.RightView
-#start = FreeCAD.Vector (0.0, 55.0, 0.0)
-#end = FreeCAD.Vector(0.0, -55.0, 0.0)
-#dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
-#
-#
-#dvp = doc.TopView
-#start = FreeCAD.Vector (0.0, 55.0, 0.0)
-#end = FreeCAD.Vector(0.0, -55.0, 0.0)
-#dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
-#
-#
-#start = FreeCAD.Vector (55.0, 0.0, 0.0)
-#end = FreeCAD.Vector (-55.0, 0.0, 0.0)
-#dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
 
-
-#exportDrawing('./Output/output.svg')
-#exportFreeCAD(doc, './Output/output.FCStd')

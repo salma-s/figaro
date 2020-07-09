@@ -11,8 +11,13 @@ class QuarterCircle(Shape):
         n = dimension[0]
         id = "QuarterCircle" + str(QuarterCircle.NEXT_ID)
         super().__init__(id, dimension)
-        
-        Cylinder(doc, [n/2, n, 90], Placement([0, 0, 0], [0, 0, 0]))
+
+        doc.addObject("Part::Cylinder", id)
+        doc.getObject(id).Radius = n/2
+        doc.getObject(id).Height = n
+        doc.getObject(id).Angle = 90
+        doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(0,0,0), FreeCAD.Rotation(0,0,0))	
+
         QuarterCircle.NEXT_ID += 1
 
 
