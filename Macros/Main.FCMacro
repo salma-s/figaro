@@ -6,14 +6,9 @@ import TechDraw
 import shutil
 
 from Cuboid import Cuboid
-#import ImportTest
-#import importlib
-#importlib.reload(ImportTest)
-#
-#ImportTest.printText('hello !!!')
-#
+from Cylinder import Cylinder
 
-
+print(sys.path)
 # -----------------------------------
 #   Document Object IDs and Types
 # -----------------------------------
@@ -39,24 +34,6 @@ def generateID(objectType):
 		id = FUSION + str(len(fusions)+1 )
 		fusions.append(id)
 	return id
-
-# -------------------------
-#   Building Blocks
-# -------------------------
-
-# dimensions = [length, width, height]
-def box(doc, id, dimensions):
-	doc.addObject("Part::Box", id)
-	doc.getObject(id).Length=dimensions[0]
-	doc.getObject(id).Width=dimensions[1]
-	doc.getObject(id).Height=dimensions[2]
-
-# dimensions = [radius, height, angle]
-def cylinder(doc, id, dimensions):
-	doc.addObject("Part::Cylinder", id)
-	doc.getObject(id).Radius=dimensions[0]
-	doc.getObject(id).Height=dimensions[1]
-	doc.getObject(id).Angle=dimensions[2]
 
 # -------------------------
 #   Fusion
@@ -90,7 +67,7 @@ def shape(doc):
 
 def circularShape(doc, id): 
 	Cuboid(doc, generateID(BOX), [100, 100, 100])
-	cylinder(doc, generateID(CYLINDER), [40, 100, 360])
+	Cylinder(doc, generateID(CYLINDER), [40, 100, 360])
 
 	place(doc, 'Cylinder1', [50,50,0], [90,90,0])
 	fuseCut(doc, id, "Box1", "Cylinder1")
