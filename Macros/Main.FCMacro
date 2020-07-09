@@ -6,13 +6,7 @@ import TechDraw
 import shutil
 
 from Cuboid import Cuboid
-#import ImportTest
-#import importlib
-#importlib.reload(ImportTest)
-#
-#ImportTest.printText('hello !!!')
-#
-
+from Cylinder import Cylinder
 
 # -----------------------------------
 #   Document Object IDs and Types
@@ -41,24 +35,6 @@ def generateID(objectType):
 	return id
 
 # -------------------------
-#   Building Blocks
-# -------------------------
-
-# dimensions = [length, width, height]
-def box(doc, id, dimensions):
-	doc.addObject("Part::Box", id)
-	doc.getObject(id).Length=dimensions[0]
-	doc.getObject(id).Width=dimensions[1]
-	doc.getObject(id).Height=dimensions[2]
-
-# dimensions = [radius, height, angle]
-def cylinder(doc, id, dimensions):
-	doc.addObject("Part::Cylinder", id)
-	doc.getObject(id).Radius=dimensions[0]
-	doc.getObject(id).Height=dimensions[1]
-	doc.getObject(id).Angle=dimensions[2]
-
-# -------------------------
 #   Fusion
 # -------------------------
 
@@ -78,10 +54,10 @@ def fuseCut(doc, fuseID, baseID, toolID):
 
 def shape(doc):
 	# Create three boxes and a cylinder
-	box(doc, generateID(BOX), [100, 100, 100])
-	box(doc, generateID(BOX), [90, 40, 100])
-	box(doc, generateID(BOX), [20, 85, 100])
-	cylinder(doc, generateID(CYLINDER), [80, 100, 360])
+	Cuboid(doc, generateID(BOX), [100, 100, 100])
+	Cuboid(doc, generateID(BOX), [90, 40, 100])
+	Cuboid(doc, generateID(BOX), [20, 85, 100])
+	Cylinder(doc, generateID(CYLINDER), [80, 100, 360])
 
 	# Fuse two boxes and the cylinder
 	fusePart(doc, generateID(FUSION), "Box2", "Cylinder1")
@@ -90,7 +66,7 @@ def shape(doc):
 
 def circularShape(doc, id): 
 	Cuboid(doc, generateID(BOX), [100, 100, 100])
-	cylinder(doc, generateID(CYLINDER), [40, 100, 360])
+	Cylinder(doc, generateID(CYLINDER), [40, 100, 360])
 
 	place(doc, 'Cylinder1', [50,50,0], [90,90,0])
 	fuseCut(doc, id, "Box1", "Cylinder1")
@@ -110,7 +86,7 @@ def generateCube(doc, n, unit):
 	for i in range(n*n*n):
 		id = 'box' + str(i)
 		boxes.append(id)
-		cylinder(doc, id, unit)
+		Cylinder(doc, id, unit)
 	
 	# a cube layer = n rows of n boxes 	
 	j = 0

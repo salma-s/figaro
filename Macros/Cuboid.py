@@ -4,9 +4,7 @@ import FreeCAD
 
 class Cuboid(Shape):
     def __init__(self, doc, id, dimension):
-        super().__init__(doc, id, dimension)
-        print(id)
-        print(dimension[0])
+        super().__init__(id, dimension)
         doc.addObject("Part::Box", id)
         doc.getObject(id).Length = dimension[0]
         doc.getObject(id).Width = dimension[1]
