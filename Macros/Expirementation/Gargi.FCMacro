@@ -54,7 +54,7 @@ weight = 0.35
 darkGrey = (50.0, 50.0, 50.0, 1.0)
 
 
-# Create orthographic views on the Shape object, define the position and scale and assign them to a Page
+# Create orthographic views on the Shape object, define the positions and scale and assign them to a Page
 # Front View
 frontView = App.ActiveDocument.addObject('TechDraw::DrawViewPart','FrontView')
 page2.addView(frontView)
@@ -66,7 +66,6 @@ App.ActiveDocument.FrontView.Y = 120.0
 App.ActiveDocument.FrontView.Scale = 0.8
 App.ActiveDocument.FrontView.Rotation = 0.0
 
-
 # Right View
 rightView = App.ActiveDocument.addObject('TechDraw::DrawViewPart','RightView')
 page2.addView(rightView)
@@ -77,7 +76,6 @@ App.ActiveDocument.RightView.X = 230.0
 App.ActiveDocument.RightView.Y = 120.0
 App.ActiveDocument.RightView.Scale = 0.8
 App.ActiveDocument.RightView.Rotation = 0.0
-
 
 # Top View
 topView = App.ActiveDocument.addObject('TechDraw::DrawViewPart','TopView')
