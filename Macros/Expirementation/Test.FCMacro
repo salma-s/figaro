@@ -1,12 +1,12 @@
-
 import sys
-FCPATH = '/Applications/FreeCAD.app/Contents/Resources/lib/FreeCADCmd'
-sys.path.append(FCPATH)
-
 import FreeCAD
 import Part
 import Drawing
+import TechDraw
 import shutil
+
+from Cuboid import Cuboid
+from Cylinder import Cylinder
 
 # -----------------------------------
 #   Document Object IDs and Types
@@ -34,25 +34,6 @@ def generateID(objectType):
 		fusions.append(id)
 	return id
 
-
-# -------------------------
-#   Building Blocks
-# -------------------------
-
-# dimensions = [length, width, height]
-def box(doc, id, dimensions):
-	doc.addObject("Part::Box", id)
-	doc.getObject(id).Length=dimensions[0]
-	doc.getObject(id).Width=dimensions[1]
-	doc.getObject(id).Height=dimensions[2]
-
-# dimensions = [radius, height, angle]
-def cylinder(doc, id, dimensions):
-	doc.addObject("Part::Cylinder", id)
-	doc.getObject(id).Radius=dimensions[0]
-	doc.getObject(id).Height=dimensions[1]
-	doc.getObject(id).Angle=dimensions[2]
-
 # -------------------------
 #   Fusion
 # -------------------------
@@ -73,22 +54,91 @@ def fuseCut(doc, fuseID, baseID, toolID):
 
 def shape(doc):
 	# Create three boxes and a cylinder
-	box(doc, generateID(BOX), [100, 100, 100])
-	box(doc, generateID(BOX), [90, 40, 100])
-	box(doc, generateID(BOX), [20, 85, 100])
-	cylinder(doc, generateID(CYLINDER), [80, 100, 360])
+	Cuboid(doc, generateID(BOX), [100, 100, 100])
+	Cuboid(doc, generateID(BOX), [90, 40, 100])
+	Cuboid(doc, generateID(BOX), [20, 85, 100])
+	Cylinder(doc, generateID(CYLINDER), [80, 100, 360])
 
 	# Fuse two boxes and the cylinder
 	fusePart(doc, generateID(FUSION), "Box2", "Cylinder1")
 	fusePart(doc, generateID(FUSION), "Box3", "Fusion1")
 	fuseCut(doc, "Shape", "Box1", "Fusion2")
 
-def circularShape(doc): 
-	box(doc, generateID(BOX), [100, 100, 100])
-	cylinder(doc, generateID(CYLINDER), [40, 100, 360])
+def circularShape(doc, id): 
+	Cuboid(doc, generateID(BOX), [100, 100, 100])
+	Cylinder(doc, generateID(CYLINDER), [40, 100, 360])
 
-	doc.getObject("Cylinder1").Placement = FreeCAD.Placement(App.Vector(50,50,0), App.Rotation(0,0,0))	
-	fuseCut(doc, "Shape", "Box1", "Cylinder1")
+	place(doc, 'Cylinder1', [50,50,0], [0,0,0])
+	fuseCut(doc, id, "Box1", "Cylinder1")
+
+
+def place(doc, id, t, r):
+	doc.getObject(id).Placement = FreeCAD.Placement(App.Vector(t[0], t[1], t[2]), App.Rotation(r[0], r[1], r[2]))	 
+
+
+# creates n x n cube
+def generateCube(doc, n, unit):
+	boxes = []
+	rows = []
+	layers = [] # n layers
+	
+	# create box units
+	for i in range(n*n*n):
+		id = 'box' + str(i)
+		boxes.append(id)
+		Cylinder(doc, id, unit)
+	
+	# a cube layer = n rows of n boxes 	
+	j = 0
+	for i in range(0, n*n*n, n):
+		base = boxes[i]	
+		for k in range(1, n):
+			base = placeRight(doc, base, boxes[i+1], unit, k, False);
+		rows.append(base)
+		j += 1
+
+	j = 0	
+	# create n diff layers:
+	for i in range(0, n*n, n):
+		base = rows[i]	
+		for k in range(1, n):
+			base = placeInFront(doc, base, rows[i+1], unit, k, False);
+		layers.append(base)
+		j += 1
+	
+	base = layers[0]
+	placeOnTop(doc, base, layers[1], unit, 1, True)
+		
+
+def placeInFront(doc, baseID, id, unit, k, isFinal):
+	place(doc, id, [0,k*-1*unit[1],0], [0,0,0])
+	if (isFinal == True):
+		fusePart(doc, 'Shape', baseID, id)
+		return ''
+	newID = generateID(FUSION)
+	fusePart(doc, newID, baseID, id)
+
+	return newID
+
+def placeRight(doc, baseID, id, unit, k, isFinal):
+	place(doc, id, [k*unit[0],0,0], [0,0,0])
+	if (isFinal == True):
+		fusePart(doc, 'Shape', baseID, id)
+		return ''
+	newID = generateID(FUSION)
+	fusePart(doc, newID, baseID, id)
+
+	return newID
+
+def placeOnTop(doc, baseID, id, unit, k, isFinal):
+	place(doc, id, [0,0,k*unit[2]], [0,0,0])
+	if (isFinal == True):
+		fusePart(doc, 'Shape', baseID, id)
+		return ''
+	newID = generateID(FUSION)
+	fusePart(doc, newID, baseID, id)
+
+	return newID
 
 # -------------------------
 #   Generate Drawings
@@ -107,11 +157,11 @@ def draw(doc, templatePath, shapeID):
 	viewIso = doc.addObject('TechDraw::DrawViewPart','ViewIso')
 	page.addView(viewIso)
 	doc.ViewIso.Source = [shape]
-	doc.ViewIso.Direction = (-1.0,-2.0,2.0)
+	doc.ViewIso.Direction = (1.0,-1.0,1.0)
 	doc.ViewIso.X = 120.0
 	doc.ViewIso.Y = 150.0
-	doc.ViewIso.Scale = 1.20
-	doc.ViewIso.Rotation = 108.5
+	doc.ViewIso.Scale = 0.3
+	doc.ViewIso.Rotation = 0.0
 	doc.ViewIso.HardHidden = False 
 	
 	# Insert a Page object and assign a template
@@ -127,8 +177,8 @@ def draw(doc, templatePath, shapeID):
 	doc.FrontView.Direction = (0.0,-1.0,0.0)
 	doc.FrontView.X = 100.0
 	doc.FrontView.Y = 120.0
-	doc.FrontView.Scale = 0.8
-	doc.FrontView.Rotation = 90.0
+	doc.FrontView.Scale = 0.3
+	doc.FrontView.Rotation = 0.0
 
 	# Create a second view on the same object but this time the view is rotated by 90 degrees.
 	# Right View
@@ -136,11 +186,11 @@ def draw(doc, templatePath, shapeID):
 	page2.addView(rightView)
 	doc.RightView.Source = [shape]    
 	doc.RightView.HardHidden=True
-	doc.RightView.Direction = (0.0,0.0,1.0)
-	doc.RightView.X = 230.0
+	doc.RightView.Direction = (0.0,-1.0,0.0)
+	doc.RightView.X = 200.0
 	doc.RightView.Y = 120.0
-	doc.RightView.Scale = 0.8
-	doc.RightView.Rotation = 90.0
+	doc.RightView.Scale = 0.3
+	doc.RightView.Rotation = 00.0
 
 	# Create a second view on the same object but this time the view is rotated by 90 degrees.
 	# Top View
@@ -148,11 +198,11 @@ def draw(doc, templatePath, shapeID):
 	page2.addView(topView)
 	doc.TopView.Source = [shape]
 	doc.TopView.HardHidden=True
-	doc.TopView.Direction = (-1.0,0.0,0.0)
+	doc.TopView.Direction = (0.0,0.0,1.0)
 	doc.TopView.X = 100.0
 	doc.TopView.Y = 230.0
-	doc.TopView.Scale = 0.8
-	doc.TopView.Rotation = 90.0
+	doc.TopView.Scale = 0.3
+	doc.TopView.Rotation = 0.0
 
 # -------------------------
 #   Exports
@@ -170,9 +220,38 @@ def exportFreeCAD(doc, path):
 # -------------   Main    -------------
 
 doc = FreeCAD.newDocument()
-circularShape(doc)
+
+#generateCube(doc, 2, [50,100,270])
+circularShape(doc, "Shape")
 draw(doc, 'Templates/A1_Landscape_plain.svg', "Shape")
 doc.recompute()
 
-exportDrawing('./Output/output.svg')
-exportFreeCAD(doc, './Output/output.FCStd')
+style = 4
+weight = 0.35
+darkGrey = (50.0, 50.0, 50.0, 1.0)
+
+dvp = doc.FrontView
+start = FreeCAD.Vector (0.0, 55.0, 0.0)
+end = FreeCAD.Vector(0.0, -55.0, 0.0)
+dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
+
+
+dvp = doc.RightView
+start = FreeCAD.Vector (0.0, 55.0, 0.0)
+end = FreeCAD.Vector(0.0, -55.0, 0.0)
+dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
+
+
+dvp = doc.TopView
+start = FreeCAD.Vector (0.0, 55.0, 0.0)
+end = FreeCAD.Vector(0.0, -55.0, 0.0)
+dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
+
+
+start = FreeCAD.Vector (100.0, 0.0, 0.0)
+end = FreeCAD.Vector (-55.0, 295.0, 0.0)
+dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
+
+
+#exportDrawing('./Output/output.svg')
+#exportFreeCAD(doc, './Output/output.FCStd')

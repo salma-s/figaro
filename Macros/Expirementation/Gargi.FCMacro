@@ -2,11 +2,13 @@ import FreeCAD
 import Part
 import TechDraw
 
+
 # Create three boxes and a cylinder
 App.ActiveDocument.addObject("Part::Box","Box")
 App.ActiveDocument.Box.Length=100.00
 App.ActiveDocument.Box.Width=100.00
 App.ActiveDocument.Box.Height=100.00
+
 
 App.ActiveDocument.addObject("Part::Cylinder","Cylinder")
 App.ActiveDocument.Cylinder.Radius=40.00
@@ -14,17 +16,21 @@ App.ActiveDocument.Cylinder.Height=100.00
 App.ActiveDocument.Cylinder.Angle=360.00
 App.ActiveDocument.Cylinder.Placement = App.Placement(App.Vector(50,50,0), App.Rotation(0,0,0))
 
+
 # Cut the fused shapes from the first box
 App.ActiveDocument.addObject("Part::Cut","Shape")
 App.ActiveDocument.Shape.Base = App.ActiveDocument.Box 
 App.ActiveDocument.Shape.Tool = App.ActiveDocument.Cylinder
 
 
+
+
 # Insert a Page object and assign a template
 page = App.ActiveDocument.addObject('TechDraw::DrawPage','Page')
 template = FreeCAD.ActiveDocument.addObject('TechDraw::DrawSVGTemplate','Template')
-template.Template = App.getResourceDir()+'Mod/Drawing/Templates/A3_Landscape.svg'
+template.Template = 'Templates/A1_Landscape_plain.svg'
 page.Template = FreeCAD.ActiveDocument.Template
+
 
 # Create an isometric view
 viewIso = App.ActiveDocument.addObject('TechDraw::DrawViewPart','ViewIso')
@@ -38,11 +44,17 @@ App.ActiveDocument.ViewIso.Rotation = 0.0
 App.ActiveDocument.ViewIso.HardHidden = False 
 
 
+
+
 # Insert a Page object and assign a template
 page2 = App.ActiveDocument.addObject('TechDraw::DrawPage','Page2')
 page2.Template = FreeCAD.ActiveDocument.Template
+style = 4
+weight = 0.35
+darkGrey = (50.0, 50.0, 50.0, 1.0)
 
-# Create a view on the Shape object, define the position and scale and assign it to a Page
+
+# Create orthographic views on the Shape object, define the position and scale and assign them to a Page
 # Front View
 frontView = App.ActiveDocument.addObject('TechDraw::DrawViewPart','FrontView')
 page2.addView(frontView)
@@ -53,10 +65,8 @@ App.ActiveDocument.FrontView.X = 100.0
 App.ActiveDocument.FrontView.Y = 120.0
 App.ActiveDocument.FrontView.Scale = 0.8
 App.ActiveDocument.FrontView.Rotation = 0.0
-dvp = App.ActiveDocument.FrontView
 
 
-# Create a second view on the same object but this time the view is rotated by 90 degrees.
 # Right View
 rightView = App.ActiveDocument.addObject('TechDraw::DrawViewPart','RightView')
 page2.addView(rightView)
@@ -68,7 +78,7 @@ App.ActiveDocument.RightView.Y = 120.0
 App.ActiveDocument.RightView.Scale = 0.8
 App.ActiveDocument.RightView.Rotation = 0.0
 
-# Create a second view on the same object but this time the view is rotated by 90 degrees.
+
 # Top View
 topView = App.ActiveDocument.addObject('TechDraw::DrawViewPart','TopView')
 page2.addView(topView)
@@ -82,3 +92,30 @@ App.ActiveDocument.TopView.Rotation = 0.0
 
 
 App.ActiveDocument.recompute()
+
+
+dvp = App.ActiveDocument.FrontView
+start = FreeCAD.Vector (0.0, 55.0, 0.0)
+end = FreeCAD.Vector(0.0, -55.0, 0.0)
+dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
+
+
+dvp = App.ActiveDocument.RightView
+start = FreeCAD.Vector (0.0, 55.0, 0.0)
+end = FreeCAD.Vector(0.0, -55.0, 0.0)
+dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
+
+
+dvp = App.ActiveDocument.TopView
+start = FreeCAD.Vector (0.0, 55.0, 0.0)
+end = FreeCAD.Vector(0.0, -55.0, 0.0)
+dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
+
+
+start = FreeCAD.Vector (100.0, 0.0, 0.0)
+end = FreeCAD.Vector (-55.0, 295.0, 0.0)
+dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
+
+
+
+
