@@ -106,23 +106,9 @@ def algo(doc, n):
 def place(doc, id, t, r):
 	doc.getObject(id).Placement = FreeCAD.Placement(App.Vector(t[0], t[1], t[2]), App.Rotation(r[0], r[1], r[2]))
 
-# -------------------------
-#   Exports
-# -------------------------
-
-# Will not work for macros
-
-def exportDrawing(path):
-    drawingSVGPath = doc.Page.PageResult
-    shutil.copyfile(drawingSVGPath, path)
-
-def exportFreeCAD(doc, path):
-    doc.saveAs(path)
 
 # -------------   Main    -------------
 doc = FreeCAD.newDocument()
 finalObjectID = algo(doc, 2)
 Draw(doc, 'Templates/A1_Landscape_plain.svg', finalObjectID)
 doc.recompute()
-
-
