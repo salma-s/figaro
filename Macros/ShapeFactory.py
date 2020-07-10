@@ -17,7 +17,7 @@ class ShapeFactory():
         self.unit = unit
 
     def generateRandomShape(self):
-        n = random.randint(1,10)
+        n = random.randint(1,11)
 
         if n == 1:
             shape = Cuboid(self.doc, [self.unit, self.unit, self.unit])
@@ -39,10 +39,7 @@ class ShapeFactory():
             shape = HoleInWedge(self.doc, [self.unit, self.unit, self.unit])
         elif n == 10:
             shape = HoleInDoor(self.doc, [self.unit, self.unit, self.unit])
+        elif n == 11:
+            shape = "Empty"
         
         return shape
-
-
-        
-        
-
