@@ -19,6 +19,7 @@ class ShapeFactory():
     def generateRandomShape(self):
         n = random.randint(1,11)
 
+        shape = None;
         if n == 1:
             shape = Cuboid(self.doc, [self.unit, self.unit, self.unit])
         elif n == 2:

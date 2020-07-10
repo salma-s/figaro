@@ -14,11 +14,11 @@ class HoleInWedge(Shape):
         super().__init__(id, dimension)
         
         cube1 = Cuboid(doc, [n, n, n])
-        cube2 = Cuboid(doc, [dimension[0]*1.5, dimension[1]*1.5, dimension[2]*1.5], Placement([0,0,0], [45, 0, 0]))
+        cube2 = Cuboid(doc, [n*1.5, n*1.5, n*1.5], Placement([0,0,0], [45, 0, 0]))
         hole = Cylinder(doc, [n/4, n, 360], Placement([n/2, 0, n/2], [0,0, -90]))
 	
         # Wedge
-        partialId = "partialWedgeId"
+        partialId = "PartialWedge" + str(HoleInWedge.NEXT_ID)
         doc.addObject("Part::Cut", partialId)
         doc.getObject(partialId).Base = doc.getObject(cube1.id)
         doc.getObject(partialId).Tool = doc.getObject(cube2.id)
@@ -29,9 +29,3 @@ class HoleInWedge(Shape):
         doc.getObject(id).Tool = doc.getObject(hole.id)
 
         HoleInWedge.NEXT_ID += 1
-
-doc = FreeCAD.newDocument()
-HoleInWedge(doc, [100,100,100])
-doc.recompute()
-
-
