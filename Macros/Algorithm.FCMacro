@@ -24,6 +24,7 @@ from HoleInDoor import HoleInDoor
 from QuarterCircle import QuarterCircle
 from HoleInWedge import HoleInWedge
 from ShapeFactory import ShapeFactory
+from Exporter import Exporter
 
 # -----------------------------------
 #   Document Object IDs and Types
@@ -111,4 +112,6 @@ def place(doc, id, t, r):
 doc = FreeCAD.newDocument()
 finalObjectID = algo(doc, 2)
 Draw(doc, 'Templates/A1_Landscape_plain.svg', finalObjectID)
+#exporter = Exporter(doc, '/Users/salmas/Documents/Output')
+#exporter.saveDrawings(finalObjectID)
 doc.recompute()
