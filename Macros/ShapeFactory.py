@@ -23,7 +23,7 @@ class ShapeFactory():
         if n == 1:
             shape = Cuboid(self.doc, [self.unit, self.unit, self.unit])
         elif n == 2:
-            shape = Cylinder(self.doc, [self.unit, self.unit, self.unit])
+            shape = Cylinder(self.doc, [self.unit/2, self.unit, 360])
         elif n == 3:
             shape = Wedge(self.doc, [self.unit, self.unit, self.unit])
         elif n == 4:

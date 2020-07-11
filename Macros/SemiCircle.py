@@ -1,5 +1,4 @@
 from Shape import Shape
-from Placement import Placement
 import FreeCAD
 
 class SemiCircle(Shape):

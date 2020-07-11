@@ -1,5 +1,4 @@
 from Shape import Shape
-from Placement import Placement
 import FreeCAD
 
 class Cylinder(Shape):
@@ -15,5 +14,7 @@ class Cylinder(Shape):
 
         if pos != -1:
             doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(pos.trans[0], pos.trans[1], pos.trans[2]), FreeCAD.Rotation(pos.rot[0], pos.rot[1], pos.rot[2]))	
+        else:
+            doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(dimension[0], dimension[0], 0), FreeCAD.Rotation(0, 0, 0))	
 
         Cylinder.NEXT_ID += 1

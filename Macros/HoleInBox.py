@@ -1,7 +1,7 @@
 from Shape import Shape
-from Placement import Placement
 from Cuboid import Cuboid
 from Cylinder import Cylinder
+from Position import Position
 import FreeCAD
 
 class HoleInBox(Shape):
@@ -14,7 +14,7 @@ class HoleInBox(Shape):
         cube = Cuboid(doc, [dimension[0], dimension[1], dimension[2]])
 
         # TODO: make rotation random
-        pos = Placement([dimension[0]/2, dimension[1]/2, 0], [0, 0, 0])
+        pos = Position([dimension[0]/2, dimension[1]/2, 0], [0, 0, 0])
         cylinder = Cylinder(doc, [0.3*dimension[0], dimension[2], 360], pos)
         
         # Cut cylinder

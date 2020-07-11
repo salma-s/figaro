@@ -1,6 +1,6 @@
 from Shape import Shape
-from Placement import Placement
 from Cuboid import Cuboid
+from Position import Position
 import FreeCAD
 
 class Wedge(Shape):
@@ -11,7 +11,7 @@ class Wedge(Shape):
         super().__init__(id, dimension)
         
         cube1 = Cuboid(doc, [dimension[0], dimension[1], dimension[2]])
-        cube2 = Cuboid(doc, [dimension[0]*1.5, dimension[1]*1.5, dimension[2]*1.5], Placement([0,0,0], [45, 0, 0]))
+        cube2 = Cuboid(doc, [dimension[0]*1.5, dimension[1]*1.5, dimension[2]*1.5], Position([0,0,0], [45, 0, 0]))
         
         # Cut cube1
         doc.addObject("Part::Cut", id)

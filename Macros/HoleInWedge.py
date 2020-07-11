@@ -1,8 +1,8 @@
 from Shape import Shape
-from Placement import Placement
 from Cylinder import Cylinder
 from Cuboid import Cuboid
 from Wedge import Wedge
+from Position import Position
 import FreeCAD
 
 class HoleInWedge(Shape):
@@ -14,8 +14,8 @@ class HoleInWedge(Shape):
         super().__init__(id, dimension)
         
         cube1 = Cuboid(doc, [n, n, n])
-        cube2 = Cuboid(doc, [n*1.5, n*1.5, n*1.5], Placement([0,0,0], [45, 0, 0]))
-        hole = Cylinder(doc, [n/4, n, 360], Placement([n/2, 0, n/2], [0,0, -90]))
+        cube2 = Cuboid(doc, [n*1.5, n*1.5, n*1.5], Position([0,0,0], [45, 0, 0]))
+        hole = Cylinder(doc, [n/4, n, 360], Position([n/2, 0, n/2], [0,0, -90]))
 	
         # Wedge
         partialId = "PartialWedge" + str(HoleInWedge.NEXT_ID)

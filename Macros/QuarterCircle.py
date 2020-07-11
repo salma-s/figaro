@@ -1,5 +1,4 @@
 from Shape import Shape
-from Placement import Placement
 from Cuboid import Cuboid
 from Cylinder import Cylinder
 import FreeCAD
@@ -13,7 +12,7 @@ class QuarterCircle(Shape):
         super().__init__(id, dimension)
 
         doc.addObject("Part::Cylinder", id)
-        doc.getObject(id).Radius = n/2
+        doc.getObject(id).Radius = n
         doc.getObject(id).Height = n
         doc.getObject(id).Angle = 90
         doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(0,0,0), FreeCAD.Rotation(0,0,0))	

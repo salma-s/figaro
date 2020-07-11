@@ -1,7 +1,7 @@
 from Shape import Shape
-from Placement import Placement
 from Cuboid import Cuboid
 from Cylinder import Cylinder
+from Position import Position
 import FreeCAD
 
 class HoleInDoor(Shape):
@@ -13,8 +13,8 @@ class HoleInDoor(Shape):
         super().__init__(id, dimension)
         
         cube = Cuboid(doc, [n, n/2, n])
-        cylinder1 = Cylinder(doc, [n/2, n, 180], Placement([n/2, n/2, 0], [0, 0, 0]))
-        cylinder2 = Cylinder(doc, [n/4, n, 360], Placement([n/2, n/2, 0], [0, 0, 0]))
+        cylinder1 = Cylinder(doc, [n/2, n, 180], Position([n/2, n/2, 0], [0, 0, 0]))
+        cylinder2 = Cylinder(doc, [n/4, n, 360], Position([n/2, n/2, 0], [0, 0, 0]))
         
         # Fuse cuboid and semicircle
         partialId = "PartialHoleInDoor" + str(HoleInDoor.NEXT_ID)
