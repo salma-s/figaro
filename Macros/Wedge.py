@@ -19,7 +19,3 @@ class Wedge(Shape):
         doc.getObject(id).Tool = doc.getObject(cube2.id)
 
         Wedge.NEXT_ID += 1
-
-doc = FreeCAD.newDocument()
-w = Wedge(doc, [30,30,30])
-doc.recompute()
