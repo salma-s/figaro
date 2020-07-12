@@ -36,7 +36,8 @@ class QuarterHoleInCuboid(Shape):
         doc.getObject(id).Tool = doc.getObject(quarterHoleID)
 
         # Translate block to actual position
-        doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), FreeCAD.Rotation(0, 0, 0))	
+        doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), 
+            QuarterHoleInCuboid.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))	
 
         QuarterHoleInCuboid.NEXT_ID += 1
 
