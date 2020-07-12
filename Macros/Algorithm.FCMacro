@@ -102,7 +102,7 @@ def algorithm(doc, x, y, z, unit):
 		nodeHash = reachableNodes.pop()
 		currentNode = map[nodeHash]
 		while currentNode.shape is None or currentNode.shape == "Empty":
-			currentNode.shape = shapeFactory.generateRandomShape([currentNode.x, currentNode,y, currentNode.z])
+			currentNode.shape = shapeFactory.generateRandomShape([currentNode.x, currentNode.y, currentNode.z])
 		if base is None and currentNode.shape != "Empty":
 			base = currentNode.shape.id
 		elif currentNode.shape != "Empty":

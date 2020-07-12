@@ -8,7 +8,6 @@ class HoleInDoor(Shape):
     NEXT_ID = 1
 
     def __init__(self, doc, dimension, matrixPos):
-        n = dimension[0]
         id = "HoleInDoor" + str(HoleInDoor.NEXT_ID)
         super().__init__(id, dimension)
         
@@ -25,7 +24,6 @@ class HoleInDoor(Shape):
         doc.getObject(mainCylinderID).Angle = 180
         doc.getObject(mainCylinderID).Placement = FreeCAD.Placement(FreeCAD.Vector(dimension/2, dimension/2, 0), FreeCAD.Rotation(0, 0, 0))
 
-        cylinder2 = Cylinder(doc, [n/4, n, 360], Position([n/2, n/2, 0], [0, 0, 0]))
         cutCylinderID = "HoleInDoorCutCylinder" + str(HoleInDoor.NEXT_ID)
        	doc.addObject("Part::Cylinder", cutCylinderID)
         doc.getObject(cutCylinderID).Radius = dimension/4
