@@ -14,6 +14,6 @@ class Cuboid(Shape):
         doc.getObject(id).Height = dimension
 
         doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), 
-            FreeCAD.Rotation(0, 0, 0))	
+            Cuboid.ROTATIONS[0])	
 
         Cuboid.NEXT_ID += 1

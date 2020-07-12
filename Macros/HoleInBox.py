@@ -2,6 +2,7 @@ from Shape import Shape
 from Cuboid import Cuboid
 from Cylinder import Cylinder
 from Position import Position
+import random
 import FreeCAD
 
 class HoleInBox(Shape):
@@ -32,6 +33,11 @@ class HoleInBox(Shape):
 
         # Translate block to actual position
         doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), 
-            FreeCAD.Rotation(0, 90, 0), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))	
+            HoleInBox.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))	
 
         HoleInBox.NEXT_ID += 1
+            
+    def getRandomRotation():
+        n = random.randint(0, len(HoleInBox.ROTATIONS) - 1)
+        return HoleInBox.ROTATIONS[n]
+
