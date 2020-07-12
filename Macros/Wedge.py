@@ -2,9 +2,15 @@ from Shape import Shape
 from Cuboid import Cuboid
 from Position import Position
 import FreeCAD
+import random
 
 class Wedge(Shape):
     NEXT_ID = 1
+    ROTATIONS = [
+        FreeCAD.Rotation(0, 0, 0), FreeCAD.Rotation(0, 90, 0), FreeCAD.Rotation(0, 180, 0), FreeCAD.Rotation(0, 270, 0), 
+        FreeCAD.Rotation(0, 0, 90), FreeCAD.Rotation(0, 90, 90), FreeCAD.Rotation(0, 180, 90), FreeCAD.Rotation(0, 270, 90), 
+        FreeCAD.Rotation(0, 0, 180), FreeCAD.Rotation(0, 90, 180), FreeCAD.Rotation(0, 180, 180), FreeCAD.Rotation(0, 270, 180), 
+    ]
 
     def __init__(self, doc, dimension, matrixPos):
         id = "Wedge" + str(Wedge.NEXT_ID)
@@ -29,6 +35,11 @@ class Wedge(Shape):
         doc.getObject(id).Tool = doc.getObject(cutCubeID)
 
         # Translate block to actual position
-        doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), FreeCAD.Rotation(0, 0, 0))
+        doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), 
+            Wedge.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))
 
         Wedge.NEXT_ID += 1
+
+    def getRandomRotation():
+        n = random.randint(0, len(Wedge.ROTATIONS) - 1)
+        return Wedge.ROTATIONS[n]
