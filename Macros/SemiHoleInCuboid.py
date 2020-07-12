@@ -7,17 +7,27 @@ import FreeCAD
 class SemiHoleInCuboid(Shape):
     NEXT_ID = 1
 
-    def __init__(self, doc, dimension):
+    def __init__(self, doc, dimension, matrixPos):
         id = "SemiHoleInCuboid" + str(SemiHoleInCuboid.NEXT_ID)
         super().__init__(id, dimension)
         
-        cube = Cuboid(doc, [dimension[0], dimension[1], dimension[2]])
-        cylinder = Cylinder(doc, [dimension[0]/2, dimension[2], 360], Position([dimension[0]/2, dimension[1], 0], [0, 0, 0]))
-        
+        cubeID = "Cube"
+        doc.addObject("Part::Box", cubeID)
+        doc.getObject(cubeID).Length = dimension
+        doc.getObject(cubeID).Width = dimension
+        doc.getObject(cubeID).Height = dimension
+
+        semiHoleID = "SemiHole"
+        doc.addObject("Part::Cylinder", semiHoleID)
+        doc.getObject(semiHoleID).Radius = dimension/2
+        doc.getObject(semiHoleID).Height = dimension
+        doc.getObject(semiHoleID).Angle = 360
+        doc.getObject(semiHoleID).Placement = FreeCAD.Placement(FreeCAD.Vector(dimension/2, dimension, 0), FreeCAD.Rotation(0, 0, 0))	
+
         # Cut hole from cube
         doc.addObject("Part::Cut", id)
-        doc.getObject(id).Base = doc.getObject(cube.id)
-        doc.getObject(id).Tool = doc.getObject(cylinder.id)
+        doc.getObject(id).Base = doc.getObject(cubeID)
+        doc.getObject(id).Tool = doc.getObject(semiHoleID)
 
         SemiHoleInCuboid.NEXT_ID += 1
 

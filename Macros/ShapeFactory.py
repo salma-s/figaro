@@ -16,10 +16,10 @@ class ShapeFactory():
         self.doc = doc
         self.unit = unit
 
-    def generateRandomShape(self):
+    def generateRandomShape(self, matrixPos):
         n = random.randint(1,11)
 
-        shape = None;
+        shape = None
         if n == 1:
             shape = Cuboid(self.doc, [self.unit, self.unit, self.unit])
         elif n == 2:
@@ -29,13 +29,13 @@ class ShapeFactory():
         elif n == 4:
             shape = HoleInBox(self.doc, [self.unit, self.unit, self.unit])
         elif n == 5:
-            shape = SemiCircle(self.doc, [self.unit, self.unit, self.unit])
+            shape = SemiCircle(self.doc, self.unit, matrixPos)
         elif n == 6:
             shape = QuarterCircle(self.doc, [self.unit, self.unit, self.unit])
         elif n == 7:
-            shape = QuarterHoleInCuboid(self.doc, [self.unit, self.unit, self.unit])
+            shape = QuarterHoleInCuboid(self.doc, self.unit, matrixPos)
         elif n == 8:
-            shape = SemiHoleInCuboid(self.doc, [self.unit, self.unit, self.unit])
+            shape = SemiHoleInCuboid(self.doc, self.unit, matrixPos)
         elif n == 9:
             shape = HoleInWedge(self.doc, [self.unit, self.unit, self.unit])
         elif n == 10:
