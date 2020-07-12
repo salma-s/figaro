@@ -2,10 +2,19 @@ from Shape import Shape
 from Cuboid import Cuboid
 from Cylinder import Cylinder
 from Position import Position
+import random
 import FreeCAD
 
 class HoleInDoor(Shape):
     NEXT_ID = 1
+    ROTATIONS = [
+        FreeCAD.Rotation(0, 0, 0), FreeCAD.Rotation(0, 90, 0), 
+        FreeCAD.Rotation(90, 0, 0), FreeCAD.Rotation(90, 90, 0), 
+        FreeCAD.Rotation(180, 0, 0), FreeCAD.Rotation(180, 90, 0),
+        FreeCAD.Rotation(270, 0, 0), FreeCAD.Rotation(270, 90, 0),
+        FreeCAD.Rotation(0, 0, 90), FreeCAD.Rotation(90, 0, 90),
+        FreeCAD.Rotation(0, 0, 270), FreeCAD.Rotation(90, 0, 270) 
+    ]
 
     def __init__(self, doc, dimension, matrixPos):
         id = "HoleInDoor" + str(HoleInDoor.NEXT_ID)
@@ -43,6 +52,12 @@ class HoleInDoor(Shape):
         doc.getObject(id).Tool = doc.getObject(cutCylinderID)
 
         # Translate block to actual position
-        doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), FreeCAD.Rotation(0, 0, 0))
+        doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), 
+            HoleInDoor.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))
 
         HoleInDoor.NEXT_ID += 1
+
+    def getRandomRotation():
+        n = random.randint(0, len(HoleInDoor.ROTATIONS) - 1)
+        return HoleInDoor.ROTATIONS[n]
+
