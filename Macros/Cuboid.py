@@ -3,6 +3,7 @@ import FreeCAD
 
 class Cuboid(Shape):
     NEXT_ID = 1
+    ROTATIONS = [FreeCAD.Vector(0, 0, 0)]
 
     def __init__(self, doc, dimension, matrixPos):
         id = "Cuboid" + str(Cuboid.NEXT_ID)

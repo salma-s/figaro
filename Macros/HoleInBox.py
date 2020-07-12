@@ -6,6 +6,7 @@ import FreeCAD
 
 class HoleInBox(Shape):
     NEXT_ID = 1
+    ROTATIONS = [FreeCAD.Rotation(90, 0, 0), FreeCAD.Rotation(0, 90, 0), FreeCAD.Rotation(0, 0, 90)]
 
     def __init__(self, doc, dimension, matrixPos):
         id = "HoleInBox" + str(HoleInBox.NEXT_ID)
@@ -30,6 +31,7 @@ class HoleInBox(Shape):
         doc.getObject(id).Tool = doc.getObject(cylinderID)
 
         # Translate block to actual position
-        doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), FreeCAD.Rotation(0, 0, 0))	
+        doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), 
+            FreeCAD.Rotation(0, 90, 0), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))	
 
         HoleInBox.NEXT_ID += 1
