@@ -13,26 +13,16 @@ importlib.reload(ShapeFactory)
 # -----------------------------
 
 from Draw import Draw
-from Cuboid import Cuboid
-from Cylinder import Cylinder
-from HoleInBox import HoleInBox
-from Wedge import Wedge
-from SemiHoleInCuboid import SemiHoleInCuboid
-from QuarterHoleInCuboid import QuarterHoleInCuboid
-from SemiCircle import SemiCircle
-from HoleInDoor import HoleInDoor
-from QuarterCircle import QuarterCircle
-from HoleInWedge import HoleInWedge
 from ShapeFactory import ShapeFactory
 from Exporter import Exporter
+
+#EXPORT_PATH = 
 
 # -----------------------------------
 #   Document Object IDs and Types
 # -----------------------------------
 fusions = []
-shapes = []
 FUSION = 'Fusion'
-SHAPE = 'Shape'
 
 # Create id for the document object type and add it to the respective list
 def generateID(objectType): 
@@ -50,68 +40,83 @@ def fusePart(doc, fuseID, baseID, toolID):
 	doc.getObject(fuseID).Base = doc.getObject(baseID)
 	doc.getObject(fuseID).Tool = doc.getObject(toolID)
 
-def fuseCut(doc, fuseID, baseID, toolID):
-	doc.addObject("Part::Cut", fuseID)
-	doc.getObject(fuseID).Base = doc.getObject(baseID)
-	doc.getObject(fuseID).Tool = doc.getObject(toolID)
-
-def right(doc, base, new, unit, k):
-	doc.getObject(new).Placement = FreeCAD.Placement(App.Vector(k*unit, 0, 0), App.Rotation(0,0,0))	
-	id = generateID(FUSION) 
-	fusePart(doc, id, base, new)
+def join(doc, base, new, unit):
+	id = generateID(FUSION)
+	fusePart(doc, id, base, new.shape.id)
 	return id
 
-def behind(doc, base, new, unit, k):
-	doc.getObject(new).Placement = FreeCAD.Placement(App.Vector(0, k*unit, 0), App.Rotation(0,0,0))	
-	id = generateID(FUSION) 
-	fusePart(doc, id, base, new)
-	return id
+# -------------------------
+#  Algorithm
+# -------------------------
+matrixX = 2
+matrixY = 2
+matrixZ= 2
+reachableNodes = {"0,0,0"}
 
-def top(doc, base, new, unit, k):
-	doc.getObject(new).Placement = FreeCAD.Placement(App.Vector(0, 0, k*unit), App.Rotation(0,0,0))	
-	id = generateID(FUSION) 
-	fusePart(doc, id, base, new)
-	return id
+class Node:
+	def __init__(self, x, y, z):
+		self.x = x
+		self.y = y
+		self.z = z
+		self.reachable = False
+		self.shape = None
 
-def algo(doc, n):
-	shapes = []
-	columns = []
-	layers = []
-	unit = 100
+def hash(x, y, z):
+	return '{},{},{}'.format(x, y, z)
 
-	factory = ShapeFactory(doc, unit)
-	for i in range(n*n*n):
-		randomShape = factory.generateRandomShape()
-		shapes.append(randomShape.id)
-	print(shapes)
-	
-	for i in range(0, n*n*n, n):
-		shape = shapes[i]
-		for j in range(1, n):
-			shape = right(doc, shape, shapes[i + j], unit, j)
-		columns.append(shape)
-	
-	for i in range (0, n*n, n):
-		column = columns[i]
-		for j in range(1, n):	
-			column = behind(doc, column, columns[i + j], unit, j)
-		layers.append(column)
-	
-	final = layers[0]
-	for i in range (1, n):
-		final = top(doc, final, layers[i], unit, i)
-	
-	return final
+def initMap(x, y, z):
+	map = {}
+	for i in range(0, x):
+		for j in range (0, y):
+			for k in range (0, z):
+				map[hash(i, j, k)] = Node(i, j, k)
+	return map
 
+def checkReachability(nodeCoords):
+	hashedString = hash(nodeCoords[0], nodeCoords[1], nodeCoords[2])
+	adjacentNode = map[hashedString]
+	if adjacentNode.shape is None and adjacentNode.reachable is False:
+		adjacentNode.reachable = True
+		reachableNodes.add(hashedString)
 
-def place(doc, id, t, r):
-	doc.getObject(id).Placement = FreeCAD.Placement(App.Vector(t[0], t[1], t[2]), App.Rotation(r[0], r[1], r[2]))
+def relaxGraph(currentNode, reachableNodes):
+	if currentNode.shape != "Empty":
+		if currentNode.x != 0:
+			checkReachability([currentNode.x - 1, currentNode.y, currentNode.z])
+		if currentNode.x != matrixX - 1:
+			checkReachability([currentNode.x + 1, currentNode.y, currentNode.z])
+		if currentNode.y != 0:
+			checkReachability([currentNode.x, currentNode.y - 1, currentNode.z])
+		if currentNode.y != matrixY - 1:
+			checkReachability([currentNode.x, currentNode.y + 1, currentNode.z])
+		if currentNode.z != 0:		
+			checkReachability([currentNode.x, currentNode.y, currentNode.z - 1])
+		if currentNode.z != matrixZ - 1:
+			checkReachability([currentNode.x, currentNode.y, currentNode.z + 1])	
 
+def algorithm(doc, x, y, z, unit):
+	shapeFactory = ShapeFactory(doc, unit)
+	base = None
+
+	while len(reachableNodes) != 0:
+		nodeHash = reachableNodes.pop()
+		currentNode = map[nodeHash]
+		while currentNode.shape is None or map["0,0,0"].shape == "Empty":
+			currentNode.shape = shapeFactory.generateRandomShape([currentNode.x, currentNode.y, currentNode.z])
+		if base is None and currentNode.shape != "Empty":
+			base = currentNode.shape.id
+		elif currentNode.shape != "Empty":
+			base = join(doc, base, currentNode, unit)
+		currentNode.reachable = False
+		relaxGraph(currentNode, reachableNodes)
+	return base
+		 
 
 # -------------   Main    -------------
 doc = FreeCAD.newDocument()
-finalObjectID = algo(doc, 2)
+map = initMap(matrixX, matrixY, matrixZ)
+finalObjectID = algorithm(doc, matrixX, matrixY, matrixZ, 100)
 Draw(doc, 'Templates/A1_Landscape_plain.svg', finalObjectID)
-#exporter = Exporter(doc, '/Users/salmas/Documents/Output')
+#exporter = Exporter(doc, EXPORT_PATH)
 #exporter.saveDrawings(finalObjectID)
 doc.recompute()

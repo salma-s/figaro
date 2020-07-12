@@ -16,33 +16,31 @@ class ShapeFactory():
         self.doc = doc
         self.unit = unit
 
-    def generateRandomShape(self):
-        n = random.randint(1,10)
+    def generateRandomShape(self, matrixPos):
+        n = random.randint(1,11)
 
+        shape = None
         if n == 1:
-            shape = Cuboid(self.doc, [self.unit, self.unit, self.unit])
+            shape = Cuboid(self.doc, self.unit, matrixPos)
         elif n == 2:
-            shape = Cylinder(self.doc, [self.unit, self.unit, self.unit])
+            shape = Cylinder(self.doc, self.unit, matrixPos)
         elif n == 3:
-            shape = Wedge(self.doc, [self.unit, self.unit, self.unit])
+            shape = Wedge(self.doc, self.unit, matrixPos)
         elif n == 4:
-            shape = HoleInBox(self.doc, [self.unit, self.unit, self.unit])
+            shape = HoleInBox(self.doc, self.unit, matrixPos)
         elif n == 5:
-            shape = SemiCircle(self.doc, [self.unit, self.unit, self.unit])
+            shape = SemiCircle(self.doc, self.unit, matrixPos)
         elif n == 6:
-            shape = QuarterCircle(self.doc, [self.unit, self.unit, self.unit])
+            shape = QuarterCircle(self.doc, self.unit, matrixPos)
         elif n == 7:
-            shape = QuarterHoleInCuboid(self.doc, [self.unit, self.unit, self.unit])
+            shape = QuarterHoleInCuboid(self.doc, self.unit, matrixPos)
         elif n == 8:
-            shape = SemiHoleInCuboid(self.doc, [self.unit, self.unit, self.unit])
+            shape = SemiHoleInCuboid(self.doc, self.unit, matrixPos)
         elif n == 9:
-            shape = HoleInWedge(self.doc, [self.unit, self.unit, self.unit])
+            shape = HoleInWedge(self.doc, self.unit, matrixPos)
         elif n == 10:
-            shape = HoleInDoor(self.doc, [self.unit, self.unit, self.unit])
+            shape = HoleInDoor(self.doc, self.unit, matrixPos)
+        elif n == 11:
+            shape = "Empty"
         
         return shape
-
-
-        
-        
-
