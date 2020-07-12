@@ -38,9 +38,6 @@ def fusePart(doc, fuseID, baseID, toolID):
 	doc.getObject(fuseID).Tool = doc.getObject(toolID)
 
 def join(doc, base, new, unit):
-	newShape = doc.getObject(new.shape.id)
-	currentPos = newShape.Placement.Base
-	newShape.Placement = FreeCAD.Placement(App.Vector(currentPos.x + unit*new.x, currentPos.y + unit*new.y, currentPos.z + unit*new.z), App.Rotation(0,0,0))
 	id = generateID(FUSION)
 	fusePart(doc, id, base, new.shape.id)
 	return id

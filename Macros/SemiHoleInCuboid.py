@@ -29,6 +29,9 @@ class SemiHoleInCuboid(Shape):
         doc.getObject(id).Base = doc.getObject(cubeID)
         doc.getObject(id).Tool = doc.getObject(semiHoleID)
 
+        # Translate block to actual position
+        doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), FreeCAD.Rotation(0, 0, 0))
+
         SemiHoleInCuboid.NEXT_ID += 1
 
 

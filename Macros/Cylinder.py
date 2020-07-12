@@ -11,7 +11,9 @@ class Cylinder(Shape):
         doc.getObject(id).Radius = dimension/2
         doc.getObject(id).Height = dimension
         doc.getObject(id).Angle = 360
-        doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(dimension/2, dimension/2, 0), FreeCAD.Rotation(0, 0, 0))
+        doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension + dimension/2, matrixPos[1] * dimension + dimension/2, matrixPos[2] * dimension), 
+            FreeCAD.Rotation(0, 0, 0))	
+
         # doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(50, 50, 0), FreeCAD.Rotation(0, 90, 0), FreeCAD.Vector(0, 0, 50))	
 
         Cylinder.NEXT_ID += 1

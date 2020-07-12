@@ -14,7 +14,9 @@ class QuarterCircle(Shape):
         doc.getObject(id).Radius = dimension
         doc.getObject(id).Height = dimension
         doc.getObject(id).Angle = 90
-        doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(0,0,0), FreeCAD.Rotation(0,0,0))	
+        
+        # Translate block to actual position
+        doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), FreeCAD.Rotation(0, 0, 0))	
 
         QuarterCircle.NEXT_ID += 1
 
