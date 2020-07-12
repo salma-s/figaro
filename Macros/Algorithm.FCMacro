@@ -48,7 +48,7 @@ def join(doc, base, new, unit):
 # -------------------------
 #  Algorithm
 # -------------------------
-matrixX = 3
+matrixX = 2
 matrixY = 2
 matrixZ= 2
 reachableNodes = {"0,0,0"}
@@ -102,7 +102,7 @@ def algorithm(doc, x, y, z, unit):
 		nodeHash = reachableNodes.pop()
 		currentNode = map[nodeHash]
 		while currentNode.shape is None or currentNode.shape == "Empty":
-			currentNode.shape = shapeFactory.generateRandomShape()
+			currentNode.shape = shapeFactory.generateRandomShape([currentNode.x, currentNode,y, currentNode.z])
 		if base is None and currentNode.shape != "Empty":
 			base = currentNode.shape.id
 		elif currentNode.shape != "Empty":

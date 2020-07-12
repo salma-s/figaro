@@ -6,16 +6,26 @@ import FreeCAD
 class Wedge(Shape):
     NEXT_ID = 1
 
-    def __init__(self, doc, dimension):
+    def __init__(self, doc, dimension, matrixPos):
         id = "Wedge" + str(Wedge.NEXT_ID)
         super().__init__(id, dimension)
         
-        cube1 = Cuboid(doc, [dimension[0], dimension[1], dimension[2]])
-        cube2 = Cuboid(doc, [dimension[0]*1.5, dimension[1]*1.5, dimension[2]*1.5], Position([0,0,0], [45, 0, 0]))
+        mainCubeID = "WedgeMainCube" + str(Wedge.NEXT_ID)
+        doc.addObject("Part::Box", mainCubeID)
+        doc.getObject(mainCubeID).Length = dimension
+        doc.getObject(mainCubeID).Width = dimension
+        doc.getObject(mainCubeID).Height = dimension
+
+        cutCubeID = "WedgeCutCube" + str(Wedge.NEXT_ID)
+        doc.addObject("Part::Box", cutCubeID)
+        doc.getObject(cutCubeID).Length = 1.5 * dimension
+        doc.getObject(cutCubeID).Width = 1.5 * dimension
+        doc.getObject(cutCubeID).Height = 1.5 * dimension
+        doc.getObject(cutCubeID).Placement = FreeCAD.Placement(FreeCAD.Vector(0, 0, 0), FreeCAD.Rotation(45, 0, 0))
         
         # Cut cube1
         doc.addObject("Part::Cut", id)
-        doc.getObject(id).Base = doc.getObject(cube1.id)
-        doc.getObject(id).Tool = doc.getObject(cube2.id)
+        doc.getObject(id).Base = doc.getObject(mainCubeID)
+        doc.getObject(id).Tool = doc.getObject(cutCubeID)
 
         Wedge.NEXT_ID += 1
