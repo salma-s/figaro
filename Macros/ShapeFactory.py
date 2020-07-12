@@ -18,7 +18,6 @@ class ShapeFactory():
 
     def generateRandomShape(self, matrixPos):
         n = random.randint(1,11)
-        print(n)
 
         shape = None
         if n == 1:
