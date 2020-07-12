@@ -3,10 +3,25 @@ from Cylinder import Cylinder
 from Cuboid import Cuboid
 from Wedge import Wedge
 from Position import Position
+import random
 import FreeCAD
 
 class HoleInWedge(Shape):
     NEXT_ID = 1
+    ROTATIONS = [
+        FreeCAD.Rotation(0, 0, 0), FreeCAD.Rotation(90, 180, 0), 
+        FreeCAD.Rotation(0, 90, 0), FreeCAD.Rotation(-90, 0, 90), 
+        FreeCAD.Rotation(0, 180, 0), FreeCAD.Rotation(-90, 0, 0),
+        FreeCAD.Rotation(0, 270, 0), FreeCAD.Rotation(-90, 0, -90),
+        FreeCAD.Rotation(0, 0, 90), FreeCAD.Rotation(90, 90, 0), 
+        FreeCAD.Rotation(0, 90, 90), FreeCAD.Rotation(180, 0, 90), 
+        FreeCAD.Rotation(0, 180, 90), FreeCAD.Rotation(-90, -90, 0), 
+        FreeCAD.Rotation(0, 270, 90), FreeCAD.Rotation(0, 0, -90), 
+        FreeCAD.Rotation(0, 0, 180), FreeCAD.Rotation(90, 0, 0), 
+        FreeCAD.Rotation(0, 90, 180), FreeCAD.Rotation(90, 0, 90), 
+        FreeCAD.Rotation(0, 180, 180), FreeCAD.Rotation(90, 0, 180), 
+        FreeCAD.Rotation(0, 270, 180), FreeCAD.Rotation(90, 0, -90), 
+    ]
 
     def __init__(self, doc, dimension, matrixPos):
         id = "HoleInWedge" + str(HoleInWedge.NEXT_ID)
@@ -44,6 +59,11 @@ class HoleInWedge(Shape):
         doc.getObject(id).Tool = doc.getObject(cylinderID)
 
         # Translate block to actual position
-        doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), FreeCAD.Rotation(0, 0, 0))
+        doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), 
+            HoleInWedge.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))
 
         HoleInWedge.NEXT_ID += 1
+
+    def getRandomRotation():
+        n = random.randint(0, len(HoleInWedge.ROTATIONS) - 1)
+        return HoleInWedge.ROTATIONS[n]
