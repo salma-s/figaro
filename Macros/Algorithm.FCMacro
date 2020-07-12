@@ -16,6 +16,8 @@ from Draw import Draw
 from ShapeFactory import ShapeFactory
 from Exporter import Exporter
 
+#EXPORT_PATH = 
+
 # -----------------------------------
 #   Document Object IDs and Types
 # -----------------------------------
@@ -115,6 +117,6 @@ doc = FreeCAD.newDocument()
 map = initMap(matrixX, matrixY, matrixZ)
 finalObjectID = algorithm(doc, matrixX, matrixY, matrixZ, 100)
 Draw(doc, 'Templates/A1_Landscape_plain.svg', finalObjectID)
-exporter = Exporter(doc, '/Users/salmas/Documents/Output')
-exporter.saveDrawings(finalObjectID)
+#exporter = Exporter(doc, EXPORT_PATH)
+#exporter.saveDrawings(finalObjectID)
 doc.recompute()
