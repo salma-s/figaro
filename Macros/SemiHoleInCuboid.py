@@ -38,8 +38,14 @@ class SemiHoleInCuboid(Shape):
         doc.getObject(id).Tool = doc.getObject(semiHoleID)
 
         # Translate block to actual position
-        doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), FreeCAD.Rotation(0, 0, 0))
+        doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), 
+            SemiHoleInCuboid.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))
 
         SemiHoleInCuboid.NEXT_ID += 1
+
+    def getRandomRotation():
+        n = random.randint(0, len(SemiHoleInCuboid.ROTATIONS) - 1)
+        return SemiHoleInCuboid.ROTATIONS[n]
+
 
 
