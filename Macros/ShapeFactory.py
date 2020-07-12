@@ -17,11 +17,7 @@ class ShapeFactory():
         self.unit = unit
 
     def generateRandomShape(self, matrixPos):
-<<<<<<< HEAD
-        n = random.randint(1,10)
-=======
         n = random.randint(1,11)
->>>>>>> 0dd660663de57b5c3df47c8c713a35f0daa448e2
 
         shape = None
         if n == 1:
