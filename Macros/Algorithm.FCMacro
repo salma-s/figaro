@@ -101,14 +101,12 @@ doc = FreeCAD.newDocument()
 map = initMap(matrixX, matrixY, matrixZ)
 finalObjectID = algorithm(doc, matrixX, matrixY, matrixZ, 100)
 Draw(doc, 'Templates/A1_Landscape_plain.svg', finalObjectID)
+doc.recompute()
 
 for k in map.keys():
-		if map[k].shape != None and map[k].shape != "Empty" and map[k].shape.centrelineInfo != None:
-				centrelineInfo = map[k].shape.centrelineInfo
-				print("X: " + str(centrelineInfo.x))
-				print("Y: " + str(centrelineInfo.y))
-				print("Z: " + str(centrelineInfo.z))
+	if map[k].shape != None and map[k].shape != "Empty" and map[k].shape.centrelineInfo != None:
+		centrelineInfo = map[k].shape.centrelineInfo
+		Draw.drawCentreline(doc, centrelineInfo)
 
 #exporter = Exporter(doc, EXPORT_PATH)
 #exporter.saveDrawings(finalObjectID)
-doc.recompute()
