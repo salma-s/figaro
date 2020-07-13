@@ -7,6 +7,7 @@ import shutil
 from Draw import Draw
 from ShapeFactory import ShapeFactory
 from Exporter import Exporter
+from Node import Node
 
 #EXPORT_PATH = 
 
@@ -44,14 +45,6 @@ matrixX = 2
 matrixY = 2
 matrixZ= 2
 reachableNodes = {"0,0,0"}
-
-class Node:
-	def __init__(self, x, y, z):
-		self.x = x
-		self.y = y
-		self.z = z
-		self.reachable = False
-		self.shape = None
 
 def hash(x, y, z):
 	return '{},{},{}'.format(x, y, z)
@@ -102,13 +95,20 @@ def algorithm(doc, x, y, z, unit):
 		currentNode.reachable = False
 		relaxGraph(currentNode, reachableNodes)
 	return base
-		 
 
 # -------------   Main    -------------
 doc = FreeCAD.newDocument()
 map = initMap(matrixX, matrixY, matrixZ)
 finalObjectID = algorithm(doc, matrixX, matrixY, matrixZ, 100)
 Draw(doc, 'Templates/A1_Landscape_plain.svg', finalObjectID)
+
+for k in map.keys():
+		if map[k].shape != None and map[k].shape != "Empty" and map[k].shape.centrelineInfo != None:
+				centrelineInfo = map[k].shape.centrelineInfo
+				print("X: " + str(centrelineInfo.x))
+				print("Y: " + str(centrelineInfo.y))
+				print("Z: " + str(centrelineInfo.z))
+
 #exporter = Exporter(doc, EXPORT_PATH)
 #exporter.saveDrawings(finalObjectID)
 doc.recompute()
