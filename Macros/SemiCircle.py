@@ -15,7 +15,7 @@ class SemiCircle(Shape):
 
     def __init__(self, doc, dimension, matrixPos):
         id = "SemiCircle" + str(SemiCircle.NEXT_ID)
-        super().__init__(id, dimension)
+        super().__init__(id, dimension, SemiCircle.ROTATIONS)
 
        	doc.addObject("Part::Cylinder", id)
         doc.getObject(id).Radius = dimension / 2
@@ -24,10 +24,6 @@ class SemiCircle(Shape):
 
         # Translate block to actual position
         doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension + dimension/2, matrixPos[1] * dimension, matrixPos[2] * dimension), 
-            SemiCircle.getRandomRotation(), FreeCAD.Vector(0, dimension/2, dimension/2))
+            self.getRandomRotation(), FreeCAD.Vector(0, dimension/2, dimension/2))
 
         SemiCircle.NEXT_ID += 1
-    
-    def getRandomRotation():
-        n = random.randint(0, len(SemiCircle.ROTATIONS) - 1)
-        return SemiCircle.ROTATIONS[n]

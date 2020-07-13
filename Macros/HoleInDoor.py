@@ -1,5 +1,4 @@
 from Shape import Shape
-import random
 import FreeCAD
 
 class HoleInDoor(Shape):
@@ -15,7 +14,7 @@ class HoleInDoor(Shape):
 
     def __init__(self, doc, dimension, matrixPos):
         id = "HoleInDoor" + str(HoleInDoor.NEXT_ID)
-        super().__init__(id, dimension)
+        super().__init__(id, dimension, HoleInDoor.ROTATIONS)
         
         cubeID = "HoleInDoorCuboid" + str(HoleInDoor.NEXT_ID)
         doc.addObject("Part::Box", cubeID)
@@ -50,11 +49,6 @@ class HoleInDoor(Shape):
 
         # Translate block to actual position
         doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), 
-            HoleInDoor.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))
+            self.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))
 
         HoleInDoor.NEXT_ID += 1
-
-    def getRandomRotation():
-        n = random.randint(0, len(HoleInDoor.ROTATIONS) - 1)
-        return HoleInDoor.ROTATIONS[n]
-

@@ -1,6 +1,5 @@
 from Shape import Shape
 from Wedge import Wedge
-import random
 import FreeCAD
 
 class HoleInWedge(Shape):
@@ -22,7 +21,7 @@ class HoleInWedge(Shape):
 
     def __init__(self, doc, dimension, matrixPos):
         id = "HoleInWedge" + str(HoleInWedge.NEXT_ID)
-        super().__init__(id, dimension)
+        super().__init__(id, dimension, HoleInWedge.ROTATIONS)
 
         mainCubeID = "HoleInWedgeMainCube" + str(HoleInWedge.NEXT_ID)
         doc.addObject("Part::Box", mainCubeID)
@@ -57,10 +56,6 @@ class HoleInWedge(Shape):
 
         # Translate block to actual position
         doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), 
-            HoleInWedge.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))
+            self.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))
 
         HoleInWedge.NEXT_ID += 1
-
-    def getRandomRotation():
-        n = random.randint(0, len(HoleInWedge.ROTATIONS) - 1)
-        return HoleInWedge.ROTATIONS[n]

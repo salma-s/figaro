@@ -7,7 +7,7 @@ class Cuboid(Shape):
 
     def __init__(self, doc, dimension, matrixPos):
         id = "Cuboid" + str(Cuboid.NEXT_ID)
-        super().__init__(id, dimension)
+        super().__init__(id, dimension, Cuboid.ROTATIONS)
         doc.addObject("Part::Box", id)
         doc.getObject(id).Length = dimension
         doc.getObject(id).Width = dimension

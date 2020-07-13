@@ -1,5 +1,4 @@
 from Shape import Shape
-import random
 import FreeCAD
 
 class SemiHoleInCuboid(Shape):
@@ -15,7 +14,7 @@ class SemiHoleInCuboid(Shape):
 
     def __init__(self, doc, dimension, matrixPos):
         id = "SemiHoleInCuboid" + str(SemiHoleInCuboid.NEXT_ID)
-        super().__init__(id, dimension)
+        super().__init__(id, dimension, SemiHoleInCuboid.ROTATIONS)
         
         cubeID = "SemiHoleInCuboidCuboid" + str(SemiHoleInCuboid.NEXT_ID)
         doc.addObject("Part::Box", cubeID)
@@ -37,13 +36,6 @@ class SemiHoleInCuboid(Shape):
 
         # Translate block to actual position
         doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), 
-            SemiHoleInCuboid.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))
+            self.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))
 
         SemiHoleInCuboid.NEXT_ID += 1
-
-    def getRandomRotation():
-        n = random.randint(0, len(SemiHoleInCuboid.ROTATIONS) - 1)
-        return SemiHoleInCuboid.ROTATIONS[n]
-
-
-

@@ -1,5 +1,4 @@
 from Shape import Shape
-import random
 import FreeCAD
 
 class Cylinder(Shape):
@@ -8,16 +7,12 @@ class Cylinder(Shape):
 
     def __init__(self, doc, dimension, matrixPos):
         id = "Cylinder" + str(Cylinder.NEXT_ID)
-        super().__init__(id, dimension)
+        super().__init__(id, dimension, Cylinder.ROTATIONS)
        	doc.addObject("Part::Cylinder", id)
         doc.getObject(id).Radius = dimension/2
         doc.getObject(id).Height = dimension
         doc.getObject(id).Angle = 360
         doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension + dimension/2, matrixPos[1] * dimension + dimension/2, matrixPos[2] * dimension), 
-            Cylinder.getRandomRotation(), FreeCAD.Vector(0, 0, dimension/2))		
+            self.getRandomRotation(), FreeCAD.Vector(0, 0, dimension/2))		
 
         Cylinder.NEXT_ID += 1
-
-    def getRandomRotation():
-        n = random.randint(0, len(Cylinder.ROTATIONS) - 1)
-        return Cylinder.ROTATIONS[n]

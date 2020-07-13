@@ -1,6 +1,5 @@
 from Shape import Shape
 import FreeCAD
-import random
 
 class QuarterCircle(Shape):
     NEXT_ID = 1
@@ -12,7 +11,7 @@ class QuarterCircle(Shape):
 
     def __init__(self, doc, dimension, matrixPos):
         id = "QuarterCircle" + str(QuarterCircle.NEXT_ID)
-        super().__init__(id, dimension)
+        super().__init__(id, dimension, QuarterCircle.ROTATIONS)
 
         doc.addObject("Part::Cylinder", id)
         doc.getObject(id).Radius = dimension
@@ -21,10 +20,6 @@ class QuarterCircle(Shape):
         
         # Translate block to actual position
         doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), 
-            QuarterCircle.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))	
+            self.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))	
 
         QuarterCircle.NEXT_ID += 1
-
-    def getRandomRotation():
-        n = random.randint(0, len(QuarterCircle.ROTATIONS) - 1)
-        return QuarterCircle.ROTATIONS[n]

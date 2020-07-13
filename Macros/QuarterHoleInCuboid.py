@@ -1,6 +1,5 @@
 from Shape import Shape
 import FreeCAD
-import random
 
 class QuarterHoleInCuboid(Shape):
     NEXT_ID = 1
@@ -12,7 +11,7 @@ class QuarterHoleInCuboid(Shape):
 
     def __init__(self, doc, dimension, matrixPos):
         id = "QuarterHoleInCuboid" + str(QuarterHoleInCuboid.NEXT_ID)
-        super().__init__(id, dimension)
+        super().__init__(id, dimension, QuarterHoleInCuboid.ROTATIONS)
         
         cubeID = "QuarterHoleInCuboidCube" + str(QuarterHoleInCuboid.NEXT_ID)
         doc.addObject("Part::Box", cubeID)
@@ -34,10 +33,6 @@ class QuarterHoleInCuboid(Shape):
 
         # Translate block to actual position
         doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), 
-            QuarterHoleInCuboid.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))	
+            self.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))	
 
         QuarterHoleInCuboid.NEXT_ID += 1
-
-    def getRandomRotation():
-        n = random.randint(0, len(QuarterHoleInCuboid.ROTATIONS) - 1)
-        return QuarterHoleInCuboid.ROTATIONS[n]
