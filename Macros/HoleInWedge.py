@@ -1,5 +1,5 @@
 from Shape import Shape
-from Wedge import Wedge
+from CentrelineInfo import CentrelineInfo
 import FreeCAD
 
 class HoleInWedge(Shape):
@@ -19,9 +19,38 @@ class HoleInWedge(Shape):
         FreeCAD.Rotation(0, 270, 180), FreeCAD.Rotation(90, 0, -90), 
     ]
 
+    @staticmethod
+    def generateCentrelines(dimension):
+        return [
+            CentrelineInfo(dimension/2, None, dimension/2, -10, 0.75 * dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, dimension/2, dimension/2, 0.25 * dimension - 10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, None, dimension/2, -10, 0.75 * dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, dimension/2, None, -10, 0.75 * dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, None, dimension/2, -10, 0.75 * dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, dimension/2, dimension/2, -10, 0.75 * dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, None, dimension/2, -10, 0.75 * dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, dimension/2, None, 0.25 * dimension - 10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, dimension/2, None, -10, 0.75 * dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, dimension/2, dimension/2, 0.25 * dimension - 10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, dimension/2, dimension/2, -10, 0.75 * dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, dimension/2, None, -10, 0.75 * dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, dimension/2, None, 0.25 * dimension - 10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, dimension/2, dimension/2, -10, 0.75 * dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, dimension/2, dimension/2, 0.25 * dimension - 10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, dimension/2, None, 0.25 * dimension - 10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, None, dimension/2, 0.25 * dimension - 10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, dimension/2, dimension/2, 0.25 * dimension - 10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, None, dimension/2, 0.25 * dimension - 10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, dimension/2, None, -10, 0.75 * dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, None, dimension/2, 0.25 * dimension - 10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, dimension/2, dimension/2, -10, 0.75 * dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, None, dimension/2, 0.25 * dimension - 10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, dimension/2, None, 0.25 * dimension - 10, dimension + 10, dimension/2 + 10),
+        ]
+
     def __init__(self, doc, dimension, matrixPos):
         id = "HoleInWedge" + str(HoleInWedge.NEXT_ID)
-        super().__init__(id, dimension, HoleInWedge.ROTATIONS)
+        super().__init__(id, dimension, HoleInWedge.ROTATIONS, HoleInWedge.generateCentrelines(dimension))
 
         mainCubeID = "HoleInWedgeMainCube" + str(HoleInWedge.NEXT_ID)
         doc.addObject("Part::Box", mainCubeID)
