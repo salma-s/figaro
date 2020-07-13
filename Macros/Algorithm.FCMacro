@@ -4,13 +4,6 @@ import Part
 import Drawing
 import TechDraw
 import shutil
-import importlib
-
-# -----------------------------
-# Reload modules ** for development only**
-import ShapeFactory
-importlib.reload(ShapeFactory)
-# -----------------------------
 
 from Draw import Draw
 from ShapeFactory import ShapeFactory
