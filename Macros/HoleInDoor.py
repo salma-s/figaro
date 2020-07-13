@@ -22,18 +22,18 @@ class HoleInDoor(Shape):
     @staticmethod
     def generateCentrelines(dimension):
         return [
-            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, dimension/4 + 10),
-            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, dimension/4 + 10),
-            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, dimension/4 + 10),
-            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, dimension/4 + 10),
-            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, dimension/4 + 10),
-            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, dimension/4 + 10),
-            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, dimension/4 + 10),
-            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, dimension/4 + 10),
-            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, dimension/4 + 10),
-            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, dimension/4 + 10),
-            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, dimension/4 + 10),
-            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, dimension/4 + 10),
+            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, dimension/2 + 10),
         ]
 
     def __init__(self, doc, dimension, matrixPos):
