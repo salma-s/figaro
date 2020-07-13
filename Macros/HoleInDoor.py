@@ -1,20 +1,44 @@
 from Shape import Shape
+from CentrelineInfo import CentrelineInfo
 import FreeCAD
 
 class HoleInDoor(Shape):
     NEXT_ID = 1
     ROTATIONS = [
-        FreeCAD.Rotation(0, 0, 0), FreeCAD.Rotation(0, 90, 0), 
-        FreeCAD.Rotation(90, 0, 0), FreeCAD.Rotation(90, 90, 0), 
-        FreeCAD.Rotation(180, 0, 0), FreeCAD.Rotation(180, 90, 0),
-        FreeCAD.Rotation(270, 0, 0), FreeCAD.Rotation(270, 90, 0),
-        FreeCAD.Rotation(0, 0, 90), FreeCAD.Rotation(90, 0, 90),
-        FreeCAD.Rotation(0, 0, 270), FreeCAD.Rotation(90, 0, 270) 
+        FreeCAD.Rotation(0, 0, 0), 
+        FreeCAD.Rotation(0, 90, 0), 
+        FreeCAD.Rotation(90, 0, 0), 
+        FreeCAD.Rotation(90, 90, 0), 
+        FreeCAD.Rotation(180, 0, 0), 
+        FreeCAD.Rotation(180, 90, 0),
+        FreeCAD.Rotation(270, 0, 0), 
+        FreeCAD.Rotation(270, 90, 0),
+        FreeCAD.Rotation(0, 0, 90), 
+        FreeCAD.Rotation(90, 0, 90),
+        FreeCAD.Rotation(0, 0, 270), 
+        FreeCAD.Rotation(90, 0, 270) 
     ]
+
+    @staticmethod
+    def generateCentrelines(dimension):
+        return [
+            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, dimension/2 + 10),
+        ]
 
     def __init__(self, doc, dimension, matrixPos):
         id = "HoleInDoor" + str(HoleInDoor.NEXT_ID)
-        super().__init__(id, dimension, HoleInDoor.ROTATIONS)
+        super().__init__(id, dimension, HoleInDoor.ROTATIONS, HoleInDoor.generateCentrelines(dimension))
         
         cubeID = "HoleInDoorCuboid" + str(HoleInDoor.NEXT_ID)
         doc.addObject("Part::Box", cubeID)
