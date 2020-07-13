@@ -61,3 +61,29 @@ class Draw:
         doc.TopView.Y = 230.0
         doc.TopView.Scale = 0.3
         doc.TopView.Rotation = 0.0
+
+        # style = 4
+        # weight = 0.35
+        # darkGrey = (50.0, 50.0, 50.0, 1.0)
+
+        # dvp = doc.FrontView
+        # start = FreeCAD.Vector (0.0, 55.0, 0.0)
+        # end = FreeCAD.Vector(0.0, -55.0, 0.0)
+        # dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
+
+
+        # dvp = doc.RightView
+        # start = FreeCAD.Vector (0.0, 55.0, 0.0)
+        # end = FreeCAD.Vector(0.0, -55.0, 0.0)
+        # dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
+
+
+        # dvp = doc.TopView
+        # start = FreeCAD.Vector (0.0, 55.0, 0.0)
+        # end = FreeCAD.Vector(0.0, -55.0, 0.0)
+        # dvp.makeCosmeticLine(start,end,style, weight, darkGrey)
+
+
+        # start = FreeCAD.Vector (100.0, 0.0, 0.0)
+        # end = FreeCAD.Vector (-55.0, 295.0, 0.0)
+        # dvp.makeCosmeticLine(start,end,style, weight, darkGrey)

@@ -1,5 +1,4 @@
 from Shape import Shape
-from Cuboid import Cuboid
 import FreeCAD
 import random
 
