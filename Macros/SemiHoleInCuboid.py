@@ -1,4 +1,5 @@
 from Shape import Shape
+from CentrelineInfo import CentrelineInfo
 import FreeCAD
 
 class SemiHoleInCuboid(Shape):
@@ -12,9 +13,26 @@ class SemiHoleInCuboid(Shape):
         FreeCAD.Rotation(0, 0, 270), FreeCAD.Rotation(90, 0, 270) 
     ]
 
+    @staticmethod
+    def generateCentrelines(dimension):
+        return [
+            CentrelineInfo(dimension/2, dimension, None, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, dimension, dimension/2, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(0, dimension/2, None, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(0, None, dimension/2, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, 0, None, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, 0, dimension/2, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension, dimension/2, None, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension, None, dimension/2, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, None, dimension, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, dimension/2, dimension, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, None, 0, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(None, dimension/2, 0, -10, dimension + 10, dimension/2 + 10),
+        ]
+
     def __init__(self, doc, dimension, matrixPos):
         id = "SemiHoleInCuboid" + str(SemiHoleInCuboid.NEXT_ID)
-        super().__init__(id, dimension, SemiHoleInCuboid.ROTATIONS)
+        super().__init__(id, dimension, SemiHoleInCuboid.ROTATIONS, SemiHoleInCuboid.generateCentrelines(dimension))
         
         cubeID = "SemiHoleInCuboidCuboid" + str(SemiHoleInCuboid.NEXT_ID)
         doc.addObject("Part::Box", cubeID)

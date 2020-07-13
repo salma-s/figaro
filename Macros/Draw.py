@@ -49,7 +49,7 @@ class Draw:
         doc.RightView.X = 580.0
         doc.RightView.Y = 100.0
         doc.RightView.Scale = 1
-        doc.RightView.Rotation = 00.0
+        doc.RightView.Rotation = 0.0
 
         # Create a second view on the same object but this time the view is rotated by 90 degrees.
         # Top View
@@ -66,7 +66,7 @@ class Draw:
     @staticmethod
     def drawCentreline(doc, node, matrixX, matrixY, matrixZ, unit):
         style = 4
-        weight = 0.35
+        weight = 0.6
         darkGrey = (1.0, 0.0, 0.0, 0.0)
 
         centrelineInfo = node.shape.centrelineInfo
