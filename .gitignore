@@ -3,3 +3,4 @@
  Macros/__pycache__/
  **/__pycache__/
  Output/
+ **/*.pyc
