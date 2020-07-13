@@ -10,5 +10,6 @@ class Shape:
 
     def getRandomRotation(self):
         n = random.randint(0, len(self.rotations) - 1)
-        self.centrelineInfo = self.CENTRELNIES[n]
+        if self.CENTRELNIES != None:
+            self.centrelineInfo = self.CENTRELNIES[n]
         return self.rotations[n]
