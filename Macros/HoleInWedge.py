@@ -2,7 +2,6 @@ from Shape import Shape
 from Cylinder import Cylinder
 from Cuboid import Cuboid
 from Wedge import Wedge
-from Position import Position
 import random
 import FreeCAD
 

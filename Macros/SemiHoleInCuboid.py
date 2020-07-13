@@ -1,7 +1,6 @@
 from Shape import Shape
 from Cuboid import Cuboid
 from Cylinder import Cylinder
-from Position import Position
 import random
 import FreeCAD
 
