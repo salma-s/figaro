@@ -80,12 +80,20 @@ class Draw:
 
         dvp = doc.FrontView
         if centrelineInfo.y is None:
-            start = FreeCAD.Vector (centrelineInfo.x - centrelineInfo.centreArcLen - matrixXTrans, centrelineInfo.z - matrixZTrans, 0.0)
-            end = FreeCAD.Vector(centrelineInfo.x + centrelineInfo.centreArcLen - matrixXTrans, centrelineInfo.z - matrixZTrans, 0.0)
-            dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
-            start = FreeCAD.Vector (centrelineInfo.x - matrixXTrans, centrelineInfo.z - centrelineInfo.centreArcLen - matrixZTrans, 0.0)
-            end = FreeCAD.Vector(centrelineInfo.x - matrixXTrans, centrelineInfo.z + centrelineInfo.centreArcLen - matrixZTrans, 0.0)
-            dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
+            if centrelineInfo.centreArcInfo != None:
+                start = FreeCAD.Vector (centrelineInfo.centreArcInfo.line1[0] - matrixXTrans, centrelineInfo.centreArcInfo.line1[1] - matrixZTrans, 0.0)
+                end = FreeCAD.Vector(centrelineInfo.centreArcInfo.line1[2] - matrixXTrans, centrelineInfo.centreArcInfo.line1[3] - matrixZTrans, 0.0)
+                dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
+                start = FreeCAD.Vector (centrelineInfo.centreArcInfo.line2[0] - matrixXTrans, centrelineInfo.centreArcInfo.line2[1] - matrixZTrans, 0.0)
+                end = FreeCAD.Vector(centrelineInfo.centreArcInfo.line2[2] - matrixXTrans, centrelineInfo.centreArcInfo.line2[3] - matrixZTrans, 0.0)
+                dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
+            else:
+                start = FreeCAD.Vector (centrelineInfo.x - centrelineInfo.centreArcLen - matrixXTrans, centrelineInfo.z - matrixZTrans, 0.0)
+                end = FreeCAD.Vector(centrelineInfo.x + centrelineInfo.centreArcLen - matrixXTrans, centrelineInfo.z - matrixZTrans, 0.0)
+                dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
+                start = FreeCAD.Vector (centrelineInfo.x - matrixXTrans, centrelineInfo.z - centrelineInfo.centreArcLen - matrixZTrans, 0.0)
+                end = FreeCAD.Vector(centrelineInfo.x - matrixXTrans, centrelineInfo.z + centrelineInfo.centreArcLen - matrixZTrans, 0.0)
+                dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
         else:
             if centrelineInfo.x is None:
                 start = FreeCAD.Vector (centrelineInfo.start - matrixXTrans, centrelineInfo.z - matrixZTrans, 0.0)
@@ -98,12 +106,20 @@ class Draw:
 
         dvp = doc.RightView
         if centrelineInfo.x is None:
-            start = FreeCAD.Vector (centrelineInfo.y - centrelineInfo.centreArcLen - matrixYTrans, centrelineInfo.z - matrixZTrans, 0.0)
-            end = FreeCAD.Vector(centrelineInfo.y + centrelineInfo.centreArcLen - matrixYTrans, centrelineInfo.z - matrixZTrans, 0.0)
-            dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
-            start = FreeCAD.Vector (centrelineInfo.y - matrixYTrans, centrelineInfo.z - centrelineInfo.centreArcLen - matrixZTrans, 0.0)
-            end = FreeCAD.Vector(centrelineInfo.y - matrixYTrans, centrelineInfo.z + centrelineInfo.centreArcLen - matrixZTrans, 0.0)
-            dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
+            if centrelineInfo.centreArcInfo != None:
+                start = FreeCAD.Vector (centrelineInfo.centreArcInfo.line1[0] - matrixYTrans, centrelineInfo.centreArcInfo.line1[1] - matrixZTrans, 0.0)
+                end = FreeCAD.Vector(centrelineInfo.centreArcInfo.line1[2] - matrixYTrans, centrelineInfo.centreArcInfo.line1[3] - matrixZTrans, 0.0)
+                dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
+                start = FreeCAD.Vector (centrelineInfo.centreArcInfo.line2[0] - matrixYTrans, centrelineInfo.centreArcInfo.line2[1] - matrixZTrans, 0.0)
+                end = FreeCAD.Vector(centrelineInfo.centreArcInfo.line2[2] - matrixYTrans, centrelineInfo.centreArcInfo.line2[3] - matrixZTrans, 0.0)
+                dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
+            else:
+                start = FreeCAD.Vector (centrelineInfo.y - centrelineInfo.centreArcLen - matrixYTrans, centrelineInfo.z - matrixZTrans, 0.0)
+                end = FreeCAD.Vector(centrelineInfo.y + centrelineInfo.centreArcLen - matrixYTrans, centrelineInfo.z - matrixZTrans, 0.0)
+                dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
+                start = FreeCAD.Vector (centrelineInfo.y - matrixYTrans, centrelineInfo.z - centrelineInfo.centreArcLen - matrixZTrans, 0.0)
+                end = FreeCAD.Vector(centrelineInfo.y - matrixYTrans, centrelineInfo.z + centrelineInfo.centreArcLen - matrixZTrans, 0.0)
+                dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
         else:
             if centrelineInfo.y is None:
                 start = FreeCAD.Vector (centrelineInfo.start - matrixYTrans, centrelineInfo.z - matrixZTrans, 0.0)
@@ -116,12 +132,20 @@ class Draw:
 
         dvp = doc.TopView
         if centrelineInfo.z is None:
-            start = FreeCAD.Vector (centrelineInfo.x - centrelineInfo.centreArcLen - matrixXTrans, centrelineInfo.y - matrixYTrans, 0.0)
-            end = FreeCAD.Vector(centrelineInfo.x + centrelineInfo.centreArcLen - matrixXTrans, centrelineInfo.y - matrixYTrans, 0.0)
-            dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
-            start = FreeCAD.Vector (centrelineInfo.x - matrixXTrans, centrelineInfo.y - centrelineInfo.centreArcLen - matrixYTrans, 0.0)
-            end = FreeCAD.Vector(centrelineInfo.x - matrixXTrans, centrelineInfo.y + centrelineInfo.centreArcLen - matrixYTrans, 0.0)
-            dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
+            if centrelineInfo.centreArcInfo != None:
+                start = FreeCAD.Vector (centrelineInfo.centreArcInfo.line1[0] - matrixXTrans, centrelineInfo.centreArcInfo.line1[1] - matrixYTrans, 0.0)
+                end = FreeCAD.Vector(centrelineInfo.centreArcInfo.line1[2] - matrixXTrans, centrelineInfo.centreArcInfo.line1[3]- matrixYTrans, 0.0)
+                dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
+                start = FreeCAD.Vector (centrelineInfo.centreArcInfo.line2[0] - matrixXTrans, centrelineInfo.centreArcInfo.line2[1]- matrixYTrans, 0.0)
+                end = FreeCAD.Vector(centrelineInfo.centreArcInfo.line2[2] - matrixXTrans, centrelineInfo.centreArcInfo.line2[3] - matrixYTrans, 0.0)
+                dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
+            else:
+                start = FreeCAD.Vector (centrelineInfo.x - centrelineInfo.centreArcLen - matrixXTrans, centrelineInfo.y - matrixYTrans, 0.0)
+                end = FreeCAD.Vector(centrelineInfo.x + centrelineInfo.centreArcLen - matrixXTrans, centrelineInfo.y - matrixYTrans, 0.0)
+                dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
+                start = FreeCAD.Vector (centrelineInfo.x - matrixXTrans, centrelineInfo.y - centrelineInfo.centreArcLen - matrixYTrans, 0.0)
+                end = FreeCAD.Vector(centrelineInfo.x - matrixXTrans, centrelineInfo.y + centrelineInfo.centreArcLen - matrixYTrans, 0.0)
+                dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
         else:
             if centrelineInfo.x is None:
                 start = FreeCAD.Vector (centrelineInfo.start - matrixXTrans, centrelineInfo.y - matrixYTrans, 0.0)

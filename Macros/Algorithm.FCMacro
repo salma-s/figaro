@@ -3,7 +3,8 @@ import FreeCAD
 import Part
 import Drawing
 import TechDraw
-import shutil
+import importlib
+
 from Draw import Draw
 from ShapeFactory import ShapeFactory
 from Exporter import Exporter
@@ -41,9 +42,9 @@ def join(doc, base, new, unit):
 # -------------------------
 #  Algorithm
 # -------------------------
-matrixX = 2
-matrixY = 2
-matrixZ= 2
+matrixX = 3
+matrixY = 1
+matrixZ= 1
 reachableNodes = {"0,0,0"}
 
 def hash(x, y, z):
