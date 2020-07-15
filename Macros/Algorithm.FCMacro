@@ -41,7 +41,7 @@ def join(doc, base, new, unit):
 #  Algorithm
 # -------------------------
 matrixX = 3
-matrixY = 1
+matrixY = 2
 matrixZ= 1
 reachableNodes = {"0,0,0"}
 

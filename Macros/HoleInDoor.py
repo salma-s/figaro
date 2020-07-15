@@ -28,7 +28,7 @@ class HoleInDoor(Shape):
             CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [dimension/4, dimension], [0, dimension], dimension/2)),
             CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, 3/4 * dimension], [0, dimension], dimension/2)),
             CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, 3/4 * dimension], [0, dimension], dimension/2)),
-            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10,  None, CentreArcInfo(baseShapeType, [0, dimension], [0, 3/4 * dimension], dimension/2)), 
+            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [0, 3/4 * dimension], dimension/2)), 
             CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, 3/4 * dimension], [0, dimension], dimension/2)),
             CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [dimension/4, dimension], [0, dimension], dimension/2)),
             CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [dimension/4, dimension], [0, dimension], dimension/2)),
