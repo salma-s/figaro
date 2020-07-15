@@ -3,10 +3,10 @@ import FreeCAD
 import Part
 import Drawing
 import TechDraw
-import shutil
 from Draw import Draw
 from ShapeFactory import ShapeFactory
 from Exporter import Exporter
+from Node import Node
 
 #EXPORT_PATH = 
 
@@ -40,18 +40,10 @@ def join(doc, base, new, unit):
 # -------------------------
 #  Algorithm
 # -------------------------
-matrixX = 2
+matrixX = 3
 matrixY = 2
-matrixZ= 2
+matrixZ= 1
 reachableNodes = {"0,0,0"}
-
-class Node:
-	def __init__(self, x, y, z):
-		self.x = x
-		self.y = y
-		self.z = z
-		self.reachable = False
-		self.shape = None
 
 def hash(x, y, z):
 	return '{},{},{}'.format(x, y, z)
@@ -102,13 +94,18 @@ def algorithm(doc, x, y, z, unit):
 		currentNode.reachable = False
 		relaxGraph(currentNode, reachableNodes)
 	return base
-		 
 
 # -------------   Main    -------------
+UNIT = 100
 doc = FreeCAD.newDocument()
 map = initMap(matrixX, matrixY, matrixZ)
-finalObjectID = algorithm(doc, matrixX, matrixY, matrixZ, 100)
+finalObjectID = algorithm(doc, matrixX, matrixY, matrixZ, UNIT)
 Draw(doc, 'Templates/A1_Landscape_plain.svg', finalObjectID)
+doc.recompute()
+
+for k in map.keys():
+	if map[k].shape != None and map[k].shape != "Empty" and map[k].shape.centrelineInfo != None:
+		Draw.drawCentreline(doc, map[k], matrixX, matrixY, matrixZ, UNIT)
+
 #exporter = Exporter(doc, EXPORT_PATH)
 #exporter.saveDrawings(finalObjectID)
-doc.recompute()
