@@ -1,33 +1,41 @@
 from Shape import Shape
 from CentrelineInfo import CentrelineInfo
+from CentreArcInfo import CentreArcInfo
 import FreeCAD
 
 class SemiHoleInCuboid(Shape):
     NEXT_ID = 1
     ROTATIONS = [
-        FreeCAD.Rotation(0, 0, 0), FreeCAD.Rotation(0, 90, 0), 
-        FreeCAD.Rotation(90, 0, 0), FreeCAD.Rotation(90, 90, 0), 
-        FreeCAD.Rotation(180, 0, 0), FreeCAD.Rotation(180, 90, 0),
-        FreeCAD.Rotation(270, 0, 0), FreeCAD.Rotation(270, 90, 0),
-        FreeCAD.Rotation(0, 0, 90), FreeCAD.Rotation(90, 0, 90),
-        FreeCAD.Rotation(0, 0, 270), FreeCAD.Rotation(90, 0, 270) 
+        FreeCAD.Rotation(0, 0, 0), 
+        FreeCAD.Rotation(0, 90, 0), 
+        FreeCAD.Rotation(90, 0, 0), 
+        FreeCAD.Rotation(90, 90, 0), 
+        FreeCAD.Rotation(180, 0, 0),
+        FreeCAD.Rotation(180, 90, 0),
+        FreeCAD.Rotation(270, 0, 0), 
+        FreeCAD.Rotation(270, 90, 0),
+        FreeCAD.Rotation(0, 0, 90), 
+        FreeCAD.Rotation(90, 0, 90),
+        FreeCAD.Rotation(0, 0, 270), 
+        FreeCAD.Rotation(90, 0, 270) 
     ]
 
     @staticmethod
     def generateCentrelines(dimension):
+        baseShapeType = 'SemiHoleInCuboid'
         return [
-            CentrelineInfo(dimension/2, dimension, None, -10, dimension + 10, dimension/2 + 10),
-            CentrelineInfo(None, dimension, dimension/2, -10, dimension + 10, dimension/2 + 10),
-            CentrelineInfo(0, dimension/2, None, -10, dimension + 10, dimension/2 + 10),
-            CentrelineInfo(0, None, dimension/2, -10, dimension + 10, dimension/2 + 10),
-            CentrelineInfo(dimension/2, 0, None, -10, dimension + 10, dimension/2 + 10),
-            CentrelineInfo(None, 0, dimension/2, -10, dimension + 10, dimension/2 + 10),
-            CentrelineInfo(dimension, dimension/2, None, -10, dimension + 10, dimension/2 + 10),
-            CentrelineInfo(dimension, None, dimension/2, -10, dimension + 10, dimension/2 + 10),
-            CentrelineInfo(dimension/2, None, dimension, -10, dimension + 10, dimension/2 + 10),
-            CentrelineInfo(None, dimension/2, dimension, -10, dimension + 10, dimension/2 + 10),
-            CentrelineInfo(dimension/2, None, 0, -10, dimension + 10, dimension/2 + 10),
-            CentrelineInfo(None, dimension/2, 0, -10, dimension + 10, dimension/2 + 10),
+            CentrelineInfo(dimension/2, dimension, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [dimension/2, dimension], [dimension/2, dimension])),
+            CentrelineInfo(None, dimension, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [dimension/2, dimension], [0, dimension], [dimension, dimension/2])),
+            CentrelineInfo(0, dimension/2, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension/2], [0, dimension], [0, dimension/2])),
+            CentrelineInfo(0, None, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension/2], [0, dimension], [0, dimension/2])),
+            CentrelineInfo(dimension/2, 0, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [0, dimension/2], [dimension/2, 0])),
+            CentrelineInfo(None, 0, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension/2], [0, dimension], [0, dimension/2])),
+            CentrelineInfo(dimension, dimension/2, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [dimension/2, dimension], [0, dimension], [dimension, dimension/2])),
+            CentrelineInfo(dimension, None, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [dimension/2, dimension], [0, dimension], [dimension, dimension/2])),
+            CentrelineInfo(dimension/2, None, dimension, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [dimension/2, dimension], [dimension/2, dimension])),
+            CentrelineInfo(None, dimension/2, dimension, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [dimension/2, dimension], [dimension/2, dimension])),
+            CentrelineInfo(dimension/2, None, 0, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [0, dimension/2], [dimension/2, 0])),
+            CentrelineInfo(None, dimension/2, 0, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [0, dimension/2], [dimension/2, 0])),
         ]
 
     def __init__(self, doc, dimension, matrixPos):
