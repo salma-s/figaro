@@ -4,7 +4,10 @@ import Part
 import Drawing
 import TechDraw
 import importlib
-
+import CentreArcInfo
+import SemiCircle
+importlib.reload(CentreArcInfo)
+importlib.reload(SemiCircle)
 from Draw import Draw
 from ShapeFactory import ShapeFactory
 from Exporter import Exporter
