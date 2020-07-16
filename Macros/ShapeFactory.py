@@ -17,30 +17,37 @@ class ShapeFactory():
         self.unit = unit
 
     def generateRandomShape(self, matrixPos):
-        n = random.randint(1,10)
 
+        pMatrix = [0.05, 0.25, 0.15, 0.125, 0.125, 0.10, 0.10, 0.04, 0.04, 0.02]
+        # pMatrix = [0.05, 0.15, 0.15, 0.1, 0.1, 0.1, 0.10, 0.04, 0.04, 0.02]
+        cumulativeMatrix = []
+        sum = 0.00
+        for i in range(len(pMatrix)):
+            sum = sum + pMatrix[i]
+            cumulativeMatrix.append(sum)
+
+        n = random.uniform(0, 1)
+        print(n)
         shape = None
-        if n == 1:
-            shape = Cuboid(self.doc, self.unit, matrixPos)
-        elif n == 2:
-            shape = Wedge(self.doc, self.unit, matrixPos)
-        elif n == 3:
-            shape = HoleInBox(self.doc, self.unit, matrixPos)
-        elif n == 4:
-            shape = SemiCircle(self.doc, self.unit, matrixPos)
-        elif n == 5:
-            shape = QuarterCircle(self.doc, self.unit, matrixPos)
-        elif n == 6:
-            shape = QuarterHoleInCuboid(self.doc, self.unit, matrixPos)
-        elif n == 7:
-            shape = SemiHoleInCuboid(self.doc, self.unit, matrixPos)
-        elif n == 8:
-            shape = HoleInWedge(self.doc, self.unit, matrixPos)
-        elif n == 9:
-            shape = HoleInDoor(self.doc, self.unit, matrixPos)
-        elif n == 10:
+
+        if n <= cumulativeMatrix[0]:
             shape = "Empty"
-        # elif n == 11:
-        #     shape = Cylinder(self.doc, self.unit, matrixPos)
-        
+        elif n <= cumulativeMatrix[1]:
+            shape = Cuboid(self.doc, self.unit, matrixPos)
+        elif n <= cumulativeMatrix[2]:
+            shape = Wedge(self.doc, self.unit, matrixPos)
+        elif n <= cumulativeMatrix[3]:
+            shape = QuarterCircle(self.doc, self.unit, matrixPos)
+        elif n <= cumulativeMatrix[4]:
+            shape = SemiCircle(self.doc, self.unit, matrixPos)
+        elif n <= cumulativeMatrix[5]:
+            shape = HoleInBox(self.doc, self.unit, matrixPos)
+        elif n <= cumulativeMatrix[6]:
+            shape = HoleInDoor(self.doc, self.unit, matrixPos)
+        elif n <= cumulativeMatrix[7]:
+            shape = QuarterHoleInCuboid(self.doc, self.unit, matrixPos)
+        elif n <= cumulativeMatrix[8]:
+            shape = SemiHoleInCuboid(self.doc, self.unit, matrixPos)
+        elif n <= cumulativeMatrix[9]:
+            shape = HoleInWedge(self.doc, self.unit, matrixPos)
         return shape
