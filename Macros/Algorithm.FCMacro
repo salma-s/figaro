@@ -40,9 +40,9 @@ def join(doc, base, new, unit):
 # -------------------------
 #  Algorithm
 # -------------------------
-matrixX = 3
+matrixX = 2
 matrixY = 2
-matrixZ= 1
+matrixZ= 2
 reachableNodes = {"0,0,0"}
 
 def hash(x, y, z):

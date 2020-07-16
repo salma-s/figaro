@@ -15,11 +15,36 @@ class ShapeFactory():
     def __init__(self, doc, unit):
         self.doc = doc
         self.unit = unit
+        self.pMatrix = None
+        self.tMatrix = [
+            [0.15, 0.200, 0.200, 0.200, 0.200, 0.20, 0.500, 0.30, 0.30, 0.1],
+            [0.10, 0.150, 0.035, 0.035, 0.100, 0.06, 0.040, 0.05, 0.20, 0.1],
+            [0.10, 0.050, 0.150, 0.150, 0.050, 0.06, 0.040, 0.10, 0.05, 0.1],
+            [0.10, 0.050, 0.100, 0.150, 0.100, 0.15, 0.150, 0.10, 0.05, 0.1],
+            [0.10, 0.150, 0.150, 0.125, 0.150, 0.15, 0.040, 0.15, 0.15, 0.1],
+            [0.10, 0.050, 0.100, 0.100, 0.100, 0.15, 0.040, 0.05, 0.05, 0.1],
+            [0.10, 0.025, 0.030, 0.030, 0.050, 0.06, 0.025, 0.05, 0.05, 0.1],
+            [0.10, 0.125, 0.150, 0.125, 0.100, 0.06, 0.075, 0.10, 0.05, 0.1],
+            [0.10, 0.150, 0.035, 0.035, 0.100, 0.06, 0.040, 0.05, 0.05, 0.1],
+            [0.05, 0.050, 0.050, 0.050, 0.050, 0.05, 0.050, 0.05, 0.05, 0.1],
+        ]
+
+    def calculateProbabilityMatrix(self):
+        if self.pMatrix is None:
+            return [0.25, 0.15, 0.125, 0.125, 0.10, 0.10, 0.04, 0.04, 0.02, 0.05]
+        
+        pMatrixNew = []
+        for i in range(len(self.pMatrix)):
+            pMatrixNew.append(0)
+            for j in range(len(self.pMatrix)):
+                pMatrixNew[i] += self.tMatrix[i][j] * self.pMatrix[j]
+
+        return pMatrixNew
 
     def generateRandomShape(self, matrixPos):
-
-        pMatrix = [0.05, 0.25, 0.15, 0.125, 0.125, 0.10, 0.10, 0.04, 0.04, 0.02]
-        # pMatrix = [0.05, 0.15, 0.15, 0.1, 0.1, 0.1, 0.10, 0.04, 0.04, 0.02]
+        pMatrix = self.calculateProbabilityMatrix()
+        print(pMatrix)
+        self.pMatrix = pMatrix
         cumulativeMatrix = []
         sum = 0.00
         for i in range(len(pMatrix)):
@@ -27,27 +52,27 @@ class ShapeFactory():
             cumulativeMatrix.append(sum)
 
         n = random.uniform(0, 1)
-        print(n)
         shape = None
 
         if n <= cumulativeMatrix[0]:
-            shape = "Empty"
-        elif n <= cumulativeMatrix[1]:
             shape = Cuboid(self.doc, self.unit, matrixPos)
-        elif n <= cumulativeMatrix[2]:
+        elif n <= cumulativeMatrix[1]:
             shape = Wedge(self.doc, self.unit, matrixPos)
-        elif n <= cumulativeMatrix[3]:
+        elif n <= cumulativeMatrix[2]:
             shape = QuarterCircle(self.doc, self.unit, matrixPos)
-        elif n <= cumulativeMatrix[4]:
+        elif n <= cumulativeMatrix[3]:
             shape = SemiCircle(self.doc, self.unit, matrixPos)
-        elif n <= cumulativeMatrix[5]:
+        elif n <= cumulativeMatrix[4]:
             shape = HoleInBox(self.doc, self.unit, matrixPos)
-        elif n <= cumulativeMatrix[6]:
+        elif n <= cumulativeMatrix[5]:
             shape = HoleInDoor(self.doc, self.unit, matrixPos)
-        elif n <= cumulativeMatrix[7]:
+        elif n <= cumulativeMatrix[6]:
             shape = QuarterHoleInCuboid(self.doc, self.unit, matrixPos)
-        elif n <= cumulativeMatrix[8]:
+        elif n <= cumulativeMatrix[7]:
             shape = SemiHoleInCuboid(self.doc, self.unit, matrixPos)
-        elif n <= cumulativeMatrix[9]:
+        elif n <= cumulativeMatrix[8]:
             shape = HoleInWedge(self.doc, self.unit, matrixPos)
+        else:
+            shape = "Empty"
         return shape
+
