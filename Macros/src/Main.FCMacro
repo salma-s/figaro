@@ -1,0 +1,111 @@
+import sys
+import FreeCAD
+import Part
+import Drawing
+import TechDraw
+from Draw import Draw
+from ShapeFactory import ShapeFactory
+from Exporter import Exporter
+from Node import Node
+
+#EXPORT_PATH = 
+
+# -----------------------------------
+#   Document Object IDs and Types
+# -----------------------------------
+fusions = []
+FUSION = 'Fusion'
+
+# Create id for the document object type and add it to the respective list
+def generateID(objectType): 
+	if objectType == FUSION:
+		id = FUSION + str(len(fusions)+1 )
+		fusions.append(id)
+	return id
+
+# -------------------------
+#   Fusion
+# -------------------------
+
+def fusePart(doc, fuseID, baseID, toolID):
+	doc.addObject("Part::Fuse", fuseID)
+	doc.getObject(fuseID).Base = doc.getObject(baseID)
+	doc.getObject(fuseID).Tool = doc.getObject(toolID)
+
+def join(doc, base, new, unit):
+	id = generateID(FUSION)
+	fusePart(doc, id, base, new.shape.id)
+	return id
+
+# -------------------------
+#  Algorithm
+# -------------------------
+matrixX = 2
+matrixY = 2
+matrixZ= 2
+reachableNodes = {"0,0,0"}
+
+def hash(x, y, z):
+	return '{},{},{}'.format(x, y, z)
+
+def initMap(x, y, z):
+	map = {}
+	for i in range(0, x):
+		for j in range (0, y):
+			for k in range (0, z):
+				map[hash(i, j, k)] = Node(i, j, k)
+	return map
+
+def checkReachability(nodeCoords):
+	hashedString = hash(nodeCoords[0], nodeCoords[1], nodeCoords[2])
+	adjacentNode = map[hashedString]
+	if adjacentNode.shape is None and adjacentNode.reachable is False:
+		adjacentNode.reachable = True
+		reachableNodes.add(hashedString)
+
+def relaxGraph(currentNode, reachableNodes):
+	if currentNode.shape != "Empty":
+		if currentNode.x != 0:
+			checkReachability([currentNode.x - 1, currentNode.y, currentNode.z])
+		if currentNode.x != matrixX - 1:
+			checkReachability([currentNode.x + 1, currentNode.y, currentNode.z])
+		if currentNode.y != 0:
+			checkReachability([currentNode.x, currentNode.y - 1, currentNode.z])
+		if currentNode.y != matrixY - 1:
+			checkReachability([currentNode.x, currentNode.y + 1, currentNode.z])
+		if currentNode.z != 0:		
+			checkReachability([currentNode.x, currentNode.y, currentNode.z - 1])
+		if currentNode.z != matrixZ - 1:
+			checkReachability([currentNode.x, currentNode.y, currentNode.z + 1])	
+
+def algorithm(doc, x, y, z, unit):
+	shapeFactory = ShapeFactory(doc, unit)
+	base = None
+
+	while len(reachableNodes) != 0:
+		nodeHash = reachableNodes.pop()
+		currentNode = map[nodeHash]
+		while currentNode.shape is None or map["0,0,0"].shape == "Empty":
+			currentNode.shape = shapeFactory.generateRandomShape([currentNode.x, currentNode.y, currentNode.z])
+		if base is None and currentNode.shape != "Empty":
+			base = currentNode.shape.id
+		elif currentNode.shape != "Empty":
+			base = join(doc, base, currentNode, unit)
+		currentNode.reachable = False
+		relaxGraph(currentNode, reachableNodes)
+	return base
+
+# -------------   Main    -------------
+UNIT = 100
+doc = FreeCAD.newDocument()
+map = initMap(matrixX, matrixY, matrixZ)
+finalObjectID = algorithm(doc, matrixX, matrixY, matrixZ, UNIT)
+Draw(doc, 'Templates/A1_Landscape_plain.svg', finalObjectID)
+doc.recompute()
+
+for k in map.keys():
+	if map[k].shape != None and map[k].shape != "Empty" and map[k].shape.centrelineInfo != None:
+		Draw.drawCentreline(doc, map[k], matrixX, matrixY, matrixZ, UNIT)
+
+#exporter = Exporter(doc, EXPORT_PATH)
+#exporter.saveDrawings(finalObjectID)
