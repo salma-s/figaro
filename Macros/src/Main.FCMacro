@@ -4,6 +4,8 @@ import Part
 import Drawing
 import TechDraw
 from Draw import Draw
+
+
 from ShapeFactory import ShapeFactory
 from Exporter import Exporter
 from Node import Node
@@ -79,7 +81,7 @@ def relaxGraph(currentNode, reachableNodes):
 			checkReachability([currentNode.x, currentNode.y, currentNode.z + 1])	
 
 def algorithm(doc, x, y, z, unit):
-	shapeFactory = ShapeFactory(doc, unit)
+	shapeFactory = ShapeFactory(doc, unit, x*y*z, 'Medium')
 	base = None
 
 	while len(reachableNodes) != 0:

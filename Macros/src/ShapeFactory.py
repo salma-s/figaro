@@ -8,71 +8,55 @@ from QuarterHoleInCuboid import QuarterHoleInCuboid
 from SemiCircle import SemiCircle
 from SemiHoleInCuboid import SemiHoleInCuboid
 from Wedge import Wedge
+from EasyBaseShapeGenerator import EasyBaseShapeGenerator
+from MediumBaseShapeGenerator import MediumBaseShapeGenerator
+from HardBaseShapeGenerator import HardBaseShapeGenerator
 import FreeCAD
 import random
 
 class ShapeFactory():
-    def __init__(self, doc, unit):
+    def __init__(self, doc, unit, numBaseShapes, difficulty):
         self.doc = doc
         self.unit = unit
-        self.pMatrix = None
-        self.tMatrix = [
-            [0.15, 0.200, 0.200, 0.200, 0.200, 0.20, 0.500, 0.30, 0.30, 0.1],
-            [0.10, 0.150, 0.035, 0.035, 0.100, 0.06, 0.040, 0.05, 0.20, 0.1],
-            [0.10, 0.050, 0.150, 0.150, 0.050, 0.06, 0.040, 0.10, 0.05, 0.1],
-            [0.10, 0.050, 0.100, 0.150, 0.100, 0.15, 0.150, 0.10, 0.05, 0.1],
-            [0.10, 0.150, 0.150, 0.125, 0.150, 0.15, 0.040, 0.15, 0.15, 0.1],
-            [0.10, 0.050, 0.100, 0.100, 0.100, 0.15, 0.040, 0.05, 0.05, 0.1],
-            [0.10, 0.025, 0.030, 0.030, 0.050, 0.06, 0.025, 0.05, 0.05, 0.1],
-            [0.10, 0.125, 0.150, 0.125, 0.100, 0.06, 0.075, 0.10, 0.05, 0.1],
-            [0.10, 0.150, 0.035, 0.035, 0.100, 0.06, 0.040, 0.05, 0.05, 0.1],
-            [0.05, 0.050, 0.050, 0.050, 0.050, 0.05, 0.050, 0.05, 0.05, 0.1],
-        ]
+        self.difficulty = difficulty
+        self.easyBaseShapeGenerator = EasyBaseShapeGenerator(doc, unit)
+        self.mediumBaseShapeGenerator = MediumBaseShapeGenerator(doc, unit)
+        self.hardBaseShapeGenerator = HardBaseShapeGenerator(doc, unit)
 
-    def calculateProbabilityMatrix(self):
-        if self.pMatrix is None:
-            return [0.25, 0.15, 0.125, 0.125, 0.10, 0.10, 0.04, 0.04, 0.02, 0.05]
-        
-        pMatrixNew = []
-        for i in range(len(self.pMatrix)):
-            pMatrixNew.append(0)
-            for j in range(len(self.pMatrix)):
-                pMatrixNew[i] += self.tMatrix[i][j] * self.pMatrix[j]
-
-        return pMatrixNew
+        if difficulty == 'Easy':
+            self.easy = numBaseShapes - 2
+            self.med = 2
+            self.hard = 0
+        elif difficulty == 'Medium':
+            self.easy = numBaseShapes - 3
+            self.med = 3
+            self.hard = 0
+        elif difficulty == 'Hard':
+            self.easy = numBaseShapes - 3
+            self.med = 1
+            self.hard = 2
 
     def generateRandomShape(self, matrixPos):
-        pMatrix = self.calculateProbabilityMatrix()
-        print(pMatrix)
-        self.pMatrix = pMatrix
-        cumulativeMatrix = []
-        sum = 0.00
-        for i in range(len(pMatrix)):
-            sum = sum + pMatrix[i]
-            cumulativeMatrix.append(sum)
+        # Get the difficulties of base shapes to generate
+        difficulties = []
+        if self.easy > 0:
+            difficulties.append(0)
+        if self.med > 0:
+            difficulties.append(1)
+        if self.hard > 0:
+            difficulties.append(2)
+        if self.easy == 0 and self.med == 0 and self.hard == 0:
+            return
 
-        n = random.uniform(0, 1)
-        shape = None
-
-        if n <= cumulativeMatrix[0]:
-            shape = Cuboid(self.doc, self.unit, matrixPos)
-        elif n <= cumulativeMatrix[1]:
-            shape = Wedge(self.doc, self.unit, matrixPos)
-        elif n <= cumulativeMatrix[2]:
-            shape = QuarterCircle(self.doc, self.unit, matrixPos)
-        elif n <= cumulativeMatrix[3]:
-            shape = SemiCircle(self.doc, self.unit, matrixPos)
-        elif n <= cumulativeMatrix[4]:
-            shape = HoleInBox(self.doc, self.unit, matrixPos)
-        elif n <= cumulativeMatrix[5]:
-            shape = HoleInDoor(self.doc, self.unit, matrixPos)
-        elif n <= cumulativeMatrix[6]:
-            shape = QuarterHoleInCuboid(self.doc, self.unit, matrixPos)
-        elif n <= cumulativeMatrix[7]:
-            shape = SemiHoleInCuboid(self.doc, self.unit, matrixPos)
-        elif n <= cumulativeMatrix[8]:
-            shape = HoleInWedge(self.doc, self.unit, matrixPos)
-        else:
-            shape = "Empty"
+        # Get a random difficulty and generate a base shape 
+        n = random.choice(difficulties)
+        if n == 0:
+            shape = self.easyBaseShapeGenerator.getRandomBaseShape(matrixPos)
+            self.easy = self.easy - 1
+        elif n == 1:
+            shape = self.mediumBaseShapeGenerator.getRandomBaseShape(matrixPos)
+            self.med = self.med - 1
+        elif n == 2:
+            shape = self.hardBaseShapeGenerator.getRandomBaseShape(matrixPos)
+            self.hard = self.hard - 1
         return shape
-
