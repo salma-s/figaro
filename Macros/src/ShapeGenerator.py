@@ -1,5 +1,5 @@
 from Node import Node
-from ShapeFactory import ShapeFactory
+from BaseShapeFactory import BaseShapeFactory
 import FreeCAD
 
 class ShapeGenerator:
@@ -70,7 +70,7 @@ class ShapeGenerator:
 
     # The algorithm which generate a shape with a specified complexity
     def generate(self, complexity):
-        shapeFactory = ShapeFactory(self.doc, self.unit, self.matrixX * self.matrixY * self.matrixZ, complexity)
+        shapeFactory = BaseShapeFactory(self.doc, self.unit, self.matrixX * self.matrixY * self.matrixZ, complexity)
         base = None
 
         while len(self.reachableNodes) != 0:

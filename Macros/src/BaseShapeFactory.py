@@ -1,20 +1,9 @@
-from Cuboid import Cuboid
-from Cylinder import Cylinder
-from HoleInBox import HoleInBox
-from HoleInDoor import HoleInDoor
-from HoleInWedge import HoleInWedge
-from QuarterCircle import QuarterCircle
-from QuarterHoleInCuboid import QuarterHoleInCuboid
-from SemiCircle import SemiCircle
-from SemiHoleInCuboid import SemiHoleInCuboid
-from Wedge import Wedge
 from EasyBaseShapeGenerator import EasyBaseShapeGenerator
 from MediumBaseShapeGenerator import MediumBaseShapeGenerator
 from HardBaseShapeGenerator import HardBaseShapeGenerator
-import FreeCAD
 import random
 
-class ShapeFactory():
+class BaseShapeFactory():
     def __init__(self, doc, unit, numBaseShapes, difficulty):
         self.doc = doc
         self.unit = unit
