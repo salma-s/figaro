@@ -29,14 +29,11 @@ def generateID(objectType):
 #   Fusion
 # -------------------------
 
-def fusePart(doc, fuseID, baseID, toolID):
-	doc.addObject("Part::Fuse", fuseID)
-	doc.getObject(fuseID).Base = doc.getObject(baseID)
-	doc.getObject(fuseID).Tool = doc.getObject(toolID)
-
 def join(doc, base, new, unit):
 	id = generateID(FUSION)
-	fusePart(doc, id, base, new.shape.id)
+	doc.addObject("Part::Fuse", id)
+	doc.getObject(id).Base = doc.getObject(base)
+	doc.getObject(id).Tool = doc.getObject(new.shape.id)
 	return id
 
 # -------------------------
