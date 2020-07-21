@@ -4,31 +4,22 @@ import Part
 import Drawing
 import TechDraw
 from Draw import Draw
-
-
 from ShapeFactory import ShapeFactory
 from Exporter import Exporter
 from Node import Node
 
 #EXPORT_PATH = 
 
-# -----------------------------------
-#   Document Object IDs and Types
-# -----------------------------------
+# Fuse ID generator
 fusions = []
 FUSION = 'Fusion'
-
-# Create id for the document object type and add it to the respective list
 def generateID(objectType): 
 	if objectType == FUSION:
 		id = FUSION + str(len(fusions)+1 )
 		fusions.append(id)
 	return id
 
-# -------------------------
-#   Fusion
-# -------------------------
-
+# Part fusion
 def join(doc, base, new, unit):
 	id = generateID(FUSION)
 	doc.addObject("Part::Fuse", id)
@@ -36,9 +27,7 @@ def join(doc, base, new, unit):
 	doc.getObject(id).Tool = doc.getObject(new.shape.id)
 	return id
 
-# -------------------------
-#  Algorithm
-# -------------------------
+# Algorithm
 matrixX = 2
 matrixY = 2
 matrixZ= 2
