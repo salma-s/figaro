@@ -54,7 +54,7 @@ class QuarterHoleInCuboid(Shape):
 
         quarterHoleID = "QuarterHoleInCuboidCylinder" + str(QuarterHoleInCuboid.NEXT_ID)
         doc.addObject("Part::Cylinder", quarterHoleID)
-        doc.getObject(quarterHoleID).Radius = dimension
+        doc.getObject(quarterHoleID).Radius = dimension - 0.5
         doc.getObject(quarterHoleID).Height = dimension
         doc.getObject(quarterHoleID).Angle = 360
         doc.getObject(quarterHoleID).Placement = FreeCAD.Placement(FreeCAD.Vector(0, dimension, 0), FreeCAD.Rotation(0, 0, 0))	
