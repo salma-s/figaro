@@ -25,8 +25,8 @@ DISTRACTOR_DIFFICULTY = 'Hard'
 # -------------   Main    -------------
 doc = FreeCAD.newDocument('doc-1')
 shapeGenerator = ShapeGenerator(doc, MATRIX_X, MATRIX_Y, MATRIX_Z, UNIT)
-finalObjectID = shapeGenerator.generate(SHAPE_COMPLEXITY)
-Draw(doc, 'Templates/A1_Landscape_plain.svg', finalObjectID)
+finalShapeID = shapeGenerator.generate(SHAPE_COMPLEXITY)
+Draw(doc, 'Templates/A1_Landscape_plain.svg', finalShapeID)
 doc.recompute()
 
 map = shapeGenerator.baseShapeMap
@@ -36,7 +36,14 @@ for k in map.keys():
 
 mcq = MCQGenerator(shapeGenerator, map, 3, DISTRACTOR_DIFFICULTY)
 doc = mcq.getDoc()
+Draw(doc, 'Templates/A1_Landscape_plain.svg', mcq.finalShapeID)
 doc.recompute()
+
+map = mcq.mcqMaps[0]
+for k in map.keys():
+	if map[k].shape != None and map[k].shape != 'Empty' and map[k].shape.centrelineInfo != None:
+		Draw.drawCentreline(doc, map[k], MATRIX_X, MATRIX_Y, MATRIX_Z, UNIT)
+
 
 #exporter = Exporter(doc, EXPORT_PATH)
 #exporter.saveDrawings(finalObjectID)

@@ -92,10 +92,10 @@ class MCQGenerator:
                 print(k + ' - ' + str(mapCopy[k].shape.rotationIndex))
 
         # Generate the shape with distractor(s) in the FreeCAD document
-        self.id = shapeGenerator.generateShapeFromPredefinedMap(mapCopy, doc)
-
-    def getID(self):
-        return self.id
+        self.finalShapeID = shapeGenerator.generateShapeFromPredefinedMap(mapCopy, doc)
+        mcqMaps = []
+        mcqMaps.append(mapCopy)
+        self.mcqMaps = mcqMaps
 
     def getDoc(self):
         return self.docs[0]
