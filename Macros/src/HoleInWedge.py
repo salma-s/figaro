@@ -1,7 +1,14 @@
 from Shape import Shape
 from CentrelineInfo import CentrelineInfo
 import FreeCAD
+import random
+from Cuboid import *
+from HoleInDoor import *
+from HoleInBox import *
+from Wedge import *
+from QuarterCircle import *
 from QuarterHoleInCuboid import *
+from SemiCircle import *
 from SemiHoleInCuboid import *
 
 class HoleInWedge(Shape):
@@ -105,10 +112,30 @@ class HoleInWedge(Shape):
         return HoleInWedge(doc, self.dimension, self.matrixPos, self.rotationIndex)
 
     def generateDissimilarShape(self, doc):
-        return QuarterHoleInCuboid(doc, self.dimension, self.matrixPos)  
+        shapes = ['Cuboid', 'QuarterCircle', 'QuarterHoleInCuboid', 'SemiHoleInCuboid']
+        shapeType = shapes[random.randint(0, len(shapes) - 1)]
+        if shapeType == 'Cuboid':
+            return Cuboid(doc, self.dimension, self.matrixPos)
+        elif shapeType == 'QuarterCircle':
+            return QuarterCircle(doc, self.dimension, self.matrixPos)
+        elif shapeType == 'HoleInBox':
+            return HoleInBox(doc, self.dimension, self.matrixPos)
+        elif shapeType == 'QuarterHoleInCuboid':
+            return QuarterHoleInCuboid(doc, self.dimension, self.matrixPos)
+        elif shapeType == 'HoleInDoor':
+            return HoleInDoor(doc, self.dimension, self.matrixPos)
+        elif shapeType == 'SemiHoleInCuboid':
+            return SemiHoleInCuboid(doc, self.dimension, self.matrixPos)  
 
     def generateSimilarShape(self, doc):
-        return SemiHoleInCuboid(doc, self.dimension, self.matrixPos)
+        shapes = ['Wedge', 'HoleInBox', 'HoleInDoor']
+        shapeType = shapes[random.randint(0, len(shapes) - 1)]
+        if shapeType == 'Wedge':
+            return Wedge(doc, self.dimension, self.matrixPos)
+        elif shapeType == 'HoleInBox':
+            return HoleInBox(doc, self.dimension, self.matrixPos)
+        elif shapeType == 'HoleInDoor':
+            return HoleInDoor(doc, self.dimension, self.matrixPos)
 
     def deepCopyWithDifferentRotation(self, doc):
         return HoleInWedge(doc, self.dimension, self.matrixPos, self.getRandomRotationIndexWithException(self.rotationIndex))

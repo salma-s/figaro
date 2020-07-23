@@ -2,7 +2,14 @@ from Shape import Shape
 from CentrelineInfo import CentrelineInfo
 from CentreArcInfo import CentreArcInfo
 import FreeCAD
+import random
+from Cuboid import *
+from HoleInDoor import *
+from HoleInBox import *
+from Wedge import *
 from HoleInWedge import *
+from QuarterHoleInCuboid import *
+from QuarterCircle import *
 from SemiHoleInCuboid import *
 
 class SemiCircle(Shape):
@@ -83,10 +90,28 @@ class SemiCircle(Shape):
         return SemiCircle(doc, self.dimension, self.matrixPos, self.rotationIndex)
 
     def generateDissimilarShape(self, doc):
-        return HoleInWedge(doc, self.dimension, self.matrixPos)  
+        shapes = ['Cuboid', 'HoleInDoor', 'HoleInBox', 'Wedge', 'HoleInWedge', 'QuarterHoleInCuboid', 'SemiHoleInCuboid']
+        shapeType = shapes[random.randint(0, len(shapes) - 1)]
+        if shapeType == 'Cuboid':
+            return Cuboid(doc, self.dimension, self.matrixPos)
+        elif shapeType == 'HoleInDoor':
+            return HoleInDoor(doc, self.dimension, self.matrixPos)
+        elif shapeType == 'HoleInBox':
+            return HoleInBox(doc, self.dimension, self.matrixPos)
+        elif shapeType == 'Wedge':
+            return Wedge(doc, self.dimension, self.matrixPos)
+        elif shapeType == 'HoleInWedge':
+            return HoleInWedge(doc, self.dimension, self.matrixPos)
+        elif shapeType == 'QuarterHoleInCuboid':
+            return QuarterHoleInCuboid(doc, self.dimension, self.matrixPos)
+        elif shapeType == 'SemiHoleInCuboid':
+            return SemiHoleInCuboid(doc, self.dimension, self.matrixPos)  
 
     def generateSimilarShape(self, doc):
-        return SemiHoleInCuboid(doc, self.dimension, self.matrixPos)
+        shapes = ['QuarterCircle']
+        shapeType = shapes[random.randint(0, len(shapes) - 1)]
+        if shapeType == 'QuarterCircle':
+            return QuarterCircle(doc, self.dimension, self.matrixPos)
 
     def deepCopyWithDifferentRotation(self, doc):
         return SemiCircle(doc, self.dimension, self.matrixPos, self.getRandomRotationIndexWithException(self.rotationIndex))

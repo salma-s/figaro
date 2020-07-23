@@ -23,7 +23,7 @@ MATRIX_Z= 2
 UNIT = 100
 
 SHAPE_COMPLEXITY = 'Easy'
-DISTRACTOR_DIFFICULTY = 'Hard'
+DISTRACTOR_DIFFICULTY = 'Easy'
 
 # MCQ Options per Question. Not more than 4 is recommended for a Hard distractor difficulty.
 # Count is inclusive of correct answer
