@@ -2,6 +2,8 @@ from Shape import Shape
 from CentrelineInfo import CentrelineInfo
 from CentreArcInfo import CentreArcInfo
 import FreeCAD
+from HoleInWedge import *
+from SemiHoleInCuboid import *
 
 class QuarterCircle(Shape):
     NEXT_ID = 1
@@ -42,7 +44,9 @@ class QuarterCircle(Shape):
             CentrelineInfo(None, dimension, 0, -10, dimension + 10, None, CentreArcInfo(baseShapeType, dimension, 0, dimension)),
         ]
 
-    def __init__(self, doc, dimension, matrixPos):
+    def __init__(self, doc, dimension, matrixPos, rotationIndex = None):
+        self.baseShapeType = 'QuarterCircle'
+        self.matrixPos = matrixPos
         id = "QuarterCircle" + str(QuarterCircle.NEXT_ID)
         super().__init__(id, dimension, QuarterCircle.ROTATIONS, QuarterCircle.generateCentrelines(dimension))
 
@@ -51,8 +55,28 @@ class QuarterCircle(Shape):
         doc.getObject(id).Height = dimension
         doc.getObject(id).Angle = 90
         
+        # If a rotation is not given, generate a random rotation
+        if rotationIndex is None:
+            self.rotationIndex = self.getRandomRotationIndex()
+        else:
+            self.rotationIndex = rotationIndex
+        
         # Translate block to actual position
         doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), 
-            self.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))	
-
+            QuarterCircle.ROTATIONS[self.rotationIndex], FreeCAD.Vector(dimension/2, dimension/2, dimension/2))
+      
         QuarterCircle.NEXT_ID += 1
+
+    # Returns [QuarterCircle] a deep copy of the shape with the same dimension, matrix position,
+    # but in a specified FreeCAD document
+    def deepCopy(self, doc):
+        return QuarterCircle(doc, self.dimension, self.matrixPos, self.rotationIndex)
+
+    def generateDissimilarShape(self, doc):
+        return HoleInWedge(doc, self.dimension, self.matrixPos)  
+
+    def generateSimilarShape(self, doc):
+        return SemiHoleInCuboid(doc, self.dimension, self.matrixPos)
+    
+    def deepCopyWithDifferentRotation(self, doc):
+        return QuarterCircle(doc, self.dimension, self.matrixPos, self.getRandomRotationIndexWithException(self.rotationIndex))

@@ -33,6 +33,7 @@ class ShapeGenerator:
         self.matrixZ = matrixZ
         self.unit = unit
         self.reachableNodes = {'0,0,0'}
+        self.coordsVisited = []
 
         # Stores the IDs of shapes which are a result of a fusion
         self.fusionIDs = []
@@ -69,19 +70,45 @@ class ShapeGenerator:
                 self.checkReachability([currentNode.x, currentNode.y, currentNode.z + 1])	
 
     # The algorithm which generate a shape with a specified complexity
+    # Arguments
+    # - complexity [String]: The complexity of the shape to generate
+    # Returns [String] the ID of the new shape
     def generate(self, complexity):
         shapeFactory = BaseShapeFactory(self.doc, self.unit, self.matrixX * self.matrixY * self.matrixZ, complexity)
-        base = None
+        newShapeID = None
+        self.complexity = complexity
 
         while len(self.reachableNodes) != 0:
             nodeHash = self.reachableNodes.pop()
+            self.coordsVisited.append(nodeHash)
             currentNode = self.baseShapeMap[nodeHash]
+
             while currentNode.shape is None or self.baseShapeMap["0,0,0"].shape == "Empty":
                 currentNode.shape = shapeFactory.generateRandomShape([currentNode.x, currentNode.y, currentNode.z])
-            if base is None and currentNode.shape != "Empty":
-                base = currentNode.shape.id
+            if newShapeID is None and currentNode.shape != "Empty":
+                newShapeID = currentNode.shape.id
             elif currentNode.shape != "Empty":
-                base = self.join(self.doc, base, currentNode, self.unit)
+                newShapeID = self.join(self.doc, newShapeID, currentNode, self.unit)
             currentNode.reachable = False
             self.relaxGraph(currentNode, self.reachableNodes)
-        return base
+        
+        #self.generateShapeFromPredefinedMap(self.baseShapeMap, self.doc)
+
+        self.finalShapeID = newShapeID
+        return self.finalShapeID
+    
+    # Given a map of coordinates to base shapes, this function creates a new shape
+    # Arguments
+    # - baseShapeMap [dict]: Map of hash coordinates to the respective base shape Node 
+    # Returns [String] the ID of the new shape
+    def generateShapeFromPredefinedMap(self, baseShapeMap, doc):
+        newShapeID = None
+
+        for key in baseShapeMap:      
+            currentNode = baseShapeMap[key]
+            if newShapeID is None and currentNode.shape != "Empty":
+                newShapeID = currentNode.shape.id
+            elif currentNode.shape != "Empty":
+                newShapeID = self.join(doc, newShapeID, currentNode, self.unit)
+
+        return newShapeID

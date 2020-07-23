@@ -2,6 +2,8 @@ from Shape import Shape
 from CentrelineInfo import CentrelineInfo
 from CentreArcInfo import CentreArcInfo
 import FreeCAD
+from HoleInWedge import *
+from SemiHoleInCuboid import *
 
 class HoleInDoor(Shape):
     NEXT_ID = 1
@@ -38,7 +40,9 @@ class HoleInDoor(Shape):
             CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [0, 3/4 * dimension], dimension/2)),
         ]
 
-    def __init__(self, doc, dimension, matrixPos):
+    def __init__(self, doc, dimension, matrixPos, rotationIndex = None):
+        self.baseShapeType = 'HoleInDoor'
+        self.matrixPos = matrixPos
         id = "HoleInDoor" + str(HoleInDoor.NEXT_ID)
         super().__init__(id, dimension, HoleInDoor.ROTATIONS, HoleInDoor.generateCentrelines(dimension))
         
@@ -73,8 +77,29 @@ class HoleInDoor(Shape):
         doc.getObject(id).Base = doc.getObject(partialId)
         doc.getObject(id).Tool = doc.getObject(cutCylinderID)
 
+        # If a rotation is not given, generate a random rotation
+        if rotationIndex is None:
+            self.rotationIndex = self.getRandomRotationIndex()
+        else:
+            self.rotationIndex = rotationIndex
+
         # Translate block to actual position
         doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), 
-            self.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))
+            HoleInDoor.ROTATIONS[self.rotationIndex], FreeCAD.Vector(dimension/2, dimension/2, dimension/2))
 
         HoleInDoor.NEXT_ID += 1
+    
+    # Returns [HoleInDoor] a deep copy of the shape with the same dimension, matrix position,
+    # but in a specified FreeCAD document
+    def deepCopy(self, doc):
+        return HoleInDoor(doc, self.dimension, self.matrixPos, self.rotationIndex)
+
+    def generateDissimilarShape(self, doc):
+        return HoleInWedge(doc, self.dimension, self.matrixPos)  
+
+    def generateSimilarShape(self, doc):
+        return SemiHoleInCuboid(doc, self.dimension, self.matrixPos)
+
+    def deepCopyWithDifferentRotation(self, doc):
+        return HoleInDoor(doc, self.dimension, self.matrixPos, self.getRandomRotationIndexWithException(self.rotationIndex))
+    

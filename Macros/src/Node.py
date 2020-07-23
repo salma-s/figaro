@@ -1,8 +1,8 @@
-#TODO: rename to base shaoe node
+#TODO: rename to base shape node
 class Node:
-    def __init__(self, x, y, z):
+    def __init__(self, x, y, z, shape = None):
         self.x = x
         self.y = y
         self.z = z
         self.reachable = False
-        self.shape = None
+        self.shape = shape

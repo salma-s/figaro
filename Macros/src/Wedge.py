@@ -1,5 +1,7 @@
 from Shape import Shape
 import FreeCAD
+from HoleInWedge import *
+from SemiHoleInCuboid import *
 
 class Wedge(Shape):
     NEXT_ID = 1
@@ -9,7 +11,9 @@ class Wedge(Shape):
         FreeCAD.Rotation(0, 0, 180), FreeCAD.Rotation(0, 90, 180), FreeCAD.Rotation(0, 180, 180), FreeCAD.Rotation(0, 270, 180), 
     ]
 
-    def __init__(self, doc, dimension, matrixPos):
+    def __init__(self, doc, dimension, matrixPos, rotationIndex = None):
+        self.baseShapeType = 'Wedge'
+        self.matrixPos = matrixPos
         id = "Wedge" + str(Wedge.NEXT_ID)
         super().__init__(id, dimension, Wedge.ROTATIONS)
         
@@ -31,8 +35,28 @@ class Wedge(Shape):
         doc.getObject(id).Base = doc.getObject(mainCubeID)
         doc.getObject(id).Tool = doc.getObject(cutCubeID)
 
+         # If a rotation is not given, generate a random rotation
+        if rotationIndex is None:
+            self.rotationIndex = self.getRandomRotationIndex()
+        else:
+            self.rotationIndex = rotationIndex
+
         # Translate block to actual position
         doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), 
-            self.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))
+            Wedge.ROTATIONS[self.rotationIndex], FreeCAD.Vector(dimension/2, dimension/2, dimension/2))
 
         Wedge.NEXT_ID += 1
+
+    # Returns [Wedge] a deep copy of the shape with the same dimension, matrix position,
+    # but in a specified FreeCAD document
+    def deepCopy(self, doc):
+        return Wedge(doc, self.dimension, self.matrixPos, self.rotationIndex)
+
+    def generateDissimilarShape(self, doc):
+        return HoleInWedge(doc, self.dimension, self.matrixPos)  
+
+    def generateSimilarShape(self, doc):
+        return SemiHoleInCuboid(doc, self.dimension, self.matrixPos)
+
+    def deepCopyWithDifferentRotation(self, doc):
+        return Wedge(doc, self.dimension, self.matrixPos, self.getRandomRotationIndexWithException(self.rotationIndex))

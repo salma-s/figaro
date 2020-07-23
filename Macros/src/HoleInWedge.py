@@ -1,6 +1,8 @@
 from Shape import Shape
 from CentrelineInfo import CentrelineInfo
 import FreeCAD
+from QuarterHoleInCuboid import *
+from SemiHoleInCuboid import *
 
 class HoleInWedge(Shape):
     NEXT_ID = 1
@@ -48,7 +50,9 @@ class HoleInWedge(Shape):
             CentrelineInfo(dimension/2, dimension/2, None, 0.25 * dimension - 10, dimension + 10, dimension/4 + 10),
         ]
 
-    def __init__(self, doc, dimension, matrixPos):
+    def __init__(self, doc, dimension, matrixPos, rotationIndex = None):
+        self.baseShapeType = 'HoleInWedge'
+        self.matrixPos = matrixPos
         id = "HoleInWedge" + str(HoleInWedge.NEXT_ID)
         super().__init__(id, dimension, HoleInWedge.ROTATIONS, HoleInWedge.generateCentrelines(dimension))
 
@@ -83,8 +87,28 @@ class HoleInWedge(Shape):
         doc.getObject(id).Base = doc.getObject(partialId)
         doc.getObject(id).Tool = doc.getObject(cylinderID)
 
+        # If a rotation is not given, generate a random rotation
+        if rotationIndex is None:
+            self.rotationIndex = self.getRandomRotationIndex()
+        else:
+            self.rotationIndex = rotationIndex
+
         # Translate block to actual position
         doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), 
-            self.getRandomRotation(), FreeCAD.Vector(dimension/2, dimension/2, dimension/2))
+            HoleInWedge.ROTATIONS[self.rotationIndex], FreeCAD.Vector(dimension/2, dimension/2, dimension/2))
 
         HoleInWedge.NEXT_ID += 1
+
+    # Returns [HoleInWedge] a deep copy of the shape with the same dimension, matrix position,
+    # but in a specified FreeCAD document
+    def deepCopy(self, doc):
+        return HoleInWedge(doc, self.dimension, self.matrixPos, self.rotationIndex)
+
+    def generateDissimilarShape(self, doc):
+        return QuarterHoleInCuboid(doc, self.dimension, self.matrixPos)  
+
+    def generateSimilarShape(self, doc):
+        return SemiHoleInCuboid(doc, self.dimension, self.matrixPos)
+
+    def deepCopyWithDifferentRotation(self, doc):
+        return HoleInWedge(doc, self.dimension, self.matrixPos, self.getRandomRotationIndexWithException(self.rotationIndex))
