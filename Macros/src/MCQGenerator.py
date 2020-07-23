@@ -26,22 +26,22 @@ class MCQGenerator:
         
         return mapCopy
 
-
     # Arguments
     # - shapeGenerator [ShapeGenerator]: The generator responsible for constructing the correct shape
     # - correctShapeMap [dict]: Maps the correct shapes corrdinates to base shapes
-    # - numOfMCQs [Integer]: The number of MCQs to be generated, exclusive of the correct shape
     # - distractorDifficulty [String]: Represents the easy/medium/hard difficulty of the distractor(s) to generate in the MCQs
-    def __init__(self, shapeGenerator, correctShapeMap, numOfMCQs, distractorDifficulty):
-        #TODO: generate multiple docs
-        #TODO: generate multiple mapo copies
-
-        docs = []
-        docs.append(FreeCAD.newDocument('copy'))
-        doc = docs[0]
-        mapCopy = self.mapDeepCopy(correctShapeMap, doc)
-        
-        self.docs = docs
+    def __init__(self, shapeGenerator, correctShapeMap, distractorDifficulty):
+        # TODO: raise exception if difficulty isnt easy/med/hard
+        self.shapeGenerator = shapeGenerator
+        self.correctShapeMap = correctShapeMap
+        self.distractorDifficulty = distractorDifficulty
+        self.docs = [] #TODO: remove if not used
+        self.baseShapeMaps = []
+        self.shapeIDs = []
+    
+    # Returns the generated shape ID
+    def generateShape(self, doc):
+        mapCopy = self.mapDeepCopy(self.correctShapeMap, doc)
 
         # Get random coordinate to modify that base shape
         # TODO: for now, this can still generate the same base shape (possibly same rotation as well)   
@@ -49,7 +49,7 @@ class MCQGenerator:
         randomCoordinate = coordinatesList[random.randint(0, len(coordinatesList) - 1)]
         baseShapeToChange = mapCopy[randomCoordinate]
 
-        if distractorDifficulty == 'Hard':
+        if self.distractorDifficulty == 'Hard':
             # The random base shape cannot be Empty nor Cuboid since they cannot have a rotated to be a distractor
             while baseShapeToChange.shape == 'Empty' or baseShapeToChange.shape.baseShapeType == 'Cuboid':
                 randomCoordinate = coordinatesList[random.randint(0, len(coordinatesList) - 1)]
@@ -66,36 +66,21 @@ class MCQGenerator:
         originalShape = mapCopy[randomCoordinate].shape
         doc.removeObject(originalShape.id)
         
-        if distractorDifficulty == 'Easy':
+        if self.distractorDifficulty == 'Easy':
             # Create a dissimilar shape to the original
             distractorShape = originalShape.generateDissimilarShape(doc)
-            mapCopy[randomCoordinate].shape = distractorShape
-
-        elif distractorDifficulty == 'Medium':
+        elif self.distractorDifficulty == 'Medium':
             # Create a similiar shape to the original
             distractorShape = originalShape.generateSimilarShape(doc)
-            mapCopy[randomCoordinate].shape = distractorShape
-        
-        elif distractorDifficulty == 'Hard':
+        elif self.distractorDifficulty == 'Hard':
             # Create the same original shape, but with a new rotation
             distractorShape = originalShape.deepCopyWithDifferentRotation(doc)
-            mapCopy[randomCoordinate].shape = distractorShape
-
-        print('original map')
-        for k in correctShapeMap.keys():
-            if correctShapeMap[k].shape != 'Empty' and correctShapeMap[k].shape.baseShapeType != 'Cuboid':
-                print(k + ' - ' + str(correctShapeMap[k].shape.rotationIndex))
         
-        print('new map')
-        for k in mapCopy.keys():
-            if mapCopy[k].shape != 'Empty' and mapCopy[k].shape.baseShapeType != 'Cuboid':
-                print(k + ' - ' + str(mapCopy[k].shape.rotationIndex))
+        mapCopy[randomCoordinate].shape = distractorShape 
+        shapeID = self.shapeGenerator.generateShapeFromPredefinedMap(mapCopy, doc)
+        
+        self.shapeIDs.append(shapeID)
+        self.docs.append(doc)
+        self.baseShapeMaps.append(mapCopy)
 
-        # Generate the shape with distractor(s) in the FreeCAD document
-        self.finalShapeID = shapeGenerator.generateShapeFromPredefinedMap(mapCopy, doc)
-        mcqMaps = []
-        mcqMaps.append(mapCopy)
-        self.mcqMaps = mcqMaps
-
-    def getDoc(self):
-        return self.docs[0]
+        return shapeID
