@@ -59,7 +59,8 @@ class QuarterCircle(Shape):
             self.rotationIndex = self.getRandomRotationIndex()
         else:
             self.rotationIndex = rotationIndex
-        
+            self.centrelineInfo = self.CENTRELNIES[rotationIndex]
+
         # Translate block to actual position
         doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), 
             QuarterCircle.ROTATIONS[self.rotationIndex], FreeCAD.Vector(dimension/2, dimension/2, dimension/2))
