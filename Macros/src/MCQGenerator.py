@@ -5,7 +5,7 @@ from ShapeGenerator import ShapeGenerator
 from Node import Node
 from Cuboid import *
 from HoleInDoor import *
-from HoleInWedge import *
+from HoleInBox import *
 from HoleInWedge import *
 from Wedge import *
 from QuarterCircle import *
