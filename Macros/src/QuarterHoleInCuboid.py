@@ -8,19 +8,19 @@ class QuarterHoleInCuboid(Shape):
     NEXT_ID = 1
     ROTATIONS = [
         FreeCAD.Rotation(0, 0, 0), 
-        FreeCAD.Rotation(0, 90, 0), 
-        FreeCAD.Rotation(0, 180, 0), 
-        FreeCAD.Rotation(0, 270, 0), 
-
-        FreeCAD.Rotation(0, 0, 90), 
-        FreeCAD.Rotation(0, 90, 90), 
-        FreeCAD.Rotation(0, 180, 90), 
-        FreeCAD.Rotation(0, 270, 90), 
-
         FreeCAD.Rotation(0, 0, 180), 
-        FreeCAD.Rotation(0, 90, 180), 
         FreeCAD.Rotation(0, 180, 180), 
-        FreeCAD.Rotation(0, 270, 180), 
+        FreeCAD.Rotation(0, 180, 0), 
+        
+        FreeCAD.Rotation(0, 90, 0), 
+        FreeCAD.Rotation(0, 270, 180),
+        FreeCAD.Rotation(0, 90, 180), 
+        FreeCAD.Rotation(0, 270, 0),
+        
+        FreeCAD.Rotation(0, 0, 90),
+        FreeCAD.Rotation(0, 180, 90),
+        FreeCAD.Rotation(0, 90, 90),
+        FreeCAD.Rotation(0, 270, 90),
     ]
 
     @staticmethod
@@ -28,19 +28,19 @@ class QuarterHoleInCuboid(Shape):
         baseShapeType = 'QuarterShape'
         return [
             CentrelineInfo(0, dimension, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, 0, dimension, dimension)),
-            CentrelineInfo(None, dimension, dimension, -10, dimension + 10, None, CentreArcInfo(baseShapeType, dimension, dimension, dimension)),
+            CentrelineInfo(0, 0, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, 0, 0, dimension)),
+            CentrelineInfo(dimension, 0, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, dimension, 0, dimension)),
             CentrelineInfo(dimension, dimension, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, dimension, dimension, dimension)),
+
+            CentrelineInfo(None, dimension, dimension, -10, dimension + 10, None, CentreArcInfo(baseShapeType, dimension, dimension, dimension)),
+            CentrelineInfo(None, 0, 0, -10, dimension + 10, None, CentreArcInfo(baseShapeType, 0, 0, dimension)),
+            CentrelineInfo(None, 0, dimension, -10, dimension + 10, None, CentreArcInfo(baseShapeType, 0, dimension, dimension)),
             CentrelineInfo(None, dimension, 0, -10, dimension + 10, None, CentreArcInfo(baseShapeType, dimension, 0, dimension)),
 
             CentrelineInfo(0, None, dimension, -10, dimension + 10, None, CentreArcInfo(baseShapeType, 0, dimension, dimension)),
-            CentrelineInfo(dimension, None, dimension, -10, dimension + 10, None, CentreArcInfo(baseShapeType, dimension, dimension, dimension)),
             CentrelineInfo(dimension, None, 0, -10, dimension + 10, None, CentreArcInfo(baseShapeType, dimension, 0, dimension)),
+            CentrelineInfo(dimension, None, dimension, -10, dimension + 10, None, CentreArcInfo(baseShapeType, dimension, dimension, dimension)),
             CentrelineInfo(0, None, 0, -10, dimension + 10, None, CentreArcInfo(baseShapeType, 0, 0, dimension)),
-
-            CentrelineInfo(0, 0, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, 0, 0, dimension)),
-            CentrelineInfo(None, 0, dimension, -10, dimension + 10, None, CentreArcInfo(baseShapeType, 0, dimension, dimension)),
-            CentrelineInfo(dimension, 0, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, dimension, 0, dimension)),
-            CentrelineInfo(None, 0, 0, -10, dimension + 10, None, CentreArcInfo(baseShapeType, 0, 0, dimension)),
         ]
 
     def __init__(self, doc, dimension, matrixPos, rotationIndex = None):
@@ -93,9 +93,10 @@ class QuarterHoleInCuboid(Shape):
     def generateSimilarShape(self, doc):
         shapes = ['SemiHoleInCuboid']
         shapeType = shapes[random.randint(0, len(shapes) - 1)]
-        return [shapeType, None]
-        # if shapeType == 'SemiHoleInCuboid':
-        #     return SemiHoleInCuboid(doc, self.dimension, self.matrixPos)
+        rotIdx = None
+        if shapeType == 'SemiHoleInCuboid':
+            rotIdx = self.rotationIndex
+        return [shapeType, rotIdx]
 
     def deepCopyWithDifferentRotation(self, doc):
         return QuarterHoleInCuboid(doc, self.dimension, self.matrixPos, self.getRandomRotationIndexWithException(self.rotationIndex))
