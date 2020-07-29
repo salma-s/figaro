@@ -7,36 +7,40 @@ import random
 class HoleInDoor(Shape):
     NEXT_ID = 1
     ROTATIONS = [
-        FreeCAD.Rotation(0, 0, 0), 
-        FreeCAD.Rotation(0, 90, 0), 
+        FreeCAD.Rotation(0, 0, 0), # Top
         FreeCAD.Rotation(90, 0, 0), 
-        FreeCAD.Rotation(90, 90, 0), 
         FreeCAD.Rotation(180, 0, 0), 
-        FreeCAD.Rotation(180, 90, 0),
         FreeCAD.Rotation(270, 0, 0), 
-        FreeCAD.Rotation(270, 90, 0),
+
+        FreeCAD.Rotation(0, 90, 0), # Right
+        FreeCAD.Rotation(180, 90, 0), 
+        FreeCAD.Rotation(90, 0, 90), 
+        FreeCAD.Rotation(90, 0, 270),
+
+        FreeCAD.Rotation(90, 90, 0), # Front
+        FreeCAD.Rotation(270, 90, 0), 
         FreeCAD.Rotation(0, 0, 90), 
-        FreeCAD.Rotation(90, 0, 90),
         FreeCAD.Rotation(0, 0, 270), 
-        FreeCAD.Rotation(90, 0, 270) 
     ]
 
     @staticmethod
     def generateCentrelines(dimension):
         baseShapeType = 'SemiCircle'
         return [
-            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [dimension/4, dimension], dimension/2)),
-            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [dimension/4, dimension], [0, dimension], dimension/2)),
-            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, 3/4 * dimension], [0, dimension], dimension/2)),
-            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, 3/4 * dimension], [0, dimension], dimension/2)),
-            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [0, 3/4 * dimension], dimension/2)), 
-            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, 3/4 * dimension], [0, dimension], dimension/2)),
-            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [dimension/4, dimension], [0, dimension], dimension/2)),
-            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [dimension/4, dimension], [0, dimension], dimension/2)),
-            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [dimension/4, dimension], dimension/2)),
-            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [dimension/4, dimension], dimension/2)),
-            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [0, 3/4 * dimension], dimension/2)),
-            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [0, 3/4 * dimension], dimension/2)),
+            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [dimension/4, dimension], dimension/2)), # 0,0,0
+            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, 3/4 * dimension], [0, dimension], dimension/2)), # 90,0,0
+            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [0, 3/4 * dimension], dimension/2)), #180,0,0
+            CentrelineInfo(dimension/2, dimension/2, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [dimension/4, dimension], [0, dimension], dimension/2)), #270,0,0
+
+            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [dimension/4, dimension], [0, dimension], dimension/2)), # 0,90,0
+            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, 3/4 * dimension], [0, dimension], dimension/2)), #180,90,0
+            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [dimension/4, dimension], dimension/2)), # 90,0,90
+            CentrelineInfo(None, dimension/2, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [0, 3/4 * dimension], dimension/2)), # 90,0,270
+            
+            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, 3/4 * dimension], [0, dimension], dimension/2)), # 90,90,0
+            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [dimension/4, dimension], [0, dimension], dimension/2)), # 270,90, 0
+            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [dimension/4, dimension], dimension/2)), #0,0,90
+            CentrelineInfo(dimension/2, None, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [0, 3/4 * dimension], dimension/2)), # 0,0,270
         ]
 
     def __init__(self, doc, dimension, matrixPos, rotationIndex = None):
@@ -113,11 +117,12 @@ class HoleInDoor(Shape):
     def generateSimilarShape(self, doc):
         shapes = ['HoleInBox', 'SemiCircle']
         shapeType = shapes[random.randint(0, len(shapes) - 1)]
-        # if shapeType == 'HoleInBox':
-        #     return HoleInBox(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'SemiCircle':
-        #     return SemiCircle(doc, self.dimension, self.matrixPos)
-        return [shapeType, None]
+        rotIdx = None
+        if shapeType == 'HoleInBox':
+            rotIdx = self.rotationIndex // 4
+        elif shapeType == 'SemiCircle':
+            rotIdx = self.rotationIndex
+        return [shapeType, rotIdx]
 
     def deepCopyWithDifferentRotation(self, doc):
         return HoleInDoor(doc, self.dimension, self.matrixPos, self.getRandomRotationIndexWithException(self.rotationIndex))

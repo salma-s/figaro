@@ -46,8 +46,6 @@ class Cuboid(Shape):
     def generateSimilarShape(self, doc):
         shapes = ['HoleInBox']
         shapeType = shapes[random.randint(0, len(shapes) - 1)]
-        # if shapeType == 'HoleInBox':
-        #     return Cuboid(doc, self.dimension, self.matrixPos)
         return [shapeType, None]
 
     # Arguments:
