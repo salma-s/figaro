@@ -6,9 +6,9 @@ import random
 class HoleInBox(Shape):
     NEXT_ID = 1
     ROTATIONS = [
-        FreeCAD.Rotation(90, 0, 0), 
-        FreeCAD.Rotation(0, 90, 0), 
-        FreeCAD.Rotation(0, 0, 90)
+        FreeCAD.Rotation(90, 0, 0), # Top 
+        FreeCAD.Rotation(0, 90, 0), # Right
+        FreeCAD.Rotation(0, 0, 90) # Front
     ]
 
     @staticmethod
@@ -81,11 +81,10 @@ class HoleInBox(Shape):
     def generateSimilarShape(self, doc):
         shapes = ['HoleInDoor', 'Cuboid']
         shapeType = shapes[random.randint(0, len(shapes) - 1)]
-        # if shapeType == 'HoleInDoor':
-        #     return HoleInDoor(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'Cuboid':
-        #     return Cuboid(doc, self.dimension, self.matrixPos)
-        return [shapeType, None]
+        rotIdx = None
+        if shapeType == 'HoleInDoor':
+            rotIdx = random.randint(4 * self.rotationIndex, 4 * self.rotationIndex + 3)
+        return [shapeType, rotIdx]
 
     def deepCopyWithDifferentRotation(self, doc):
         return HoleInBox(doc, self.dimension, self.matrixPos, self.getRandomRotationIndexWithException(self.rotationIndex))
