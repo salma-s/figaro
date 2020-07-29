@@ -7,36 +7,40 @@ import random
 class SemiHoleInCuboid(Shape):
     NEXT_ID = 1
     ROTATIONS = [
-        FreeCAD.Rotation(0, 0, 0), 
-        FreeCAD.Rotation(0, 90, 0), 
-        FreeCAD.Rotation(90, 0, 0), 
-        FreeCAD.Rotation(90, 90, 0), 
-        FreeCAD.Rotation(180, 0, 0),
-        FreeCAD.Rotation(180, 90, 0),
-        FreeCAD.Rotation(270, 0, 0), 
-        FreeCAD.Rotation(270, 90, 0),
-        FreeCAD.Rotation(0, 0, 90), 
-        FreeCAD.Rotation(90, 0, 90),
-        FreeCAD.Rotation(0, 0, 270), 
-        FreeCAD.Rotation(90, 0, 270) 
+        FreeCAD.Rotation(0, 0, 0), #1
+        FreeCAD.Rotation(90, 0, 0), #3
+        FreeCAD.Rotation(180, 0, 0),#5
+        FreeCAD.Rotation(270, 0, 0), #7
+
+        FreeCAD.Rotation(0, 90, 0), #2
+        FreeCAD.Rotation(180, 90, 0),#6
+        FreeCAD.Rotation(90, 0, 90),#10
+        FreeCAD.Rotation(90, 0, 270), #12
+
+        FreeCAD.Rotation(90, 90, 0), #4
+        FreeCAD.Rotation(270, 90, 0),#8
+        FreeCAD.Rotation(0, 0, 90), #9
+        FreeCAD.Rotation(0, 0, 270), #11
     ]
 
     @staticmethod
     def generateCentrelines(dimension):
         baseShapeType = 'SemiHoleInCuboid'
         return [
-            CentrelineInfo(dimension/2, dimension, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [dimension/2, dimension], [dimension/2, dimension])),
-            CentrelineInfo(None, dimension, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [dimension/2, dimension], [0, dimension], [dimension, dimension/2])),
-            CentrelineInfo(0, dimension/2, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension/2], [0, dimension], [0, dimension/2])),
-            CentrelineInfo(0, None, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension/2], [0, dimension], [0, dimension/2])),
-            CentrelineInfo(dimension/2, 0, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [0, dimension/2], [dimension/2, 0])),
-            CentrelineInfo(None, 0, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension/2], [0, dimension], [0, dimension/2])),
-            CentrelineInfo(dimension, dimension/2, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [dimension/2, dimension], [0, dimension], [dimension, dimension/2])),
-            CentrelineInfo(dimension, None, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [dimension/2, dimension], [0, dimension], [dimension, dimension/2])),
-            CentrelineInfo(dimension/2, None, dimension, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [dimension/2, dimension], [dimension/2, dimension])),
-            CentrelineInfo(None, dimension/2, dimension, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [dimension/2, dimension], [dimension/2, dimension])),
-            CentrelineInfo(dimension/2, None, 0, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [0, dimension/2], [dimension/2, 0])),
-            CentrelineInfo(None, dimension/2, 0, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [0, dimension/2], [dimension/2, 0])),
+            CentrelineInfo(dimension/2, dimension, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [dimension/2, dimension], [dimension/2, dimension])),#1
+            CentrelineInfo(0, dimension/2, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension/2], [0, dimension], [0, dimension/2])),#3
+            CentrelineInfo(dimension/2, 0, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [0, dimension/2], [dimension/2, 0])),#5
+            CentrelineInfo(dimension, dimension/2, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [dimension/2, dimension], [0, dimension], [dimension, dimension/2])),#7
+
+            CentrelineInfo(None, dimension, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [dimension/2, dimension], [0, dimension], [dimension, dimension/2])),#2
+            CentrelineInfo(None, 0, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension/2], [0, dimension], [0, dimension/2])),#6
+            CentrelineInfo(None, dimension/2, dimension, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [dimension/2, dimension], [dimension/2, dimension])),#10
+            CentrelineInfo(None, dimension/2, 0, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [0, dimension/2], [dimension/2, 0])),#12
+
+            CentrelineInfo(0, None, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension/2], [0, dimension], [0, dimension/2])),#4
+            CentrelineInfo(dimension, None, dimension/2, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [dimension/2, dimension], [0, dimension], [dimension, dimension/2])),#8
+            CentrelineInfo(dimension/2, None, dimension, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [dimension/2, dimension], [dimension/2, dimension])),#9
+            CentrelineInfo(dimension/2, None, 0, -10, dimension + 10, None, CentreArcInfo(baseShapeType, [0, dimension], [0, dimension/2], [dimension/2, 0])),#11
         ]
 
     def __init__(self, doc, dimension, matrixPos, rotationIndex = None):
@@ -85,23 +89,14 @@ class SemiHoleInCuboid(Shape):
         shapes = ['Cuboid', 'HoleInDoor', 'HoleInBox', 'Wedge', 'HoleInWedge', 'QuarterCircle', 'SemiCircle']
         shapeType = shapes[random.randint(0, len(shapes) - 1)]
         return [shapeType, None]
-        # if shapeType == 'Cuboid':
-        #     return Cuboid(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'HoleInDoor':
-        #     return HoleInDoor(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'HoleInBox':
-        #     return HoleInBox(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'Wedge':
-        #     return Wedge(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'HoleInWedge':
-        #     return HoleInWedge(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'QuarterCircle':
-        #     return QuarterCircle(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'SemiCircle':
-        #     return SemiCircle(doc, self.dimension, self.matrixPos)  
 
     def generateSimilarShape(self, doc):
-        return ['QuarterHoleInCuboid', None]
+        shapes = ['QuarterHoleInCuboid']
+        shapeType = shapes[random.randint(0, len(shapes) - 1)]
+        rotIdx = None
+        if shapeType == 'QuarterHoleInCuboid':
+            rotIdx = self.rotationIndex
+        return [shapeType, rotIdx]
 
     def deepCopyWithDifferentRotation(self, doc):
         return SemiHoleInCuboid(doc, self.dimension, self.matrixPos, self.getRandomRotationIndexWithException(self.rotationIndex))

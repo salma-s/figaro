@@ -101,18 +101,6 @@ class HoleInDoor(Shape):
     def generateDissimilarShape(self, doc):
         shapes = ['Cuboid', 'QuarterCircle','Wedge', 'HoleInWedge', 'QuarterHoleInCuboid', 'SemiHoleInCuboid']
         shapeType = shapes[random.randint(0, len(shapes) - 1)]
-        # if shapeType == 'Cuboid':
-        #     return Cuboid(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'QuarterCircle':
-        #     return QuarterCircle(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'Wedge':
-        #     return Wedge(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'QuarterHoleInCuboid':
-        #     return QuarterHoleInCuboid(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'HoleInWedge':
-        #     return HoleInWedge(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'SemiHoleInCuboid':
-        #     return SemiHoleInCuboid(doc, self.dimension, self.matrixPos)  
         return [shapeType, None]
 
     def generateSimilarShape(self, doc):

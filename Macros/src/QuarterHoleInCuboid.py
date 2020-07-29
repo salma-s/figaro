@@ -89,20 +89,6 @@ class QuarterHoleInCuboid(Shape):
         shapes = ['Cuboid', 'HoleInDoor', 'HoleInBox', 'Wedge', 'HoleInWedge', 'QuarterCircle', 'SemiCircle']
         shapeType = shapes[random.randint(0, len(shapes) - 1)]
         return [shapeType, None]
-        # if shapeType == 'Cuboid':
-        #     return Cuboid(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'HoleInDoor':
-        #     return HoleInDoor(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'HoleInBox':
-        #     return HoleInBox(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'Wedge':
-        #     return Wedge(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'HoleInWedge':
-        #     return HoleInWedge(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'QuarterCircle':
-        #     return QuarterCircle(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'SemiCircle':
-        #     return SemiCircle(doc, self.dimension, self.matrixPos)  
 
     def generateSimilarShape(self, doc):
         shapes = ['SemiHoleInCuboid']

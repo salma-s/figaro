@@ -107,22 +107,6 @@ class HoleInWedge(Shape):
     def generateDissimilarShape(self, doc):
         shapes = ['Cuboid', 'QuarterCircle', 'QuarterHoleInCuboid', 'SemiHoleInCuboid', 'HoleInBox', 'HoleInDoor']
         shapeType = shapes[random.randint(0, len(shapes) - 1)]
-        # if shapeType == 'Cuboid':
-        #     return Cuboid(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'QuarterCircle':
-        #     return QuarterCircle(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'HoleInBox':
-        #     return HoleInBox(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'QuarterHoleInCuboid':
-        #     return QuarterHoleInCuboid(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'HoleInDoor':
-        #     return HoleInDoor(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'SemiHoleInCuboid':
-        #     return SemiHoleInCuboid(doc, self.dimension, self.matrixPos) 
-        # elif shapeType == 'HoleInBox':
-        #     return HoleInBox(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'HoleInDoor':
-        #     return HoleInDoor(doc, self.dimension, self.matrixPos) 
         return [shapeType, None]
 
     def generateSimilarShape(self, doc):
