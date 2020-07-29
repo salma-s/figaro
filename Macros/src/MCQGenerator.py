@@ -50,23 +50,23 @@ class MCQGenerator:
     
     def generateMutation(self, doc, shapeType, dimension, matrixPos, rotationIdx):
         if shapeType == 'Cuboid':
-            return Cuboid(doc, dimension, matrixPos)
+            return Cuboid(doc, dimension, matrixPos, rotationIdx)
         elif shapeType == 'HoleInDoor':
-            return HoleInDoor(doc, dimension, matrixPos)
+            return HoleInDoor(doc, dimension, matrixPos, rotationIdx)
         elif shapeType == 'HoleInBox':
-            return HoleInBox(doc, dimension, matrixPos)
+            return HoleInBox(doc, dimension, matrixPos, rotationIdx)
         elif shapeType == 'Wedge':
-            return Wedge(doc, dimension, matrixPos)
+            return Wedge(doc, dimension, matrixPos, rotationIdx)
         elif shapeType == 'HoleInWedge':
-            return HoleInWedge(doc, dimension, matrixPos)
+            return HoleInWedge(doc, dimension, matrixPos, rotationIdx)
         elif shapeType == 'QuarterCircle':
-            return QuarterCircle(doc, dimension, matrixPos)
+            return QuarterCircle(doc, dimension, matrixPos, rotationIdx)
         elif shapeType == 'SemiCircle':
-            return SemiCircle(doc, dimension, matrixPos)  
+            return SemiCircle(doc, dimension, matrixPos, rotationIdx)  
         elif shapeType == 'QuarterHoleInCuboid':
-            return QuarterHoleInCuboid(doc, dimension, matrixPos)
+            return QuarterHoleInCuboid(doc, dimension, matrixPos, rotationIdx)
         elif shapeType == 'SemiHoleInCuboid':
-            return SemiHoleInCuboid(doc, dimension, matrixPos)  
+            return SemiHoleInCuboid(doc, dimension, matrixPos, rotationIdx)  
     
     # Returns the generated shape ID
     def generateShape(self, doc):
