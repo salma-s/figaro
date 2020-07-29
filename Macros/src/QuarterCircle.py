@@ -96,7 +96,7 @@ class QuarterCircle(Shape):
         rotIdx = None
         if shapeType == 'SemiCircle':
             rotIdx = self.rotationIndex
-        return [shapeType, None]
+        return [shapeType, rotIdx]
     
     def deepCopyWithDifferentRotation(self, doc):
         return QuarterCircle(doc, self.dimension, self.matrixPos, self.getRandomRotationIndexWithException(self.rotationIndex))

@@ -64,18 +64,6 @@ class HoleInBox(Shape):
     def generateDissimilarShape(self, doc):
         shapes = ['QuarterCircle','Wedge', 'HoleInWedge', 'QuarterHoleInCuboid', 'SemiHoleInCuboid', 'SemiCircle']
         shapeType = shapes[random.randint(0, len(shapes) - 1)]
-        # if shapeType == 'QuarterCircle':
-        #     return QuarterCircle(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'Wedge':
-        #     return Wedge(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'QuarterHoleInCuboid':
-        #     return QuarterHoleInCuboid(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'HoleInWedge':
-        #     return HoleInWedge(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'SemiHoleInCuboid':
-        #     return SemiHoleInCuboid(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'SemiCircle':
-        #     return SemiCircle(doc, self.dimension, self.matrixPos)
         return [shapeType, None]
 
     def generateSimilarShape(self, doc):
@@ -84,6 +72,8 @@ class HoleInBox(Shape):
         rotIdx = None
         if shapeType == 'HoleInDoor':
             rotIdx = random.randint(4 * self.rotationIndex, 4 * self.rotationIndex + 3)
+            print(self.rotationIndex)
+            print(rotIdx)
         return [shapeType, rotIdx]
 
     def deepCopyWithDifferentRotation(self, doc):
