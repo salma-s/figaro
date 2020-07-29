@@ -3,7 +3,7 @@ from Exporter import Exporter
 from Node import Node
 import copy
 import FreeCAD
-from HoleInDoor import HoleInDoor
+from QuarterCircle import QuarterCircle
 
 #import importlib
 #import MCQGenerator
@@ -35,7 +35,7 @@ MCQ_OPTIONS_PER_QUESTION = 4
 
 for i in range(12):
 	doc = FreeCAD.newDocument('correct' + str(i))
-	shape =  HoleInDoor(doc, UNIT, [0, 0, 0], i)
+	shape =  QuarterCircle(doc, UNIT, [0, 0, 0], i)
 	node = Node(0, 0, 0, shape)
 	Draw(doc, 'Templates/A1_Landscape_plain.svg', shape.id)
 	doc.recompute()
