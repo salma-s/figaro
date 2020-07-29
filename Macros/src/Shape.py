@@ -22,9 +22,5 @@ class Shape:
                 rotationIndexesToChooseFrom.append(i)
         
         randomRotationIndex = random.choice(rotationIndexesToChooseFrom)
-        # print('getRandomRotationIndexWithException()')
-        # print(rotationToIgnore)
-        # print(rotationIndexesToChooseFrom)
-        # print(randomRotationIndex)
         self.rotationIndex = randomRotationIndex
         return randomRotationIndex

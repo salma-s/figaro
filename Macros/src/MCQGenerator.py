@@ -66,13 +66,13 @@ class MCQGenerator:
         originalShape = mapCopy[randomCoordinate].shape
         doc.removeObject(originalShape.id)
         
-        if self.distractorDifficulty == 'Easy':
+        if self.distractorDifficulty == 'Obvious':
             # Create a dissimilar shape to the original
             distractorShape = originalShape.generateDissimilarShape(doc)
-        elif self.distractorDifficulty == 'Medium':
+        elif self.distractorDifficulty == 'Moderate':
             # Create a similiar shape to the original
             distractorShape = originalShape.generateSimilarShape(doc)
-        elif self.distractorDifficulty == 'Hard':
+        elif self.distractorDifficulty == 'Subtle':
             # Create the same original shape, but with a new rotation
             distractorShape = originalShape.deepCopyWithDifferentRotation(doc)
         

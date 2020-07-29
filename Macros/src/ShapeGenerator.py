@@ -73,10 +73,10 @@ class ShapeGenerator:
     # Arguments
     # - complexity [String]: The complexity of the shape to generate
     # Returns [String] the ID of the new shape
-    def generate(self, complexity):
-        shapeFactory = BaseShapeFactory(self.doc, self.unit, self.matrixX * self.matrixY * self.matrixZ, complexity)
+    def generate(self, shapeComplexity):
+        shapeFactory = BaseShapeFactory(self.doc, self.unit, self.matrixX * self.matrixY * self.matrixZ, shapeComplexity)
         newShapeID = None
-        self.complexity = complexity
+        self.shapeComplexity = shapeComplexity
 
         while len(self.reachableNodes) != 0:
             nodeHash = self.reachableNodes.pop()
