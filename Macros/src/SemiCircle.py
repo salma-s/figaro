@@ -90,7 +90,7 @@ class SemiCircle(Shape):
         return SemiCircle(doc, self.dimension, self.matrixPos, self.rotationIndex)
 
     def generateDissimilarShape(self, doc):
-        shapes = ['QuarterCircle', 'Wedge', 'HoleInWedge', 'QuarterHoleInCuboid', 'SemiHoleInCuboid']
+        shapes = ['QuarterCircle', 'Wedge', 'HoleInWedge', 'QuarterHoleInCuboid', 'SemiHoleInCuboid', 'HoleInBox']
         shapeType = shapes[random.randint(0, len(shapes) - 1)]
         if shapeType == 'HoleInDoor':
             return QuarterCircle(doc, self.dimension, self.matrixPos)
