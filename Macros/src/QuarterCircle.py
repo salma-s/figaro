@@ -7,40 +7,40 @@ import random
 class QuarterCircle(Shape):
     NEXT_ID = 1
     ROTATIONS = [
-        FreeCAD.Rotation(0, 0, 0), 
-        FreeCAD.Rotation(0, 90, 0),
-        FreeCAD.Rotation(0, 180, 0),
-        FreeCAD.Rotation(0, 270, 0),
-
-        FreeCAD.Rotation(0, 0, 90),
-        FreeCAD.Rotation(0, 90, 90),
-        FreeCAD.Rotation(0, 180, 90),
-        FreeCAD.Rotation(0, 270, 90),
-
-        FreeCAD.Rotation(0, 0, 180),
-        FreeCAD.Rotation(0, 90, 180),
+        FreeCAD.Rotation(0, 0, 0), # Top
+        FreeCAD.Rotation(0, 180, 0), 
+        FreeCAD.Rotation(0, 0, 180), 
         FreeCAD.Rotation(0, 180, 180), 
+
+        FreeCAD.Rotation(0, 90, 0), # Right
+        FreeCAD.Rotation(0, 270, 0), 
+        FreeCAD.Rotation(0, 90, 180), 
         FreeCAD.Rotation(0, 270, 180), 
+
+        FreeCAD.Rotation(0, 0, 90), # Front
+        FreeCAD.Rotation(0, 90, 90), 
+        FreeCAD.Rotation(0, 180, 90), 
+        FreeCAD.Rotation(0, 270, 90), 
     ]
 
     @staticmethod
     def generateCentrelines(dimension):
         baseShapeType = 'QuarterShape'
         return [
-            CentrelineInfo(0, 0, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, 0, 0, dimension)),
-            CentrelineInfo(None, 0, dimension, -10, dimension + 10, None, CentreArcInfo(baseShapeType, 0, dimension, dimension)),
+            CentrelineInfo(0, 0, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, 0, 0, dimension)), 
             CentrelineInfo(dimension, 0, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, dimension, 0, dimension)),
+            CentrelineInfo(0, dimension, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, 0, dimension, dimension)),
+            CentrelineInfo(dimension, dimension, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, dimension, dimension, dimension)),
+
+            CentrelineInfo(None, 0, dimension, -10, dimension + 10, None, CentreArcInfo(baseShapeType, 0, dimension, dimension)),
             CentrelineInfo(None, 0, 0, -10, dimension + 10, None, CentreArcInfo(baseShapeType, 0, 0, dimension)),
+            CentrelineInfo(None, dimension, dimension, -10, dimension + 10, None, CentreArcInfo(baseShapeType, dimension, dimension, dimension)),
+            CentrelineInfo(None, dimension, 0, -10, dimension + 10, None, CentreArcInfo(baseShapeType, dimension, 0, dimension)),
 
             CentrelineInfo(0, None, 0, -10, dimension + 10, dimension + 20, CentreArcInfo(baseShapeType, 0, 0, dimension)),
             CentrelineInfo(0, None, dimension, -10, dimension + 10, dimension + 20, CentreArcInfo(baseShapeType, 0, dimension, dimension)),
             CentrelineInfo(dimension, None, dimension, -10, dimension + 10, dimension + 20, CentreArcInfo(baseShapeType, dimension, dimension, dimension)),
             CentrelineInfo(dimension, None, 0, -10, dimension + 10, dimension + 20, CentreArcInfo(baseShapeType, dimension, 0, dimension)),
-
-            CentrelineInfo(0, dimension, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, 0, dimension, dimension)),
-            CentrelineInfo(None, dimension, dimension, -10, dimension + 10, None, CentreArcInfo(baseShapeType, dimension, dimension, dimension)),
-            CentrelineInfo(dimension, dimension, None, -10, dimension + 10, None, CentreArcInfo(baseShapeType, dimension, dimension, dimension)),
-            CentrelineInfo(None, dimension, 0, -10, dimension + 10, None, CentreArcInfo(baseShapeType, dimension, 0, dimension)),
         ]
 
     def __init__(self, doc, dimension, matrixPos, rotationIndex = None):
@@ -93,11 +93,10 @@ class QuarterCircle(Shape):
         # TODO: confirm cuboid should be here
         shapes = ['SemiCircle', 'Cuboid']
         shapeType = shapes[random.randint(0, len(shapes) - 1)]
+        rotIdx = None
+        if shapeType == 'SemiCircle':
+            rotIdx = self.rotationIndex
         return [shapeType, None]
-        # if shapeType == 'SemiCircle':
-        #     return SemiCircle(doc, self.dimension, self.matrixPos)
-        # elif shapeType == 'Cuboid':
-        #     return Cuboid(doc, self.dimension, self.matrixPos)
     
     def deepCopyWithDifferentRotation(self, doc):
         return QuarterCircle(doc, self.dimension, self.matrixPos, self.getRandomRotationIndexWithException(self.rotationIndex))
