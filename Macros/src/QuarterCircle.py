@@ -80,10 +80,8 @@ class QuarterCircle(Shape):
         return QuarterCircle(doc, self.dimension, self.matrixPos, self.rotationIndex)
 
     def generateDissimilarShape(self, doc):
-        shapes = ['Cuboid', 'HoleInDoor', 'HoleInBox', 'Wedge', 'HoleInWedge', 'QuarterHoleInCuboid', 'SemiHoleInCuboid']
+        shapes = ['HoleInDoor', 'HoleInBox', 'Wedge', 'HoleInWedge', 'QuarterHoleInCuboid', 'SemiHoleInCuboid']
         shapeType = shapes[random.randint(0, len(shapes) - 1)]
-        if shapeType == 'Cuboid':
-            return Cuboid(doc, self.dimension, self.matrixPos)
         elif shapeType == 'HoleInDoor':
             return HoleInDoor(doc, self.dimension, self.matrixPos)
         elif shapeType == 'HoleInBox':
@@ -98,10 +96,13 @@ class QuarterCircle(Shape):
             return SemiHoleInCuboid(doc, self.dimension, self.matrixPos)  
 
     def generateSimilarShape(self, doc):
-        shapes = ['SemiCircle']
+        # TODO: confirm cuboid should be here
+        shapes = ['SemiCircle', 'Cuboid']
         shapeType = shapes[random.randint(0, len(shapes) - 1)]
         if shapeType == 'SemiCircle':
             return SemiCircle(doc, self.dimension, self.matrixPos)
+        elif shapeType == 'Cuboid':
+            return Cuboid(doc, self.dimension, self.matrixPos)
     
     def deepCopyWithDifferentRotation(self, doc):
         return QuarterCircle(doc, self.dimension, self.matrixPos, self.getRandomRotationIndexWithException(self.rotationIndex))

@@ -107,10 +107,7 @@ class SemiHoleInCuboid(Shape):
             return SemiCircle(doc, self.dimension, self.matrixPos)  
 
     def generateSimilarShape(self, doc):
-        shapes = ['QuarterHoleInCuboid']
-        shapeType = shapes[random.randint(0, len(shapes) - 1)]
-        if shapeType == 'QuarterHoleInCuboid':
-            return QuarterHoleInCuboid(doc, self.dimension, self.matrixPos)
+        return QuarterHoleInCuboid(doc, self.dimension, self.matrixPos)
 
     def deepCopyWithDifferentRotation(self, doc):
         return SemiHoleInCuboid(doc, self.dimension, self.matrixPos, self.getRandomRotationIndexWithException(self.rotationIndex))
