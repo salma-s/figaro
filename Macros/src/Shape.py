@@ -22,5 +22,4 @@ class Shape:
                 rotationIndexesToChooseFrom.append(i)
         
         randomRotationIndex = random.choice(rotationIndexesToChooseFrom)
-        self.rotationIndex = randomRotationIndex
         return randomRotationIndex
