@@ -1,5 +1,6 @@
 from Shape import Shape
 import FreeCAD
+import random
 from Cuboid import *
 from HoleInDoor import *
 from HoleInBox import *

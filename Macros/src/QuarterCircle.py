@@ -82,7 +82,7 @@ class QuarterCircle(Shape):
     def generateDissimilarShape(self, doc):
         shapes = ['HoleInDoor', 'HoleInBox', 'Wedge', 'HoleInWedge', 'QuarterHoleInCuboid', 'SemiHoleInCuboid']
         shapeType = shapes[random.randint(0, len(shapes) - 1)]
-        elif shapeType == 'HoleInDoor':
+        if shapeType == 'HoleInDoor':
             return HoleInDoor(doc, self.dimension, self.matrixPos)
         elif shapeType == 'HoleInBox':
             return HoleInBox(doc, self.dimension, self.matrixPos)

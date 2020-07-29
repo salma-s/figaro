@@ -109,7 +109,7 @@ class SemiCircle(Shape):
         # TODO: confirm cuboid should be here
         shapes = ['HoleInDoor', 'Cuboid']
         shapeType = shapes[random.randint(0, len(shapes) - 1)]
-         if shapeType == 'HoleInDoor':
+        if shapeType == 'HoleInDoor':
             return HoleInDoor(doc, self.dimension, self.matrixPos)
         elif shapeType == 'Cuboid':
             return Cuboid(doc, self.dimension, self.matrixPos)
