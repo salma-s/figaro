@@ -71,7 +71,12 @@ class Wedge(Shape):
         #     return SemiCircle(doc, self.dimension, self.matrixPos)  
 
     def generateSimilarShape(self, doc):
-        return ['HoleInWedge', None]
+        shapes = ['HoleInWedge']
+        shapeType = shapes[random.randint(0, len(shapes) - 1)] 
+        rotIdx = None
+        if shapeType == 'HoleInWedge':
+            rotIdx = random.randint(2 * self.rotationIndex, 2 * self.rotationIndex + 1)
+        return [shapeType, rotIdx]
 
     def deepCopyWithDifferentRotation(self, doc):
         return Wedge(doc, self.dimension, self.matrixPos, self.getRandomRotationIndexWithException(self.rotationIndex))
