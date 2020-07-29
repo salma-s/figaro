@@ -1,14 +1,6 @@
 from Shape import Shape
 import FreeCAD
 import random
-from Cuboid import *
-from HoleInDoor import *
-from HoleInBox import *
-from QuarterHoleInCuboid import *
-from HoleInWedge import *
-from QuarterCircle import *
-from SemiCircle import *
-from SemiHoleInCuboid import *
 
 class Wedge(Shape):
     NEXT_ID = 1
@@ -62,23 +54,24 @@ class Wedge(Shape):
     def generateDissimilarShape(self, doc):
         shapes = ['Cuboid', 'HoleInDoor', 'HoleInBox', 'QuarterHoleInCuboid', 'SemiHoleInCuboid', 'QuarterCircle', 'SemiCircle']
         shapeType = shapes[random.randint(0, len(shapes) - 1)]
-        if shapeType == 'Cuboid':
-            return Cuboid(doc, self.dimension, self.matrixPos)
-        elif shapeType == 'HoleInDoor':
-            return HoleInDoor(doc, self.dimension, self.matrixPos)
-        elif shapeType == 'HoleInBox':
-            return HoleInBox(doc, self.dimension, self.matrixPos)
-        elif shapeType == 'QuarterHoleInCuboid':
-            return QuarterHoleInCuboid(doc, self.dimension, self.matrixPos)
-        elif shapeType == 'SemiHoleInCuboid':
-            return SemiHoleInCuboid(doc, self.dimension, self.matrixPos)
-        elif shapeType == 'QuarterCircle':
-            return QuarterCircle(doc, self.dimension, self.matrixPos)
-        elif shapeType == 'SemiCircle':
-            return SemiCircle(doc, self.dimension, self.matrixPos)  
+        return [shapeType, None]
+        # if shapeType == 'Cuboid':
+        #     return Cuboid(doc, self.dimension, self.matrixPos)
+        # elif shapeType == 'HoleInDoor':
+        #     return HoleInDoor(doc, self.dimension, self.matrixPos)
+        # elif shapeType == 'HoleInBox':
+        #     return HoleInBox(doc, self.dimension, self.matrixPos)
+        # elif shapeType == 'QuarterHoleInCuboid':
+        #     return QuarterHoleInCuboid(doc, self.dimension, self.matrixPos)
+        # elif shapeType == 'SemiHoleInCuboid':
+        #     return SemiHoleInCuboid(doc, self.dimension, self.matrixPos)
+        # elif shapeType == 'QuarterCircle':
+        #     return QuarterCircle(doc, self.dimension, self.matrixPos)
+        # elif shapeType == 'SemiCircle':
+        #     return SemiCircle(doc, self.dimension, self.matrixPos)  
 
     def generateSimilarShape(self, doc):
-        return HoleInWedge(doc, self.dimension, self.matrixPos)
+        return ['HoleInWedge', None]
 
     def deepCopyWithDifferentRotation(self, doc):
         return Wedge(doc, self.dimension, self.matrixPos, self.getRandomRotationIndexWithException(self.rotationIndex))
