@@ -32,7 +32,7 @@ class Cuboid(Shape):
         Cuboid.NEXT_ID += 1
     
     def generateDissimilarShape(self, doc):
-        shapes = ['QuarterCircle', 'SemiCircle', 'Wedge', 'HoleInWedge', 'QuarterHoleInCuboid', 'SemiHoleInCuboid']
+        shapes = ['QuarterCircle', 'SemiCircle', 'Wedge', 'HoleInWedge', 'QuarterHoleInCuboid', 'SemiHoleInCuboid', 'HoleInDoor']
         shapeType = shapes[random.randint(0, len(shapes) - 1)]
         if shapeType == 'QuarterCircle':
             return QuarterCircle(doc, self.dimension, self.matrixPos)
@@ -46,14 +46,14 @@ class Cuboid(Shape):
             return Wedge(doc, self.dimension, self.matrixPos)
         elif shapeType == 'HoleInWedge':
             return HoleInWedge(doc, self.dimension, self.matrixPos)
-
-    def generateSimilarShape(self, doc):
-        shapes = ['HoleInBox', 'HoleInDoor']
-        shapeType = shapes[random.randint(0, len(shapes) - 1)]
-        if shapeType == 'HoleInBox':
-            return HoleInBox(doc, self.dimension, self.matrixPos)
         elif shapeType == 'HoleInDoor':
             return HoleInDoor(doc, self.dimension, self.matrixPos)
+
+    def generateSimilarShape(self, doc):
+        shapes = ['HoleInBox']
+        shapeType = shapes[random.randint(0, len(shapes) - 1)]
+        if shapeType == 'HoleInBox':
+            return Cuboid(doc, self.dimension, self.matrixPos)
 
     # Arguments:
     # - doc: The FreeCAD document to create the deep copy in
