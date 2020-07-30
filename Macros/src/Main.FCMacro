@@ -18,47 +18,47 @@ from ShapeGenerator import ShapeGenerator
 # -------------   Config    -------------
 #EXPORT_PATH = 
 
-MATRIX_X = 1
-MATRIX_Y = 1
-MATRIX_Z= 1
+MATRIX_X = 2
+MATRIX_Y = 2
+MATRIX_Z= 2
 UNIT = 100
 
-SHAPE_COMPLEXITY = 'Simple'
-DISTRACTOR_DIFFICULTY = 'Obvious'
+SHAPE_COMPLEXITY = 'SIMPLE' # "SIMPLE", "NORMAL", "COMPLEX"
+DISTRACTOR_TYPE = 'DISSIMILAR' # "DISSIMILAR", "SIMILAR", "DIFF_ROTATION"
 
-# MCQ Options per Question. Not more than 4 is recommended for a Hard distractor difficulty.
+# MCQ Options per Question. Not more than 4 is recommended for a DIFF_ROTATION distractor type.
 # Count is inclusive of correct answer
 MCQ_OPTIONS_PER_QUESTION = 4 
 
 # -------------   Main    -------------
 # Generate 'correct' shape
 
-for i in range(12):
-	doc = FreeCAD.newDocument('correct' + str(i))
-	shape =  SemiHoleInCuboid(doc, UNIT, [0, 0, 0], i)
-	node = Node(0, 0, 0, shape)
-	Draw(doc, 'Templates/A1_Landscape_plain.svg', shape.id)
-	doc.recompute()
-	Draw.drawCentreline(doc, node, MATRIX_X, MATRIX_Y, MATRIX_Z, UNIT)
+#for i in range(12):
+#	doc = FreeCAD.newDocument('correct' + str(i))
+#	shape =  SemiHoleInCuboid(doc, UNIT, [0, 0, 0], i)
+#	node = Node(0, 0, 0, shape)
+#	Draw(doc, 'Templates/A1_Landscape_plain.svg', shape.id)
+#	doc.recompute()
+#	Draw.drawCentreline(doc, node, MATRIX_X, MATRIX_Y, MATRIX_Z, UNIT)
 
-#doc = FreeCAD.newDocument('correct')
-#shapeGenerator = ShapeGenerator(doc, MATRIX_X, MATRIX_Y, MATRIX_Z, UNIT)
-#shapeID = shapeGenerator.generate(SHAPE_COMPLEXITY)
-#Draw(doc, 'Templates/A1_Landscape_plain.svg', shapeID)
-#doc.recompute()
-#map = shapeGenerator.baseShapeMap
-#for k in map.keys():
-#    if map[k].shape != None and map[k].shape != 'Empty' and map[k].shape.centrelineInfo != None:
-#        Draw.drawCentreline(doc, map[k], MATRIX_X, MATRIX_Y, MATRIX_Z, UNIT)
+doc = FreeCAD.newDocument('correct')
+shapeGenerator = ShapeGenerator(doc, MATRIX_X, MATRIX_Y, MATRIX_Z, UNIT)
+shapeID = shapeGenerator.generate(SHAPE_COMPLEXITY)
+Draw(doc, 'Templates/A1_Landscape_plain.svg', shapeID)
+doc.recompute()
+map = shapeGenerator.baseShapeMap
+for k in map.keys():
+    if map[k].shape != None and map[k].shape != 'Empty' and map[k].shape.centrelineInfo != None:
+        Draw.drawCentreline(doc, map[k], MATRIX_X, MATRIX_Y, MATRIX_Z, UNIT)
 
 # Generate other MCQs
-#mcqGenerator = MCQGenerator(shapeGenerator, map, DISTRACTOR_DIFFICULTY)
-#for i in range(MCQ_OPTIONS_PER_QUESTION - 1):
-#    doc = FreeCAD.newDocument('incorrect')
-#    shapeID = mcqGenerator.generateShape(doc)
-#    Draw(doc, 'Templates/A1_Landscape_plain.svg', shapeID)
-#    doc.recompute()
-#    map = mcqGenerator.baseShapeMaps[i]
-#    for k in map.keys():
-#        if map[k].shape != None and map[k].shape != 'Empty' and map[k].shape.centrelineInfo != None:
-#            Draw.drawCentreline(doc, map[k], MATRIX_X, MATRIX_Y, MATRIX_Z, UNIT)
+mcqGenerator = MCQGenerator(shapeGenerator, map, DISTRACTOR_TYPE)
+for i in range(MCQ_OPTIONS_PER_QUESTION - 1):
+    doc = FreeCAD.newDocument('incorrect')
+    shapeID = mcqGenerator.generateShape(doc)
+    Draw(doc, 'Templates/A1_Landscape_plain.svg', shapeID)
+    doc.recompute()
+    map = mcqGenerator.baseShapeMaps[i]
+    for k in map.keys():
+        if map[k].shape != None and map[k].shape != 'Empty' and map[k].shape.centrelineInfo != None:
+            Draw.drawCentreline(doc, map[k], MATRIX_X, MATRIX_Y, MATRIX_Z, UNIT)
