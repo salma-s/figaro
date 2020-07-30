@@ -12,15 +12,15 @@ class BaseShapeFactory():
         self.setBBaseShapeGenerator = SetBBaseShapeGenerator(doc, unit)
         self.setCBaseShapeGenerator = SetCBaseShapeGenerator(doc, unit)
 
-        if shapeComplexity == 'Simple':
+        if shapeComplexity == 'SIMPLE':
             self.setA = numBaseShapes - 2
             self.setB = 2
             self.setC = 0
-        elif shapeComplexity == 'Normal':
+        elif shapeComplexity == 'NORMAL':
             self.setA = numBaseShapes - 3
             self.setB = 3
             self.setC = 0
-        elif shapeComplexity == 'Complex':
+        elif shapeComplexity == 'COMPLEX':
             self.setA = numBaseShapes - 3
             self.setB = 1
             self.setC = 2

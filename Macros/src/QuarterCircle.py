@@ -50,7 +50,7 @@ class QuarterCircle(Shape):
         super().__init__(id, dimension, QuarterCircle.ROTATIONS, QuarterCircle.generateCentrelines(dimension))
 
         doc.addObject("Part::Cylinder", id)
-        doc.getObject(id).Radius = dimension
+        doc.getObject(id).Radius = dimension + 0.1
         doc.getObject(id).Height = dimension
         doc.getObject(id).Angle = 90
         

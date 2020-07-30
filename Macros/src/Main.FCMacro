@@ -20,15 +20,17 @@ EXPORT_PATH = '/Users/salmas/Documents/Output'
 
 MATRIX_X = 2
 MATRIX_Y = 2
-MATRIX_Z= 2
+MATRIX_Z = 2
 UNIT = 100
 
-SHAPE_COMPLEXITY = 'Normal'
-DISTRACTOR_DIFFICULTY = 'Moderate'
+SHAPE_COMPLEXITY = 'SIMPLE' # "SIMPLE", "NORMAL", "COMPLEX"
+DISTRACTOR_TYPE = 'DISSIMILAR' # "DISSIMILAR", "SIMILAR", "DIFF_ROTATION"
 
-# MCQ Options per Question. Not more than 4 is recommended for a Hard distractor difficulty.
+# MCQ Options per Question. Not more than 4 is recommended for a DIFF_ROTATION distractor type.
 # Count is inclusive of correct answer
 MCQ_OPTIONS_PER_QUESTION = 4 
+
+# --------   Error Handling    --------
 
 # -------------   Main    -------------
 # Generate 'correct' shape
@@ -53,8 +55,8 @@ for k in map.keys():
 exporter = Exporter(doc, EXPORT_PATH)
 exporter.saveDrawings(shapeID)
 
-#Generate other MCQs
-mcqGenerator = MCQGenerator(shapeGenerator, map, DISTRACTOR_DIFFICULTY)
+# Generate other MCQs
+mcqGenerator = MCQGenerator(shapeGenerator, map, DISTRACTOR_TYPE)
 for i in range(MCQ_OPTIONS_PER_QUESTION - 1):
     doc = FreeCAD.newDocument('incorrect')
     shapeID = mcqGenerator.generateShape(doc)
@@ -66,4 +68,3 @@ for i in range(MCQ_OPTIONS_PER_QUESTION - 1):
             Draw.drawCentreline(doc, map[k], MATRIX_X, MATRIX_Y, MATRIX_Z, UNIT)
     exporter = Exporter(doc, EXPORT_PATH)
     exporter.saveDrawings(shapeID)
-

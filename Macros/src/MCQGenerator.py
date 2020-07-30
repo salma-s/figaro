@@ -38,12 +38,12 @@ class MCQGenerator:
     # Arguments
     # - shapeGenerator [ShapeGenerator]: The generator responsible for constructing the correct shape
     # - correctShapeMap [dict]: Maps the correct shapes corrdinates to base shapes
-    # - distractorDifficulty [String]: Represents the easy/medium/hard difficulty of the distractor(s) to generate in the MCQs
-    def __init__(self, shapeGenerator, correctShapeMap, distractorDifficulty):
-        # TODO: raise exception if difficulty isnt easy/med/hard
+    # - distractorType [String]: Represents the SIMILAR/DISSIMILAR/DIFF_ROTATION type of the distractor(s) to generate in the MCQs
+    def __init__(self, shapeGenerator, correctShapeMap, distractorType):
+        # TODO: raise exception if type isnt SIMILAR/DISSIMILAR/DIFF_ROTATION
         self.shapeGenerator = shapeGenerator
         self.correctShapeMap = correctShapeMap
-        self.distractorDifficulty = distractorDifficulty
+        self.distractorType = distractorType
         self.docs = [] #TODO: remove if not used
         self.baseShapeMaps = []
         self.shapeIDs = []
@@ -78,7 +78,7 @@ class MCQGenerator:
         randomCoordinate = coordinatesList[random.randint(0, len(coordinatesList) - 1)]
         baseShapeToChange = mapCopy[randomCoordinate]
 
-        if self.distractorDifficulty == 'Hard':
+        if self.distractorType == 'DIFF_ROTATION':
             # The random base shape cannot be Empty nor Cuboid since they cannot have a rotated to be a distractor
             while baseShapeToChange.shape == 'Empty' or baseShapeToChange.shape.baseShapeType == 'Cuboid':
                 randomCoordinate = coordinatesList[random.randint(0, len(coordinatesList) - 1)]
@@ -95,15 +95,15 @@ class MCQGenerator:
         originalShape = mapCopy[randomCoordinate].shape
         doc.removeObject(originalShape.id)
         
-        if self.distractorDifficulty == 'Obvious':
+        if self.distractorType == 'DISSIMILAR':
             # Create a dissimilar shape to the original
             [shapeType, rotationIdx] = originalShape.generateDissimilarShape(doc)
             distractorShape = self.generateMutation(doc, shapeType, originalShape.dimension, originalShape.matrixPos, rotationIdx)
-        elif self.distractorDifficulty == 'Moderate':
+        elif self.distractorType == 'SIMILAR':
             # Create a similiar shape to the original
             [shapeType, rotationIdx] = originalShape.generateSimilarShape(doc)
             distractorShape = self.generateMutation(doc, shapeType, originalShape.dimension, originalShape.matrixPos, rotationIdx)
-        elif self.distractorDifficulty == 'Subtle':
+        elif self.distractorType == 'DIFF_ROTATION':
             # Create the same original shape, but with a new rotation
             distractorShape = originalShape.deepCopyWithDifferentRotation(doc)
         
