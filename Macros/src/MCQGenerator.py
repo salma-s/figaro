@@ -50,7 +50,7 @@ class MCQGenerator:
     
     def generateMutation(self, doc, shapeType, dimension, matrixPos, rotationIdx):
         if shapeType == 'Cuboid':
-            return Cuboid(doc, dimension, matrixPos, rotationIdx)
+            return Cuboid(doc, dimension, matrixPos)
         elif shapeType == 'HoleInDoor':
             return HoleInDoor(doc, dimension, matrixPos, rotationIdx)
         elif shapeType == 'HoleInBox':
