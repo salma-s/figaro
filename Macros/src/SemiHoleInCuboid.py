@@ -57,7 +57,7 @@ class SemiHoleInCuboid(Shape):
 
         semiHoleID = "SemiHoleInCuboidCylinder" + str(SemiHoleInCuboid.NEXT_ID)
         doc.addObject("Part::Cylinder", semiHoleID)
-        doc.getObject(semiHoleID).Radius = dimension/2
+        doc.getObject(semiHoleID).Radius = dimension/2 - 0.5
         doc.getObject(semiHoleID).Height = dimension
         doc.getObject(semiHoleID).Angle = 360
         doc.getObject(semiHoleID).Placement = FreeCAD.Placement(FreeCAD.Vector(dimension/2, dimension, 0), FreeCAD.Rotation(0, 0, 0))	

@@ -66,7 +66,7 @@ class HoleInWedge(Shape):
         doc.getObject(cutCubeID).Length = 1.5 * dimension
         doc.getObject(cutCubeID).Width = 1.5 * dimension
         doc.getObject(cutCubeID).Height = 1.5 * dimension
-        doc.getObject(cutCubeID).Placement = FreeCAD.Placement(FreeCAD.Vector(0, 0, 0), FreeCAD.Rotation(45, 0, 0))
+        doc.getObject(cutCubeID).Placement = FreeCAD.Placement(FreeCAD.Vector(-0.5, 0, 0), FreeCAD.Rotation(45, 0, 0))
 
         cylinderID = "HoleInWedgeCylinder" + str(HoleInWedge.NEXT_ID)
         doc.addObject("Part::Cylinder", cylinderID)
