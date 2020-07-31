@@ -8,6 +8,7 @@ from os import path
 
 # -------------   Config    -------------
 EXPORT_FOLDER_PATH = '/Users/salmas/Documents/Output'
+TEMPLATE_PATH = '/Users/salmas/source/repos/part-iv-project/Templates/blank.svg'
 
 MATRIX_X = 2
 MATRIX_Y = 2
@@ -21,7 +22,7 @@ DISTRACTOR_TYPE = 'DISSIMILAR' # "DISSIMILAR", "SIMILAR", "DIFF_ROTATION"
 # Count is inclusive of correct answer
 MCQ_OPTIONS_PER_QUESTION = 4 
 
-NUMBER_OF_MCQS = 4 # The number of MCQs to generate
+NUMBER_OF_MCQS = 1 # The number of MCQs to generate
 
 # --------   Error Handling    --------
 if EXPORT_FOLDER_PATH == '':
@@ -43,7 +44,7 @@ for j in range(NUMBER_OF_MCQS):
     doc = FreeCAD.newDocument('correct')
     shapeGenerator = ShapeGenerator(doc, MATRIX_X, MATRIX_Y, MATRIX_Z, UNIT)
     shapeID = shapeGenerator.generate(SHAPE_COMPLEXITY)
-    Draw(doc, 'Templates/A1_Landscape_plain.svg', shapeID)
+    Draw(doc, TEMPLATE_PATH, shapeID)
     doc.recompute()
     map = shapeGenerator.baseShapeMap
     for k in map.keys():
@@ -57,7 +58,7 @@ for j in range(NUMBER_OF_MCQS):
     for i in range(MCQ_OPTIONS_PER_QUESTION - 1):
         doc = FreeCAD.newDocument('incorrect')
         shapeID = mcqGenerator.generateShape(doc)
-        Draw(doc, 'Templates/A1_Landscape_plain.svg', shapeID)
+        Draw(doc, TEMPLATE_PATH, shapeID)
         doc.recompute()
         map = mcqGenerator.baseShapeMaps[i]
         for k in map.keys():
