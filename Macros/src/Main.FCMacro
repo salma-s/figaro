@@ -1,22 +1,15 @@
 from Draw import Draw
 from Exporter import Exporter
+import os.path
+from os import path
 from Node import Node
 import copy
 import FreeCAD
-from SemiHoleInCuboid import SemiHoleInCuboid
-
-#import importlib
-#import MCQGenerator
-#import ShapeGenerator
-#import Cuboid
-#importlib.reload(MCQGenerator)
-#importlib.reload(ShapeGenerator)
-#importlib.reload(Cuboid)
 from MCQGenerator import MCQGenerator
 from ShapeGenerator import ShapeGenerator
 
 # -------------   Config    -------------
-EXPORT_PATH = '/Users/salmas/Documents/Output'
+EXPORT_FOLDER_PATH = '/Users/salmas/Documents/Output'
 
 MATRIX_X = 2
 MATRIX_Y = 2
@@ -31,6 +24,16 @@ DISTRACTOR_TYPE = 'DISSIMILAR' # "DISSIMILAR", "SIMILAR", "DIFF_ROTATION"
 MCQ_OPTIONS_PER_QUESTION = 4 
 
 # --------   Error Handling    --------
+if EXPORT_FOLDER_PATH == '':
+    raise ValueError('Please assign a value for EXPORT_FOLDER_PATH')
+elif path.exists(EXPORT_FOLDER_PATH) == False:
+    raise OSError('EXPORT_FOLDER_PATH is invalid. Please check that this path exists. ')
+
+if SHAPE_COMPLEXITY != 'SIMPLE' and SHAPE_COMPLEXITY != 'NORMAL' and SHAPE_COMPLEXITY != 'COMPLEX':
+    raise ValueError('SHAPE_COMPLEXITY must be one of SIMPLE, NORMAL,  or COMPLEX')
+
+if DISTRACTOR_TYPE != 'DISSIMILAR' and DISTRACTOR_TYPE != 'SIMILAR' and DISTRACTOR_TYPE != 'DIFF_ROTATION':
+    raise ValueError('DISTRACTOR_TYPE must be one of DISSIMILAR, SIMILAR,  or DIFF_ROTATION')
 
 # -------------   Main    -------------
 # Generate 'correct' shape
@@ -52,7 +55,7 @@ map = shapeGenerator.baseShapeMap
 for k in map.keys():
     if map[k].shape != None and map[k].shape != 'Empty' and map[k].shape.centrelineInfo != None:
         Draw.drawCentreline(doc, map[k], MATRIX_X, MATRIX_Y, MATRIX_Z, UNIT)
-exporter = Exporter(doc, EXPORT_PATH)
+exporter = Exporter(doc, EXPORT_FOLDER_PATH)
 exporter.saveDrawings(shapeID)
 
 # Generate other MCQs
@@ -66,5 +69,5 @@ for i in range(MCQ_OPTIONS_PER_QUESTION - 1):
     for k in map.keys():
         if map[k].shape != None and map[k].shape != 'Empty' and map[k].shape.centrelineInfo != None:
             Draw.drawCentreline(doc, map[k], MATRIX_X, MATRIX_Y, MATRIX_Z, UNIT)
-    exporter = Exporter(doc, EXPORT_PATH)
+    exporter = Exporter(doc, EXPORT_FOLDER_PATH)
     exporter.saveDrawings(shapeID)
