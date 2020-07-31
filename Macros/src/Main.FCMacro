@@ -1,0 +1,69 @@
+from Draw import Draw
+from Exporter import Exporter
+import FreeCAD
+from MCQGenerator import MCQGenerator
+from ShapeGenerator import ShapeGenerator
+import os.path
+from os import path
+
+# -------------   Config    -------------
+EXPORT_FOLDER_PATH = '/Users/salmas/Documents/Output'
+TEMPLATE_PATH_ISO = '/Users/salmas/source/repos/part-iv-project/Templates/blank-iso.svg'
+TEMPLATE_PATH_ORTHO= '/Users/salmas/source/repos/part-iv-project/Templates/blank-ortho.svg'
+
+MATRIX_X = 2
+MATRIX_Y = 2
+MATRIX_Z = 2
+UNIT = 100
+
+SHAPE_COMPLEXITY = 'SIMPLE' # "SIMPLE", "NORMAL", "COMPLEX"
+DISTRACTOR_TYPE = 'DISSIMILAR' # "DISSIMILAR", "SIMILAR", "DIFF_ROTATION"
+
+# MCQ Options per Question. Not more than 4 is recommended for a DIFF_ROTATION distractor type.
+# Count is inclusive of correct answer
+MCQ_OPTIONS_PER_QUESTION = 4 
+
+NUMBER_OF_MCQS = 1 # The number of MCQs to generate
+
+# --------   Error Handling    --------
+if EXPORT_FOLDER_PATH == '':
+    raise ValueError('Please assign a value for EXPORT_FOLDER_PATH')
+elif path.exists(EXPORT_FOLDER_PATH) == False:
+    raise OSError('EXPORT_FOLDER_PATH is invalid. Please check that this path exists. ')
+
+if SHAPE_COMPLEXITY != 'SIMPLE' and SHAPE_COMPLEXITY != 'NORMAL' and SHAPE_COMPLEXITY != 'COMPLEX':
+    raise ValueError('SHAPE_COMPLEXITY must be one of SIMPLE, NORMAL,  or COMPLEX')
+
+if DISTRACTOR_TYPE != 'DISSIMILAR' and DISTRACTOR_TYPE != 'SIMILAR' and DISTRACTOR_TYPE != 'DIFF_ROTATION':
+    raise ValueError('DISTRACTOR_TYPE must be one of DISSIMILAR, SIMILAR,  or DIFF_ROTATION')
+
+# -------------   Main    -------------
+
+for j in range(NUMBER_OF_MCQS):
+    fname = 'Q' + str(j + 1)
+    # Generate 'correct' shape
+    doc = FreeCAD.newDocument('correct')
+    shapeGenerator = ShapeGenerator(doc, MATRIX_X, MATRIX_Y, MATRIX_Z, UNIT)
+    shapeID = shapeGenerator.generate(SHAPE_COMPLEXITY)
+    Draw(doc, TEMPLATE_PATH_ISO, TEMPLATE_PATH_ORTHO, shapeID)
+    doc.recompute()
+    map = shapeGenerator.baseShapeMap
+    for k in map.keys():
+        if map[k].shape != None and map[k].shape != 'Empty' and map[k].shape.centrelineInfo != None:
+            Draw.drawCentreline(doc, map[k], MATRIX_X, MATRIX_Y, MATRIX_Z, UNIT)
+    exporter = Exporter(doc, EXPORT_FOLDER_PATH)
+    exporter.saveDrawings(fname + '-1')
+
+    # Generate other MCQs
+    mcqGenerator = MCQGenerator(shapeGenerator, map, DISTRACTOR_TYPE)
+    for i in range(MCQ_OPTIONS_PER_QUESTION - 1):
+        doc = FreeCAD.newDocument('incorrect')
+        shapeID = mcqGenerator.generateShape(doc)
+        Draw(doc, TEMPLATE_PATH_ISO, TEMPLATE_PATH_ORTHO, shapeID)
+        doc.recompute()
+        map = mcqGenerator.baseShapeMaps[i]
+        for k in map.keys():
+            if map[k].shape != None and map[k].shape != 'Empty' and map[k].shape.centrelineInfo != None:
+                Draw.drawCentreline(doc, map[k], MATRIX_X, MATRIX_Y, MATRIX_Z, UNIT)
+        exporter = Exporter(doc, EXPORT_FOLDER_PATH)
+        exporter.saveDrawings(fname + '-' + str(i + 2))

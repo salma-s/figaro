@@ -3,7 +3,7 @@ import TechDraw
 import FreeCAD
 
 class Draw:
-    def __init__(self, doc, templatePath, shapeID):
+    def __init__(self, doc, templatePath, templatePathOrtho, shapeID):
         shape = doc.getObject(shapeID)
 
         # Insert a Page object and assign a template
@@ -17,15 +17,17 @@ class Draw:
         page.addView(viewIso)
         doc.ViewIso.Source = [shape]
         doc.ViewIso.Direction = (1.0,-1.0,1.0)
-        doc.ViewIso.X = 300.0
-        doc.ViewIso.Y = 420.0
+        doc.ViewIso.X = 200.0
+        doc.ViewIso.Y = 200.0
         doc.ViewIso.Scale = 1
         doc.ViewIso.Rotation = 0.0
         doc.ViewIso.HardHidden = False 
         
         # Insert a Page object and assign a template
         page2 = doc.addObject('TechDraw::DrawPage', 'Orthographic')
-        page2.Template = FreeCAD.ActiveDocument.Template
+        template = doc.addObject('TechDraw::DrawSVGTemplate','TemplateOrtho')
+        template.Template = templatePathOrtho
+        page2.Template = doc.TemplateOrtho
         
         # Create a view on the Shape object, define the position and scale and assign it to a Page
         # Front View
@@ -34,8 +36,8 @@ class Draw:
         doc.FrontView.Source = [shape]
         doc.FrontView.HardHidden=True
         doc.FrontView.Direction = (0.0,-1.0,0.0)
-        doc.FrontView.X = 100.0
-        doc.FrontView.Y = 100.0
+        doc.FrontView.X = 150.0
+        doc.FrontView.Y = 150.0
         doc.FrontView.Scale = 1
         doc.FrontView.Rotation = 0.0
 
@@ -46,8 +48,8 @@ class Draw:
         doc.RightView.Source = [shape]    
         doc.RightView.HardHidden=True
         doc.RightView.Direction = (1.0,0.0,0.0)
-        doc.RightView.X = 580.0
-        doc.RightView.Y = 100.0
+        doc.RightView.X = 400.0
+        doc.RightView.Y = 150.0
         doc.RightView.Scale = 1
         doc.RightView.Rotation = 0.0
 
@@ -58,7 +60,7 @@ class Draw:
         doc.TopView.Source = [shape]
         doc.TopView.HardHidden=True
         doc.TopView.Direction = (0.0,0.0,1.0)
-        doc.TopView.X = 100.0
+        doc.TopView.X = 150.0
         doc.TopView.Y = 400.0
         doc.TopView.Scale = 1
         doc.TopView.Rotation = 0.0
