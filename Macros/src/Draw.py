@@ -17,8 +17,8 @@ class Draw:
         page.addView(viewIso)
         doc.ViewIso.Source = [shape]
         doc.ViewIso.Direction = (1.0,-1.0,1.0)
-        doc.ViewIso.X = 300.0
-        doc.ViewIso.Y = 420.0
+        doc.ViewIso.X = 200.0
+        doc.ViewIso.Y = 200.0
         doc.ViewIso.Scale = 1
         doc.ViewIso.Rotation = 0.0
         doc.ViewIso.HardHidden = False 
