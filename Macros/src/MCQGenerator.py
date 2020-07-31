@@ -75,6 +75,8 @@ class MCQGenerator:
         # Get random coordinate to modify that base shape
         # TODO: for now, this can still generate the same base shape (possibly same rotation as well)   
         coordinatesList = list(mapCopy.keys())
+        coordinateToRemove = ["0,1,0"] # Removes the block that can't be seen from the iso view
+        coordinatesList = list(set(coordinatesList) - set(coordinateToRemove))
         randomCoordinate = coordinatesList[random.randint(0, len(coordinatesList) - 1)]
         baseShapeToChange = mapCopy[randomCoordinate]
 
