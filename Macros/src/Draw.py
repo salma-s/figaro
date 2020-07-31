@@ -34,8 +34,8 @@ class Draw:
         doc.FrontView.Source = [shape]
         doc.FrontView.HardHidden=True
         doc.FrontView.Direction = (0.0,-1.0,0.0)
-        doc.FrontView.X = 250.0
-        doc.FrontView.Y = 250.0
+        doc.FrontView.X = 150.0
+        doc.FrontView.Y = 150.0
         doc.FrontView.Scale = 1
         doc.FrontView.Rotation = 0.0
 
