@@ -3,7 +3,7 @@ import TechDraw
 import FreeCAD
 
 class Draw:
-    def __init__(self, doc, templatePath, shapeID):
+    def __init__(self, doc, templatePath, templatePathOrtho, shapeID):
         shape = doc.getObject(shapeID)
 
         # Insert a Page object and assign a template
@@ -25,7 +25,9 @@ class Draw:
         
         # Insert a Page object and assign a template
         page2 = doc.addObject('TechDraw::DrawPage', 'Orthographic')
-        page2.Template = FreeCAD.ActiveDocument.Template
+        template = doc.addObject('TechDraw::DrawSVGTemplate','TemplateOrtho')
+        template.Template = templatePathOrtho
+        page2.Template = doc.TemplateOrtho
         
         # Create a view on the Shape object, define the position and scale and assign it to a Page
         # Front View

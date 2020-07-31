@@ -8,7 +8,8 @@ from os import path
 
 # -------------   Config    -------------
 EXPORT_FOLDER_PATH = '/Users/salmas/Documents/Output'
-TEMPLATE_PATH = '/Users/salmas/source/repos/part-iv-project/Templates/blank.svg'
+TEMPLATE_PATH_ISO = '/Users/salmas/source/repos/part-iv-project/Templates/blank-iso.svg'
+TEMPLATE_PATH_ORTHO= '/Users/salmas/source/repos/part-iv-project/Templates/blank-ortho.svg'
 
 MATRIX_X = 2
 MATRIX_Y = 2
@@ -44,7 +45,7 @@ for j in range(NUMBER_OF_MCQS):
     doc = FreeCAD.newDocument('correct')
     shapeGenerator = ShapeGenerator(doc, MATRIX_X, MATRIX_Y, MATRIX_Z, UNIT)
     shapeID = shapeGenerator.generate(SHAPE_COMPLEXITY)
-    Draw(doc, TEMPLATE_PATH, shapeID)
+    Draw(doc, TEMPLATE_PATH_ISO, TEMPLATE_PATH_ORTHO, shapeID)
     doc.recompute()
     map = shapeGenerator.baseShapeMap
     for k in map.keys():
@@ -58,7 +59,7 @@ for j in range(NUMBER_OF_MCQS):
     for i in range(MCQ_OPTIONS_PER_QUESTION - 1):
         doc = FreeCAD.newDocument('incorrect')
         shapeID = mcqGenerator.generateShape(doc)
-        Draw(doc, TEMPLATE_PATH, shapeID)
+        Draw(doc, TEMPLATE_PATH_ISO, TEMPLATE_PATH_ORTHO, shapeID)
         doc.recompute()
         map = mcqGenerator.baseShapeMaps[i]
         for k in map.keys():

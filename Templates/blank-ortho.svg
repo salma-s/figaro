@@ -6,8 +6,8 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    version="1.0"
-   width="900"
-   height="600"
+   width="550"
+   height="550"
    id="svg2">
   <metadata
      id="metadata5041">
@@ -23,12 +23,12 @@
   <defs
      id="defs4" />
   <rect
-     width="900"
-     height="600"
+     width="550"
+     height="550"
      rx="1.1102251e-014"
      ry="3.7751492e-015"
      x="0"
      y="0"
-     style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-opacity:1"
+     style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-opacity:0"
      id="rect1306" />
 </svg>
