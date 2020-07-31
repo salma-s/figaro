@@ -5,6 +5,6 @@ class Exporter:
 		self.doc = doc
 		self.savePath = savePath
 
-	def saveDrawings(self, shapeID):
-		TechDrawGui.exportPageAsPdf(self.doc.getObject("Isometric"), '{}/{}-Isometric'.format(self.savePath, shapeID))
-		TechDrawGui.exportPageAsPdf(self.doc.getObject("Orthographic"), '{}/{}-Orthographic'.format(self.savePath, shapeID))
+	def saveDrawings(self, shapeName):
+		TechDrawGui.exportPageAsPdf(self.doc.getObject("Isometric"), '{}/{}-Isometric'.format(self.savePath, shapeName))
+		TechDrawGui.exportPageAsPdf(self.doc.getObject("Orthographic"), '{}/{}-Orthographic'.format(self.savePath, shapeName))
