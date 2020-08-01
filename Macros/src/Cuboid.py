@@ -24,13 +24,13 @@ class Cuboid(Shape):
         Cuboid.NEXT_ID += 1
     
     def generateDissimilarShape(self, doc):
-        shapes = ['QuarterCircle', 'SemiCircle', 'Wedge', 'HoleInWedge', 'QuarterHoleInCuboid', 'SemiHoleInCuboid', 'HoleInDoor']
+        shapes = ['HoleInWedge', 'QuarterHoleInCuboid', 'SemiHoleInCuboid', 'HoleInDoor']
         shapeType = shapes[random.randint(0, len(shapes) - 1)]
 
         return [shapeType, None]
 
     def generateSimilarShape(self, doc):
-        shapes = ['HoleInBox']
+        shapes = ['HoleInBox', 'QuarterCircle', 'SemiCircle', 'Wedge']
         shapeType = shapes[random.randint(0, len(shapes) - 1)]
         return [shapeType, None]
 
