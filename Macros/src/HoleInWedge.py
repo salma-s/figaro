@@ -19,6 +19,20 @@ class HoleInWedge(Shape):
         FreeCAD.Rotation(0, 180, 180), FreeCAD.Rotation(90, 0, 180), 
         FreeCAD.Rotation(0, 270, 180), FreeCAD.Rotation(90, 0, -90), 
     ]
+    EXTRA_CENTRE_LINE = [
+        ["X", "Vertical"], ["Y", "Vertical"],
+        ["Z", "Horizontal"], ["Y", "Horizontal"],
+        ["X", "Vertical"], ["Y", "Vertical"], 
+        ["Z", "Horizontal"], ["Y", "Horizontal"],
+        ["X", "Horizontal"], ["Z", "Vertical"],
+        ["Z", "Vertical"], ["X", "Horizontal"],
+        ["X", "Horizontal"], ["Z", "Vertical"],
+        ["Z", "Vertical"], ["X", "Horizontal"],
+        ["X", "Vertical"], ["Y", "Vertical"],
+        ["Z", "Horizontal"], ["Y", "Horizontal"],
+        ["X", "Vertical"], ["Y", "Vertical"],
+        ["Z", "Horizontal"], ["Y", "Horizontal"],
+    ]
 
     @staticmethod
     def generateCentrelines(dimension):
@@ -92,6 +106,7 @@ class HoleInWedge(Shape):
         else:
             self.rotationIndex = rotationIndex
             self.centrelineInfo = self.CENTRELNIES[rotationIndex]
+        self.additionalCentreArc = HoleInWedge.EXTRA_CENTRE_LINE[self.rotationIndex]
 
         # Translate block to actual position
         doc.getObject(id).Placement = FreeCAD.Placement(FreeCAD.Vector(matrixPos[0] * dimension, matrixPos[1] * dimension, matrixPos[2] * dimension), 

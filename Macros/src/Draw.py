@@ -105,6 +105,14 @@ class Draw:
                 end = FreeCAD.Vector(centrelineInfo.x - matrixXTrans, centrelineInfo.end - matrixZTrans, 0.0)  
             dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
 
+            if node.shape.baseShapeType == 'HoleInWedge' and node.shape.additionalCentreArc[0] == "Y":
+                if (node.shape.additionalCentreArc[1] == "Vertical"):
+                    start = FreeCAD.Vector (unit/2 - matrixXTrans, unit/4 - 10 - matrixZTrans, 0.0)
+                    end = FreeCAD.Vector(unit/2 - matrixXTrans, unit * 3/4 + 10 - matrixZTrans, 0.0)  
+                else:
+                    start = FreeCAD.Vector (unit/4 - 10 - matrixXTrans, unit/2 - matrixZTrans, 0.0)
+                    end = FreeCAD.Vector(unit * 3/4 + 10 - matrixXTrans, unit/2 - matrixZTrans, 0.0)  
+                dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
 
         dvp = doc.RightView
         if centrelineInfo.x is None:
@@ -131,6 +139,15 @@ class Draw:
                 end = FreeCAD.Vector(centrelineInfo.y - matrixYTrans, centrelineInfo.end - matrixZTrans, 0.0)  
             dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
 
+            if node.shape.baseShapeType == 'HoleInWedge' and node.shape.additionalCentreArc[0] == "X":
+                if (node.shape.additionalCentreArc[1] == "Vertical"):
+                    start = FreeCAD.Vector (unit/2 - matrixYTrans, unit/4 - 10 - matrixZTrans, 0.0)
+                    end = FreeCAD.Vector(unit/2 - matrixYTrans, unit * 3/4 + 10 - matrixZTrans, 0.0)  
+                else:
+                    start = FreeCAD.Vector (unit/4 - 10 - matrixYTrans, unit/2 - matrixZTrans, 0.0)
+                    end = FreeCAD.Vector(unit * 3/4 + 10 - matrixYTrans, unit/2 - matrixZTrans, 0.0)  
+                dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
+
 
         dvp = doc.TopView
         if centrelineInfo.z is None:
@@ -156,4 +173,12 @@ class Draw:
                 start = FreeCAD.Vector (centrelineInfo.x - matrixXTrans, centrelineInfo.start - matrixYTrans, 0.0)
                 end = FreeCAD.Vector(centrelineInfo.x - matrixXTrans, centrelineInfo.end - matrixYTrans, 0.0)  
             dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
-            
+
+            if node.shape.baseShapeType == 'HoleInWedge' and node.shape.additionalCentreArc[0] == "Z":
+                if (node.shape.additionalCentreArc[1] == "Vertical"):
+                    start = FreeCAD.Vector (unit/2 - matrixXTrans, unit/4 - 10 - matrixYTrans, 0.0)
+                    end = FreeCAD.Vector(unit/2 - matrixXTrans, unit * 3/4 + 10 - matrixYTrans, 0.0)  
+                else:
+                    start = FreeCAD.Vector (unit/4 - 10 - matrixXTrans, unit/2 - matrixYTrans, 0.0)
+                    end = FreeCAD.Vector(unit * 3/4 + 10 - matrixXTrans, unit/2 - matrixYTrans, 0.0)  
+                dvp.makeCosmeticLine(start, end, style, weight, darkGrey)
