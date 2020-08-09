@@ -2,7 +2,7 @@ import os
 import fileinput
 import xml.dom.minidom
 
-DIRECTORY = '/Users/gargi/P4P_Output/Test/' # Directory to recursively search for SVG files in
+DIRECTORY = '/Users/gargi/Fourth Year Projects/P4P/Output' # Directory to recursively search for SVG files in
 TEMP_FILE_NAME = "temp.svg"
 ALL_SVGS = [];
 
@@ -25,10 +25,12 @@ for filename in ALL_SVGS:
     if 'stroke' in t.attributes.keys(): # Modifying line styling information
       if (t.attributes['stroke'].value=="#000000"):
         t.setAttribute('stroke-width', "20")
+      if (t.attributes['stroke'].value=="#afafaf"):
+        t.setAttribute('stroke', "#555555")
       if 'stroke-dasharray' in t.attributes.keys():
         if (t.attributes['stroke'].value=="#ff0000"):
           t.setAttribute('stroke-dasharray', "60,30,20,30")
-        if (t.attributes['stroke'].value=="#afafaf"):
+        if (t.attributes['stroke'].value=="#555555"):
           t.setAttribute('stroke-dasharray', "60,60")
   temp.write(doc.toprettyxml()) # Writing new SVG to temp
   temp.close()
