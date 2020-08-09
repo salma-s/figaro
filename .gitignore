@@ -1,8 +1,5 @@
- __pycache__/
- *.pyc
- Macros/__pycache__/
- **/__pycache__/
- /Output/**
- **/*.pyc
- **/*.svg
- **/*.png
+**/__pycache__/
+Output/
+**/*.pyc
+**/*.svg
+**/*.png
