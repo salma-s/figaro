@@ -3,29 +3,8 @@ from Exporter import Exporter
 import FreeCAD
 from MCQGenerator import MCQGenerator
 from ShapeGenerator import ShapeGenerator
-import os.path
 from os import path
-
-# -------------   Config    -------------
-EXPORT_FOLDER_PATH = '/Users/gargi/P4P_Output'
-TEMPLATE_PATH_ISO = '/Users/gargi/Fourth Year Projects/P4P/Templates/blank-iso.svg'
-TEMPLATE_PATH_ORTHO= '/Users/gargi/Fourth Year Projects/P4P/Templates/blank-ortho.svg'
-
-MATRIX_X = 2
-MATRIX_Y = 2
-MATRIX_Z = 2
-UNIT = 100
-
-SHAPE_COMPLEXITY = 'SIMPLE' # "SIMPLE", "NORMAL", "COMPLEX"
-DISTRACTOR_TYPE = 'DISSIMILAR' # "DISSIMILAR", "SIMILAR", "DIFF_ROTATION"
-
-# MCQ Options per Question. Not more than 4 is recommended for a DIFF_ROTATION distractor type.
-# Count is inclusive of correct answer
-MCQ_OPTIONS_PER_QUESTION = 4
-
-NUMBER_OF_MCQS = 1 # The number of MCQs to generate
-
-Q_START_NUM = 1
+from config import *
 
 # --------   Error Handling    --------
 if EXPORT_FOLDER_PATH == '':
@@ -41,7 +20,7 @@ if DISTRACTOR_TYPE != 'DISSIMILAR' and DISTRACTOR_TYPE != 'SIMILAR' and DISTRACT
 
 # -------------   Main    -------------
 
-for j in range(Q_START_NUM, Q_START_NUM + NUMBER_OF_MCQS):
+for j in range(MCQ_START_NUM, MCQ_START_NUM + NUMBER_OF_MCQS):
     fname = 'Q' + str(j)
     # Generate 'correct' shape
     doc = FreeCAD.newDocument('correct')
