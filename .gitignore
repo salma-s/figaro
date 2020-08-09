@@ -3,4 +3,4 @@ Output/
 **/*.pyc
 **/*.svg
 **/*.png
-**/config.py
+Macros/src/config.py
