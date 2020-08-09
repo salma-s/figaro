@@ -2,5 +2,5 @@
  *.pyc
  Macros/__pycache__/
  **/__pycache__/
- Output/
+ /Output/**
  **/*.pyc
