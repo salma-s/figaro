@@ -5,10 +5,10 @@ import os.path
 import os
 from PyPDF2 import PdfFileMerger, PdfFileReader
 
-IMAGE_DIRECTORY = 'C:/Users/ssana/source/repos/part-iv-project/Output/'
-EXPORT_PATH_INDIVIDUAL_MCQ_PDF = 'C:/Users/ssana/source/repos/part-iv-project/Output/FormattedMCQs/individual-mcqs-pdf/'
-EXPORT_PATH_INDIVIDUAL_MCQ_SVG = 'C:/Users/ssana/source/repos/part-iv-project/Output/FormattedMCQs/individual-mcqs-svg/'
-EXPORT_PATH_MERGED_MCQ_PDF = 'C:/Users/ssana/source/repos/part-iv-project/Output/FormattedMCQs/mergedMCQs.pdf'
+IMAGE_DIRECTORY = '/Users/salmas/source/repos/part-iv-project/Macros/Output/'
+EXPORT_PATH_INDIVIDUAL_MCQ_PDF = '/Users/salmas/source/repos/part-iv-project/Macros/Output/FormattedMCQs/IndividualMCQs-pdf/'
+EXPORT_PATH_INDIVIDUAL_MCQ_SVG = '/Users/salmas/source/repos/part-iv-project/Macros/Output/FormattedMCQs/IndividualMCQs-svg/'
+EXPORT_PATH_MERGED_MCQ_PDF = '/Users/salmas/source/repos/part-iv-project/Macros/Output/FormattedMCQs/mergedMCQs.pdf'
 QUESTION_IDS = [1, 2, 3, 4, 5]
 
 # Add front arrow overlay to isometric question
@@ -25,39 +25,40 @@ textSize = 10
 merger = PdfFileMerger()
 j = 1
 for i in QUESTION_IDS:
-    questionPath = IMAGE_DIRECTORY + '\Q' + str(i) + '-1-Isometric.svg'
-    optionAPath = IMAGE_DIRECTORY + '\Q' + str(i) + '-1-Orthographic.svg'
-    optionBPath = IMAGE_DIRECTORY + '\Q' + str(i) + '-2-Orthographic.svg'
-    optionCPath = IMAGE_DIRECTORY + '\Q' + str(i) + '-3-Orthographic.svg'
-    optionDPath = IMAGE_DIRECTORY + '\Q' + str(i) + '-4-Orthographic.svg'
+    questionPath = IMAGE_DIRECTORY + 'Q' + str(i) + '-1-Orthographic.svg'
+    optionAPath = IMAGE_DIRECTORY + 'Q' + str(i) + '-1-Isometric.svg'
+    optionBPath = IMAGE_DIRECTORY + 'Q' + str(i) + '-2-Isometric.svg'
+    optionCPath = IMAGE_DIRECTORY + 'Q' + str(i) + '-3-Isometric.svg'
+    optionDPath = IMAGE_DIRECTORY + 'Q' + str(i) + '-4-Isometric.svg'
 
-    svgPagePath = EXPORT_PATH_INDIVIDUAL_MCQ_SVG + 'page' + str(i) + '.svg'
+    svgPagePath = EXPORT_PATH_INDIVIDUAL_MCQ_SVG + 'mcq-' + str(i) + '.svg'
     questionText = 'Question ' + str(j)
     Figure("29.7cm", "21.0cm", 
         Panel(
-            SVG(questionPath).scale(scaleIsoQuestion),
+            SVG(questionPath).scale(scaleOrthoQuestion),
             Text(questionText, 25, 20, size=textSize, weight=textWeight)
             ),
         Panel(
-            SVG(optionAPath).scale(scaleOrthoAnswer),
+            SVG(optionAPath).scale(scaleIsoAnswer),
             Text("A", 5, 20, size=textSize, weight=textWeight)
             ).move(280, 0),
         Panel(
-            SVG(optionBPath).scale(scaleOrthoAnswer),
+            SVG(optionBPath).scale(scaleIsoAnswer),
             Text("B", 5, 20, size=textSize, weight=textWeight)
             ).move(550, 0),
         Panel(
-            SVG(optionCPath).scale(scaleOrthoAnswer),
+            SVG(optionCPath).scale(scaleIsoAnswer),
             Text("C", 5, 20, size=textSize, weight=textWeight)
             ).move(280, 270),
         Panel(
-            SVG(optionDPath).scale(scaleOrthoAnswer),
+            SVG(optionDPath).scale(scaleIsoAnswer),
             Text("D", 5, 20, size=textSize, weight=textWeight)
             ).move(550, 270)
         ).save(svgPagePath)
 
     # Convert the page to PDF and add it to the collated pages 
-    pdfPagePath = EXPORT_PATH_INDIVIDUAL_MCQ_PDF + 'page' + str(i) + '.pdf'
+    pdfPagePath = EXPORT_PATH_INDIVIDUAL_MCQ_PDF + 'mcq-' + str(i) + '.pdf'
+    print(svgPagePath)
     renderPDF.drawToFile(svg2rlg(svgPagePath), pdfPagePath)
     page = open(pdfPagePath, "rb")
     merger.append(page)
