@@ -4,14 +4,18 @@ from reportlab.graphics import renderPDF
 import os.path
 import os
 from PyPDF2 import PdfFileMerger, PdfFileReader
+from pathlib import Path
 
+PROJECT_LOCATION = '/Users/salmas/source/repos/part-iv-project/'
 IMAGE_DIRECTORY = '/Users/salmas/source/repos/part-iv-project/Macros/Output/'
-EXPORT_PATH_INDIVIDUAL_MCQ_PDF = '/Users/salmas/source/repos/part-iv-project/Macros/Output/FormattedMCQs/IndividualMCQs-pdf/'
-EXPORT_PATH_INDIVIDUAL_MCQ_SVG = '/Users/salmas/source/repos/part-iv-project/Macros/Output/FormattedMCQs/IndividualMCQs-svg/'
-EXPORT_PATH_MERGED_MCQ_PDF = '/Users/salmas/source/repos/part-iv-project/Macros/Output/FormattedMCQs/mergedMCQs.pdf'
+EXPORT_PATH_INDIVIDUAL_MCQ_PDF = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/IndividualMCQs-pdf/'
+EXPORT_PATH_INDIVIDUAL_MCQ_SVG = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/IndividualMCQs-svg/'
+EXPORT_PATH_MERGED_MCQ_PDF = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/mergedMCQs-OrthoToIso.pdf'
 QUESTION_IDS = [1, 2, 3, 4, 5]
 
-# Add front arrow overlay to isometric question
+# Create required directories
+Path(EXPORT_PATH_INDIVIDUAL_MCQ_PDF).mkdir(parents=True, exist_ok=True)
+Path(EXPORT_PATH_INDIVIDUAL_MCQ_SVG).mkdir(parents=True, exist_ok=True)
 
 # MCQ format settings
 scaleOrthoAnswer = 0.05
@@ -25,11 +29,12 @@ textSize = 10
 merger = PdfFileMerger()
 j = 1
 for i in QUESTION_IDS:
-    questionPath = IMAGE_DIRECTORY + 'Q' + str(i) + '-1-Orthographic.svg'
-    optionAPath = IMAGE_DIRECTORY + 'Q' + str(i) + '-1-Isometric.svg'
-    optionBPath = IMAGE_DIRECTORY + 'Q' + str(i) + '-2-Isometric.svg'
-    optionCPath = IMAGE_DIRECTORY + 'Q' + str(i) + '-3-Isometric.svg'
-    optionDPath = IMAGE_DIRECTORY + 'Q' + str(i) + '-4-Isometric.svg'
+    svgPathPrefix = IMAGE_DIRECTORY + 'Q' + str(i)
+    questionPath = svgPathPrefix + '-1-Orthographic.svg'
+    optionAPath = svgPathPrefix + '-1-Isometric.svg'
+    optionBPath = svgPathPrefix + '-2-Isometric.svg'
+    optionCPath = svgPathPrefix + '-3-Isometric.svg'
+    optionDPath = svgPathPrefix + '-4-Isometric.svg'
 
     svgPagePath = EXPORT_PATH_INDIVIDUAL_MCQ_SVG + 'mcq-' + str(i) + '.svg'
     questionText = 'Question ' + str(j)

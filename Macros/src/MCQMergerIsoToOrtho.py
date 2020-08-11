@@ -4,17 +4,21 @@ from reportlab.graphics import renderPDF
 import os.path
 import os
 from PyPDF2 import PdfFileMerger, PdfFileReader
-import svg_stack as ss
 import svgutils.transform as st
-
-# python3 -m  pip install git+https://github.com/varnion/svg_stack@d324a93a42d80c98a2ed27e4004a1781b44ffc0a --user
+from pathlib import Path
 
 PROJECT_LOCATION = '/Users/salmas/source/repos/part-iv-project/'
 IMAGE_DIRECTORY = '/Users/salmas/source/repos/part-iv-project/Macros/Output/'
-EXPORT_PATH_INDIVIDUAL_MCQ_PDF = '/Users/salmas/source/repos/part-iv-project/Macros/Output/FormattedMCQs/IndividualMCQs-pdf/'
-EXPORT_PATH_INDIVIDUAL_MCQ_SVG = '/Users/salmas/source/repos/part-iv-project/Macros/Output/FormattedMCQs/IndividualMCQs-svg/'
-EXPORT_PATH_MERGED_MCQ_PDF = '/Users/salmas/source/repos/part-iv-project/Macros/Output/FormattedMCQs/mergedMCQs.pdf'
+EXPORT_PATH_INDIVIDUAL_MCQ_PDF = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/IndividualMCQs-pdf/'
+EXPORT_PATH_INDIVIDUAL_MCQ_SVG = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/IndividualMCQs-svg/'
+EXPORT_PATH_MERGED_MCQ_PDF = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/mergedMCQs-IsoToOrtho.pdf'
+EXPORT_PATH_ISOMETRIC_WITH_FRONT_LABEL = PROJECT_LOCATION + 'Macros/Output/IsometricWithFrontLabel/'
 QUESTION_IDS = [1, 2, 3, 4, 5]
+
+# Create required directories
+Path(EXPORT_PATH_INDIVIDUAL_MCQ_PDF).mkdir(parents=True, exist_ok=True)
+Path(EXPORT_PATH_INDIVIDUAL_MCQ_SVG).mkdir(parents=True, exist_ok=True)
+Path(EXPORT_PATH_ISOMETRIC_WITH_FRONT_LABEL).mkdir(parents=True, exist_ok=True)
 
 # Add front arrow overlay to isometric question
 labelArrow = PROJECT_LOCATION+'Macros/src/Resources/arrow.svg'
@@ -52,7 +56,7 @@ for i in QUESTION_IDS:
     labelTextSvg = st.fromfile(labelTextTranslated)
     drawingSvg.append(labelArrowSvg)
     drawingSvg.append(labelTextSvg)
-    isometricWithLabelPath = svgPathPrefix + '-1-Isometric-with-front-label.svg'
+    isometricWithLabelPath = EXPORT_PATH_ISOMETRIC_WITH_FRONT_LABEL + 'Q' + str(i) + '-1-Isometric-with-front-label.svg'
     drawingSvg.save(isometricWithLabelPath)
 
     questionPath = isometricWithLabelPath
