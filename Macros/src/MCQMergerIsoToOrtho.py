@@ -6,9 +6,8 @@ import os
 from PyPDF2 import PdfFileMerger, PdfFileReader
 import svgutils.transform as st
 from pathlib import Path
+from config import PROJECT_LOCATION, IMAGE_DIRECTORY
 
-PROJECT_LOCATION = '/Users/salmas/source/repos/part-iv-project/'
-IMAGE_DIRECTORY = '/Users/salmas/source/repos/part-iv-project/Macros/Output/'
 EXPORT_PATH_INDIVIDUAL_MCQ_PDF = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/IndividualMCQs-pdf/'
 EXPORT_PATH_INDIVIDUAL_MCQ_SVG = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/IndividualMCQs-svg/'
 EXPORT_PATH_MERGED_MCQ_PDF = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/mergedMCQs-IsoToOrtho.pdf'

@@ -27,3 +27,12 @@ MCQ_OPTIONS_PER_QUESTION = 1
 NUMBER_OF_MCQS = 1 # The number of MCQs to generate
 
 MCQ_START_NUM = 1 # The question number of the first MCQ outputted
+
+# Directory of project
+# Required for MCQMergerIsoToOrtho and MCQMergerOrthoToIso
+PROJECT_LOCATION = '/Users/salmas/source/repos/part-iv-project/'
+
+# Directory contaning individual iso and ortho SVGs to be converted into formatted MCQs
+# Required for MCQMergerIsoToOrtho and MCQMergerOrthoToIso
+IMAGE_DIRECTORY = '/Users/salmas/source/repos/part-iv-project/Macros/Output/'
+
