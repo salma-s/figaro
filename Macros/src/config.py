@@ -28,11 +28,13 @@ NUMBER_OF_MCQS = 1 # The number of MCQs to generate
 
 MCQ_START_NUM = 1 # The question number of the first MCQ outputted
 
-# Directory of project
+# Path to the project
 # Required for MCQMergerIsoToOrtho and MCQMergerOrthoToIso
 PROJECT_LOCATION = '/Users/salmas/source/repos/part-iv-project/'
 
-# Directory contaning individual iso and ortho SVGs to be converted into formatted MCQs
+# Path to the individual draeing SVGs to be converted into formatted MCQs
 # Required for MCQMergerIsoToOrtho and MCQMergerOrthoToIso
 IMAGE_DIRECTORY = '/Users/salmas/source/repos/part-iv-project/Macros/Output/'
 
+# A list of the question ids (in the filename of the individual drawing SVGs) to be converted into MCQs
+QUESTION_IDS_TO_CREATE_MCQs = [1, 2, 3, 4, 5]

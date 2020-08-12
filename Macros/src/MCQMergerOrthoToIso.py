@@ -5,12 +5,11 @@ import os.path
 import os
 from PyPDF2 import PdfFileMerger, PdfFileReader
 from pathlib import Path
-from config import PROJECT_LOCATION, IMAGE_DIRECTORY
+from config import PROJECT_LOCATION, IMAGE_DIRECTORY, QUESTION_IDS_TO_CREATE_MCQs
 
 EXPORT_PATH_INDIVIDUAL_MCQ_PDF = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/IndividualMCQs-pdf/'
 EXPORT_PATH_INDIVIDUAL_MCQ_SVG = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/IndividualMCQs-svg/'
-EXPORT_PATH_MERGED_MCQ_PDF = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/mergedMCQs-OrthoToIso.pdf'
-QUESTION_IDS = [1, 2, 3, 4, 5]
+EXPORT_PATH_MERGED_MCQ_PDF = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/MergedMCQs-OrthoToIso.pdf'
 
 # Create required directories
 Path(EXPORT_PATH_INDIVIDUAL_MCQ_PDF).mkdir(parents=True, exist_ok=True)
@@ -27,7 +26,7 @@ textSize = 10
 # Initialise the output pdf of merged mcqs
 merger = PdfFileMerger()
 j = 1
-for i in QUESTION_IDS:
+for i in QUESTION_IDS_TO_CREATE_MCQs:
     svgPathPrefix = IMAGE_DIRECTORY + 'Q' + str(i)
     questionPath = svgPathPrefix + '-1-Orthographic.svg'
     optionAPath = svgPathPrefix + '-1-Isometric.svg'
