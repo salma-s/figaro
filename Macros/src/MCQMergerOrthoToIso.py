@@ -3,11 +3,19 @@ from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPDF
 from PyPDF2 import PdfFileMerger, PdfFileReader
 from pathlib import Path
-from config import PROJECT_LOCATION, IMAGE_DIRECTORY, QUESTION_IDS_TO_CREATE_MCQs
+import svgutils.transform as st
+from config import PROJECT_LOCATION, IMAGE_DIRECTORY, QUESTION_IDS, MCQ_OPTIONS_PER_QUESTION
 
 EXPORT_PATH_INDIVIDUAL_MCQ_PDF = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/IndividualMCQs-pdf/'
 EXPORT_PATH_INDIVIDUAL_MCQ_SVG = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/IndividualMCQs-svg/'
 EXPORT_PATH_MERGED_MCQ_PDF = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/MergedMCQs-OrthoToIso.pdf'
+EXPORT_PATH_ISOMETRIC_WITH_FRONT_LABEL = PROJECT_LOCATION + 'Macros/Output/IsometricWithFrontLabel/'
+
+# Add front arrow overlay to isometric question
+labelArrow = PROJECT_LOCATION+'Macros/src/Resources/arrow.svg'
+labelText = PROJECT_LOCATION+'Macros/src/Resources/front-text.svg'
+labelTextTranslated = PROJECT_LOCATION+'Macros/src/Resources/translated-label-text.svg'
+labelArrowTranslated = PROJECT_LOCATION+'Macros/src/Resources/translated-label-arrow.svg'
 
 # Create required directories
 Path(EXPORT_PATH_INDIVIDUAL_MCQ_PDF).mkdir(parents=True, exist_ok=True)
@@ -24,13 +32,33 @@ textSize = 10
 # Initialise the output pdf of merged mcqs
 merger = PdfFileMerger()
 j = 1
-for i in QUESTION_IDS_TO_CREATE_MCQs:
+for i in QUESTION_IDS:
+  # Translate the front label components
+    Figure( "180cm", "180cm",
+            SVG(labelArrow).scale(0.4)
+            .move(790, 3550)
+    ).save(labelArrowTranslated)
+    Figure( "180cm", "200cm",
+            SVG(labelText).scale(2.8)
+            .move(320, 3700)
+    ).save(labelTextTranslated)
+
     svgPathPrefix = IMAGE_DIRECTORY + 'Q' + str(i)
     questionPath = svgPathPrefix + '-1-Orthographic.svg'
     optionAPath = svgPathPrefix + '-1-Isometric.svg'
     optionBPath = svgPathPrefix + '-2-Isometric.svg'
     optionCPath = svgPathPrefix + '-3-Isometric.svg'
     optionDPath = svgPathPrefix + '-4-Isometric.svg'
+
+    for k in range(1, MCQ_OPTIONS_PER_QUESTION + 1):
+        # Append front label to the isometric drawing
+        drawingSvg = st.fromfile(svgPathPrefix + '-' + str(k) + '-Isometric.svg')
+        labelArrowSvg = st.fromfile(labelArrowTranslated)
+        labelTextSvg = st.fromfile(labelTextTranslated)
+        drawingSvg.append(labelArrowSvg)
+        drawingSvg.append(labelTextSvg)
+        isometricWithLabelPath = EXPORT_PATH_ISOMETRIC_WITH_FRONT_LABEL + 'Q' + str(i) + '-' + str(k) + '-Isometric.svg'
+        drawingSvg.save(isometricWithLabelPath)
 
     svgPagePath = EXPORT_PATH_INDIVIDUAL_MCQ_SVG + 'mcq-' + str(i) + '.svg'
     questionText = 'Question ' + str(j)

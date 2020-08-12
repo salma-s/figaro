@@ -4,7 +4,7 @@ from reportlab.graphics import renderPDF
 from PyPDF2 import PdfFileMerger, PdfFileReader
 import svgutils.transform as st
 from pathlib import Path
-from config import PROJECT_LOCATION, IMAGE_DIRECTORY, QUESTION_IDS_TO_CREATE_MCQs
+from config import PROJECT_LOCATION, IMAGE_DIRECTORY, QUESTION_IDS
 
 EXPORT_PATH_INDIVIDUAL_MCQ_PDF = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/IndividualMCQs-pdf/'
 EXPORT_PATH_INDIVIDUAL_MCQ_SVG = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/IndividualMCQs-svg/'
@@ -33,7 +33,7 @@ textSize = 10
 # # Initialise the output pdf of merged mcqs
 merger = PdfFileMerger()
 j = 1
-for i in QUESTION_IDS_TO_CREATE_MCQs:
+for i in QUESTION_IDS:
     # Translate the front label components
     Figure( "180cm", "180cm",
             SVG(labelArrow).scale(0.4)
