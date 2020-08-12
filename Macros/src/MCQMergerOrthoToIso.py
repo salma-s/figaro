@@ -62,7 +62,6 @@ for i in QUESTION_IDS:
 
     # Convert the page to PDF and add it to the collated pages 
     pdfPagePath = EXPORT_PATH_INDIVIDUAL_MCQ_PDF + 'mcq-' + str(i) + '.pdf'
-    print(svgPagePath)
     renderPDF.drawToFile(svg2rlg(svgPagePath), pdfPagePath)
     page = open(pdfPagePath, "rb")
     merger.append(page)
