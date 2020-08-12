@@ -39,3 +39,5 @@ IMAGE_DIRECTORY = '/Users/salmas/Downloads/Ortho To Iso/Simple - Similar/'
 # A list of the question ids (in the filename of the individual drawing SVGs) to be converted into MCQs
 # Required to run MCQMergerIsoToOrtho.py, MCQMergerOrthoToIso.py, AddFronLabelToIso
 QUESTION_IDS = [1,2,5,7,8]
+
+IMAGE_DIRECTORY_FOR_SVG_TO_PNG = '/Users/salmas/source/repos/part-iv-project/Macros/Output/IsometricWithFrontLabel'
