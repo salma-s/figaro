@@ -1,8 +1,6 @@
 from svgutils.compose import *
 from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPDF
-import os.path
-import os
 from PyPDF2 import PdfFileMerger, PdfFileReader
 import svgutils.transform as st
 from pathlib import Path

@@ -1,8 +1,6 @@
 from svgutils.compose import *
 from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPDF
-import os.path
-import os
 from PyPDF2 import PdfFileMerger, PdfFileReader
 from pathlib import Path
 from config import PROJECT_LOCATION, IMAGE_DIRECTORY, QUESTION_IDS_TO_CREATE_MCQs
