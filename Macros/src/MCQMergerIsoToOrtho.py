@@ -37,11 +37,11 @@ for i in QUESTION_IDS:
     # Translate the front label components
     Figure( "180cm", "180cm",
             SVG(labelArrow).scale(0.4)
-            .move(790, 3600)
+            .move(790, 3520)
     ).save(labelArrowTranslated)
     Figure( "180cm", "200cm",
             SVG(labelText).scale(3)
-            .move(320, 3900)
+            .move(320, 3700)
     ).save(labelTextTranslated)
 
     svgPathPrefix = IMAGE_DIRECTORY + 'Q' + str(i)
