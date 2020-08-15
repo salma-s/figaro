@@ -32,7 +32,7 @@ MCQ_START_NUM = 1 # The question number of the first MCQ outputted
 # Required to run MCQMergerIsoToOrtho.py, MCQMergerOrthoToIso.py, AddFronLabelToIso
 PROJECT_LOCATION = '/Users/salmas/source/repos/part-iv-project/'
 
-# Path to the individual draeing SVGs to be converted into formatted MCQs
+# Path to the individual drawing SVGs to be converted into formatted MCQs
 # Required to run MCQMergerIsoToOrtho.py, MCQMergerOrthoToIso.py, AddFronLabelToIso
 IMAGE_DIRECTORY = '/Users/salmas/Downloads/Ortho To Iso/Simple - Similar/'
 

@@ -5,6 +5,7 @@ from PyPDF2 import PdfFileMerger, PdfFileReader
 from pathlib import Path
 import svgutils.transform as st
 from config import PROJECT_LOCATION, IMAGE_DIRECTORY, QUESTION_IDS, MCQ_OPTIONS_PER_QUESTION
+import random
 
 EXPORT_PATH_INDIVIDUAL_MCQ_PDF = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/IndividualMCQs-pdf/'
 EXPORT_PATH_INDIVIDUAL_MCQ_SVG = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/IndividualMCQs-svg/'
@@ -43,12 +44,15 @@ for i in QUESTION_IDS:
             .move(320, 3700)
     ).save(labelTextTranslated)
 
+    optionSuffixes = ['-1-Isometric.svg', '-2-Isometric.svg', '-3-Isometric.svg', '-4-Isometric.svg'];
+    random.shuffle(optionSuffixes);
+
     svgPathPrefix = IMAGE_DIRECTORY + 'Q' + str(i)
     questionPath = svgPathPrefix + '-1-Orthographic.svg'
-    optionAPath = svgPathPrefix + '-1-Isometric.svg'
-    optionBPath = svgPathPrefix + '-2-Isometric.svg'
-    optionCPath = svgPathPrefix + '-3-Isometric.svg'
-    optionDPath = svgPathPrefix + '-4-Isometric.svg'
+    optionAPath = svgPathPrefix + optionSuffixes[0];
+    optionBPath = svgPathPrefix + optionSuffixes[1];
+    optionCPath = svgPathPrefix + optionSuffixes[2];
+    optionDPath = svgPathPrefix + optionSuffixes[3];
 
     for k in range(1, MCQ_OPTIONS_PER_QUESTION + 1):
         # Append front label to the isometric drawing
@@ -74,11 +78,11 @@ for i in QUESTION_IDS:
         Panel(
             SVG(optionBPath).scale(scaleIsoAnswer),
             Text("B", 5, 20, size=textSize, weight=textWeight)
-            ).move(550, 0),
+            ).move(280, 270),
         Panel(
             SVG(optionCPath).scale(scaleIsoAnswer),
             Text("C", 5, 20, size=textSize, weight=textWeight)
-            ).move(280, 270),
+            ).move(550, 0),
         Panel(
             SVG(optionDPath).scale(scaleIsoAnswer),
             Text("D", 5, 20, size=textSize, weight=textWeight)

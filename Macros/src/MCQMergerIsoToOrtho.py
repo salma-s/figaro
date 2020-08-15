@@ -5,6 +5,7 @@ from PyPDF2 import PdfFileMerger, PdfFileReader
 import svgutils.transform as st
 from pathlib import Path
 from config import PROJECT_LOCATION, IMAGE_DIRECTORY, QUESTION_IDS
+import random
 
 EXPORT_PATH_INDIVIDUAL_MCQ_PDF = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/IndividualMCQs-pdf/'
 EXPORT_PATH_INDIVIDUAL_MCQ_SVG = PROJECT_LOCATION + 'Macros/Output/FormattedMCQs/IndividualMCQs-svg/'
@@ -55,11 +56,14 @@ for i in QUESTION_IDS:
     isometricWithLabelPath = EXPORT_PATH_ISOMETRIC_WITH_FRONT_LABEL + 'Q' + str(i) + '-1-Isometric-with-front-label.svg'
     drawingSvg.save(isometricWithLabelPath)
 
+    optionSuffixes = ['-1-Orthographic.svg', '-2-Orthographic.svg', '-3-Orthographic.svg', '-4-Orthographic.svg'];
+    random.shuffle(optionSuffixes);
+
     questionPath = isometricWithLabelPath
-    optionAPath = svgPathPrefix + '-1-Orthographic.svg'
-    optionBPath = svgPathPrefix + '-2-Orthographic.svg'
-    optionCPath = svgPathPrefix + '-3-Orthographic.svg'
-    optionDPath = svgPathPrefix + '-4-Orthographic.svg'
+    optionAPath = svgPathPrefix + optionSuffixes[0]
+    optionBPath = svgPathPrefix + optionSuffixes[1]
+    optionCPath = svgPathPrefix + optionSuffixes[2]
+    optionDPath = svgPathPrefix + optionSuffixes[3]
 
     svgPagePath = EXPORT_PATH_INDIVIDUAL_MCQ_SVG + 'mcq-' + str(i) + '.svg'
     questionText = 'Question ' + str(j)
@@ -75,11 +79,11 @@ for i in QUESTION_IDS:
         Panel(
             SVG(optionBPath).scale(scaleOrthoAnswer),
             Text("B", 5, 20, size=textSize, weight=textWeight)
-            ).move(550, 0),
+            ).move(280, 270),
         Panel(
             SVG(optionCPath).scale(scaleOrthoAnswer),
             Text("C", 5, 20, size=textSize, weight=textWeight)
-            ).move(280, 270),
+            ).move(550, 0),
         Panel(
             SVG(optionDPath).scale(scaleOrthoAnswer),
             Text("D", 5, 20, size=textSize, weight=textWeight)
