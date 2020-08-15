@@ -56,8 +56,8 @@ for i in QUESTION_IDS:
     isometricWithLabelPath = EXPORT_PATH_ISOMETRIC_WITH_FRONT_LABEL + 'Q' + str(i) + '-1-Isometric-with-front-label.svg'
     drawingSvg.save(isometricWithLabelPath)
 
-    optionSuffixes = ['-1-Orthographic.svg', '-2-Orthographic.svg', '-3-Orthographic.svg', '-4-Orthographic.svg'];
-    random.shuffle(optionSuffixes);
+    optionSuffixes = ['-1-Orthographic.svg', '-2-Orthographic.svg', '-3-Orthographic.svg', '-4-Orthographic.svg']
+    random.shuffle(optionSuffixes)
 
     questionPath = isometricWithLabelPath
     optionAPath = svgPathPrefix + optionSuffixes[0]
