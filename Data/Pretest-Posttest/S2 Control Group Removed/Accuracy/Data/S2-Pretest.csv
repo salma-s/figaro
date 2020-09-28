@@ -1,0 +1,361 @@
+id,sis_id,iso_ortho_gs_response,iso_ortho_gs_score,ortho_iso_gs_response,ortho_iso_gs_score,iso_ortho_hz_response,iso_ortho_hz_score,ortho_iso_hz_response,ortho_iso_hz_score,confidence_iso_ortho_ortho_iso,total_score,participated_in_treatment
+258396,951614208,C,0,C,0,"A,M",0,H,0,"Agree,Agree",0,TRUE
+261219,434015885,B,0,D,0,"F,O",0,E,0,"Neutral,Neutral",0,TRUE
+252715,334961911,C,0,C,0,"C,O",0,C,0,"Agree,Agree",0,TRUE
+258290,692281481,C,0,,0,,0,,0,,0,TRUE
+258712,120683565,A,0,A,0,"G,M",0,B,0,"Strongly disagree,Strongly disagree",0,TRUE
+218402,967368958,C,0,C,0,"F,M",0,K,0,"Strongly disagree,Disagree",0,TRUE
+257988,576264940,C,0,D,0,"C,M",0,C,0,"Strongly agree,Disagree",0,TRUE
+253070,291426168,C,0,A,0,"B,M",0,J,0,"Neutral,Neutral",0,TRUE
+271235,785221912,A,0,A,0,"A,M",0,A,0,"Strongly agree,Strongly agree",0,TRUE
+257927,620609500,A,0,A,0,"B,M",0,J,0,"Strongly disagree,Strongly disagree",0,TRUE
+257990,316953934,,0,,0,,0,J,0,"Strongly disagree,Strongly disagree",0,TRUE
+268041,419099478,C,0,A,0,"C,O",0,C,0,"Neutral,Disagree",0,TRUE
+224345,898686927,C,0,C,0,"C,N",0,E,0,"Strongly disagree,Strongly disagree",0,TRUE
+253090,120844031,B,0,C,0,"E,O",0,G,1,,1,TRUE
+244692,161674235,A,0,D,0,"A,M",0,G,1,"Disagree,Disagree",1,TRUE
+206728,778074619,D,1,D,0,"D,M",0,C,0,"Strongly disagree,Strongly disagree",1,TRUE
+254861,999939698,C,0,A,0,"B,M",0,G,1,"Neutral,Neutral",1,TRUE
+253065,715999470,D,1,C,0,"G,M",0,B,0,"Disagree,Disagree",1,TRUE
+234819,236153830,D,1,C,0,"C,N",0,F,0,"Agree,Neutral",1,TRUE
+265433,290273518,C,0,B,1,"B,M",0,B,0,"Agree,Agree",1,TRUE
+243752,267826815,A,0,B,1,"B,M",0,J,0,"Neutral,Agree",1,TRUE
+213711,176808801,B,0,C,0,"C,O",0,G,1,"Agree,Neutral",1,TRUE
+246194,943104843,A,0,B,1,"G,M",0,D,0,"Disagree,Disagree",1,TRUE
+232871,605529857,D,1,C,0,"B,O",0,E,0,"Agree,Disagree",1,TRUE
+263934,508961752,B,0,D,0,"B,M",0,G,1,"Disagree,Neutral",1,TRUE
+256441,959759115,C,0,B,1,"G,M",0,K,0,"Neutral,Neutral",1,TRUE
+256718,955395465,D,1,C,0,"G,O",0,B,0,"Disagree,Strongly agree",1,TRUE
+258103,290165600,A,0,B,1,"B,N",0,D,0,"Strongly disagree,Strongly disagree",1,TRUE
+242173,104076327,D,1,D,0,"D,N",0,J,0,"Neutral,Neutral",1,TRUE
+265109,746982364,A,0,C,0,"D,O",0,G,1,"Disagree,Agree",1,TRUE
+250203,581087950,A,0,B,1,"C,O",0,J,0,"Disagree,Disagree",1,TRUE
+259789,462490210,A,0,C,0,"E,M",1,D,0,"Agree,Agree",1,TRUE
+254202,539834780,A,0,B,1,"G,M",0,G,1,"Agree,Agree",2,TRUE
+268552,444858819,D,1,C,0,"G,M",0,G,1,"Strongly disagree,Strongly disagree",2,TRUE
+260315,921461081,D,1,D,0,"G,M",0,G,1,"Neutral,Neutral",2,TRUE
+269784,797696763,D,1,B,1,"B,M",0,J,0,"Agree,Agree",2,TRUE
+265850,535062568,C,0,C,0,"E,M",1,G,1,"Strongly agree,Strongly agree",2,TRUE
+224993,723622382,C,0,B,1,"E,N",0,G,1,"Agree,Agree",2,TRUE
+169962,261170747,B,0,B,1,"C,M",0,G,1,"Disagree,Disagree",2,TRUE
+272378,149259530,A,0,B,1,"G,M",0,G,1,"Strongly agree,Strongly agree",2,TRUE
+256889,166932766,D,1,B,1,"D,M",0,J,0,"Neutral,Disagree",2,TRUE
+232852,458831385,D,1,B,1,"G,M",0,B,0,Strongly agree,2,TRUE
+251364,983765419,A,0,B,1,"G,M",0,G,1,"Strongly agree,Neutral",2,TRUE
+247261,382019461,C,0,B,1,"B,M",0,G,1,"Agree,Neutral",2,TRUE
+258302,383683794,C,0,B,1,"B,M",0,G,1,"Agree,Agree",2,TRUE
+271648,360859107,C,0,B,1,"A,M",0,G,1,"Disagree,Agree",2,TRUE
+272627,451546258,C,0,B,1,"B,M",0,G,1,"Agree,Agree",2,TRUE
+272420,840742914,C,0,B,1,"H,M",0,G,1,"Strongly agree,Neutral",2,TRUE
+255468,856915197,D,1,B,1,"B,M",0,J,0,"Agree,Neutral",2,TRUE
+252263,936672199,A,0,B,1,"E,M",1,J,0,"Neutral,Disagree",2,TRUE
+242887,246438848,D,1,A,0,"G,M",0,G,1,"Agree,Agree",2,TRUE
+252759,638988662,B,0,C,0,"E,M",1,G,1,"Agree,Neutral",2,TRUE
+257755,392120104,D,1,D,0,"E,N",0,G,1,"Agree,Neutral",2,TRUE
+254000,759628802,D,1,B,1,"C,M",0,E,0,"Neutral,Neutral",2,TRUE
+261121,631156441,C,0,B,1,"B,M",0,G,1,"Neutral,Neutral",2,TRUE
+242404,180087933,C,0,B,1,"B,M",0,G,1,"Neutral,Disagree",2,TRUE
+286337,966694495,D,1,B,1,E,0,,0,,2,TRUE
+251944,537314220,D,1,B,1,"G,M",0,C,0,"Disagree,Disagree",2,TRUE
+256555,226468951,A,0,B,1,"B,M",0,G,1,"Agree,Disagree",2,TRUE
+258010,713375707,B,0,B,1,"G,M",0,G,1,"Neutral,Neutral",2,TRUE
+200497,756680677,D,1,A,0,"B,M",0,G,1,"Neutral,Neutral",2,TRUE
+160372,183368087,D,1,B,1,"C,M",0,E,0,"Neutral,Neutral",2,TRUE
+253013,537164680,D,1,B,1,"G,M",0,C,0,"Disagree,Disagree",2,TRUE
+229924,335185926,C,0,B,1,"G,O",0,G,1,"Agree,Neutral",2,TRUE
+7460,769492712,A,0,B,1,"B,M",0,G,1,"Agree,Agree",2,TRUE
+262311,501299719,D,1,A,0,"G,M",0,G,1,"Neutral,Disagree",2,TRUE
+248887,963755846,D,1,D,0,"E,M",1,K,0,"Disagree,Agree",2,TRUE
+254577,332141645,D,1,B,1,"B,M",0,D,0,"Agree,Agree",2,TRUE
+255769,219002862,D,1,B,1,"G,M",0,B,0,,2,TRUE
+249028,706680353,D,1,B,1,"A,M",0,B,0,"Neutral,Neutral",2,TRUE
+270606,409750028,D,1,A,0,"G,M",0,G,1,"Neutral,Agree",2,TRUE
+258348,563173118,A,0,B,1,"B,M",0,G,1,"Neutral,Agree",2,TRUE
+210203,971491326,C,0,B,1,"G,M",0,G,1,"Disagree,Disagree",2,TRUE
+263471,416782810,A,0,B,1,"G,M",0,G,1,"Agree,Agree",2,TRUE
+252122,349985043,C,0,B,1,"G,M",0,G,1,"Agree,Agree",2,TRUE
+215530,246668993,A,0,B,1,"C,M",0,G,1,"Neutral,Disagree",2,TRUE
+256685,528670194,C,0,B,1,"F,M",0,G,1,"Neutral,Neutral",2,TRUE
+244905,750738161,A,0,B,1,"D,M",0,G,1,"Neutral,Neutral",2,TRUE
+232981,436666227,C,0,B,1,"G,N",0,G,1,"Neutral,Neutral",2,TRUE
+285982,982974454,,0,B,1,"B,M",0,G,1,"Agree,Agree",2,TRUE
+263923,383627995,A,0,B,1,"B,M",0,G,1,"Disagree,Agree",2,TRUE
+198481,324315051,D,1,B,1,,0,,0,,2,TRUE
+263322,712485402,D,1,B,1,"B,M",0,J,0,"Agree,Neutral",2,TRUE
+285898,216317586,D,1,B,1,"B,M",0,,0,"Strongly agree,Agree",2,TRUE
+252590,577376653,A,0,B,1,"E,N",0,G,1,"Agree,Agree",2,TRUE
+210978,551805595,C,0,B,1,"E,M",1,G,1,"Agree,Agree",3,TRUE
+265587,335975063,D,1,B,1,"B,M",0,G,1,"Agree,Agree",3,TRUE
+226685,294851856,D,1,B,1,"B,M",0,G,1,"Neutral,Agree",3,TRUE
+269129,572796819,D,1,B,1,"E,M",1,J,0,"Disagree,Disagree",3,TRUE
+248483,254100150,D,1,B,1,"B,N",0,G,1,"Agree,Agree",3,TRUE
+262809,726951392,D,1,B,1,"E,N",0,G,1,"Strongly agree,Strongly agree",3,TRUE
+250647,721180197,D,1,B,1,"E,M",1,J,0,"Agree,Agree",3,TRUE
+254550,867709049,D,1,B,1,"G,M",0,G,1,"Neutral,Agree",3,TRUE
+214946,574105647,D,1,B,1,"B,M",0,G,1,"Strongly disagree,Neutral",3,TRUE
+246092,810091938,D,1,B,1,"B,M",0,G,1,"Agree,Agree",3,TRUE
+259051,837051522,D,1,B,1,"G,M",0,G,1,"Neutral,Neutral",3,TRUE
+268292,669607076,C,0,B,1,"E,M",1,G,1,"Disagree,Disagree",3,TRUE
+289460,241954894,D,1,A,0,"E,M",1,G,1,"Agree,Agree",3,TRUE
+167625,462145775,D,1,B,1,"A,M",0,G,1,"Disagree,Disagree",3,TRUE
+275907,649911679,D,1,B,1,"G,M",0,G,1,"Neutral,Neutral",3,TRUE
+249210,672593584,D,1,B,1,"E,M",1,,0,,3,TRUE
+259322,296964694,D,1,B,1,"E,M",1,C,0,"Disagree,Disagree",3,TRUE
+258502,259729767,D,1,B,1,"G,N",0,G,1,"Strongly agree,Agree",3,TRUE
+223084,414847975,D,1,B,1,"E,N",0,G,1,"Disagree,Disagree",3,TRUE
+259754,280790845,D,1,B,1,"B,M",0,G,1,"Strongly agree,Neutral",3,TRUE
+193737,980682765,A,0,B,1,"E,M",1,G,1,"Agree,Agree",3,TRUE
+259340,404741974,D,1,A,0,"E,M",1,G,1,"Agree,Agree",3,TRUE
+250796,694111662,D,1,B,1,"G,M",0,G,1,"Agree,Agree",3,TRUE
+252210,541707756,D,1,A,0,"E,M",1,G,1,"Agree,Agree",3,TRUE
+255426,378684936,D,1,B,1,"B,M",0,G,1,"Neutral,Neutral",3,TRUE
+252850,786833945,C,0,B,1,"E,M",1,G,1,"Neutral,Agree",3,TRUE
+258212,481517490,D,1,B,1,"K,M",0,G,1,"Agree,Neutral",3,TRUE
+257041,264651749,D,1,B,1,"G,M",0,G,1,"Agree,Agree",3,TRUE
+248607,287955382,A,0,B,1,"E,M",1,G,1,"Agree,Strongly agree",3,TRUE
+257936,510674795,D,1,B,1,"G,M",0,G,1,"Neutral,Neutral",3,TRUE
+253823,461376061,D,1,B,1,"B,M",0,G,1,"Neutral,Neutral",3,TRUE
+256163,973031120,D,1,B,1,"G,M",0,G,1,"Neutral,Neutral",3,TRUE
+262171,962435074,C,0,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",3,TRUE
+247929,704386396,D,1,B,1,"G,M",0,G,1,"Neutral,Agree",3,TRUE
+232706,583753793,D,1,B,1,"G,M",0,G,1,"Strongly agree,Strongly agree",3,TRUE
+250400,233904926,D,1,A,0,"E,M",1,G,1,"Neutral,Agree",3,TRUE
+264096,266920316,D,1,B,1,"G,M",0,G,1,"Agree,Agree",3,TRUE
+257943,970610856,C,0,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",3,TRUE
+195987,949250900,D,1,B,1,"G,M",0,G,1,"Strongly agree,Strongly agree",3,TRUE
+254635,543674679,D,1,B,1,"G,M",0,G,1,"Neutral,Neutral",3,TRUE
+252532,605414195,D,1,B,1,"G,M",0,G,1,"Agree,Agree",3,TRUE
+246608,831109519,D,1,B,1,"B,M",0,G,1,"Agree,Neutral",3,TRUE
+277644,572543643,D,1,B,1,"E,M",1,J,0,"Strongly agree,Strongly agree",3,TRUE
+251587,515417675,C,0,B,1,"E,M",1,G,1,"Agree,Agree",3,TRUE
+286465,707007988,C,0,B,1,"E,M",1,G,1,"Agree,Agree",3,TRUE
+261031,654476806,D,1,B,1,"G,M",0,G,1,"Disagree,Neutral",3,TRUE
+245478,293245571,D,1,B,1,"G,M",0,G,1,"Agree,Agree",3,TRUE
+208301,903498630,C,0,B,1,"E,M",1,G,1,"Agree,Agree",3,TRUE
+261656,110265597,A,0,B,1,"E,M",1,G,1,"Neutral,Neutral",3,TRUE
+269392,473859511,D,1,B,1,"B,M",0,G,1,"Agree,Agree",3,TRUE
+258191,498962224,D,1,B,1,"B,M",0,G,1,"Disagree,Disagree",3,TRUE
+248177,967708051,D,1,B,1,"G,M",0,G,1,"Agree,Agree",3,TRUE
+238371,885687301,D,1,B,1,"G,M",0,G,1,"Agree,Strongly agree",3,TRUE
+219330,683834908,D,1,A,0,"E,M",1,G,1,"Strongly agree,Strongly agree",3,TRUE
+246500,146352457,C,0,B,1,"E,M",1,G,1,"Agree,Agree",3,TRUE
+234255,115415697,A,0,B,1,"E,M",1,G,1,"Disagree,Disagree",3,TRUE
+249755,337275773,D,1,B,1,"B,M",0,G,1,"Agree,Agree",3,TRUE
+264340,107794551,D,1,B,1,"B,M",0,G,1,"Neutral,Neutral",3,TRUE
+198435,217340006,D,1,B,1,"B,M",0,G,1,"Agree,Neutral",3,TRUE
+232388,669917584,D,1,B,1,"E,M",1,K,0,"Strongly agree,Strongly agree",3,TRUE
+253067,469980212,D,1,D,0,"E,M",1,G,1,"Agree,Agree",3,TRUE
+217343,666196611,D,1,B,1,"K,M",0,G,1,"Neutral,Neutral",3,TRUE
+245101,726519129,D,1,B,1,"B,M",0,G,1,"Disagree,Neutral",3,TRUE
+282181,225095890,D,1,B,1,"E,M",1,C,0,"Neutral,Neutral",3,TRUE
+270617,623154198,D,1,B,1,"G,M",0,G,1,"Neutral,Neutral",3,TRUE
+263128,833015300,D,1,B,1,"E,N",0,G,1,"Strongly agree,Strongly agree",3,TRUE
+213909,899903137,D,1,B,1,"E,O",0,G,1,"Disagree,Neutral",3,TRUE
+255033,621693315,D,1,B,1,"B,M",0,G,1,"Neutral,Neutral",3,TRUE
+252346,703575558,D,1,B,1,"B,M",0,G,1,"Agree,Agree",3,TRUE
+291145,372023200,D,1,B,1,"B,M",0,G,1,"Strongly agree,Neutral",3,TRUE
+252820,544975983,D,1,B,1,"B,M",0,G,1,"Agree,Agree",3,TRUE
+246067,942106919,D,1,B,1,"B,M",0,G,1,"Agree,Agree",3,TRUE
+249678,626330775,C,0,B,1,"E,M",1,G,1,"Neutral,Agree",3,TRUE
+257435,534761295,C,0,B,1,"E,M",1,G,1,"Neutral,Strongly disagree",3,TRUE
+247267,948100454,D,1,B,1,"B,M",0,G,1,"Neutral,Disagree",3,TRUE
+197585,676346898,D,1,B,1,"B,M",0,G,1,"Agree,Neutral",3,TRUE
+251412,345027534,C,0,B,1,"E,M",1,G,1,"Neutral,Neutral",3,TRUE
+238267,803755257,D,1,B,1,"G,M",0,G,1,"Agree,Agree",3,TRUE
+257693,486594591,D,1,B,1,"F,M",0,G,1,"Agree,Agree",3,TRUE
+282234,924508180,D,1,B,1,"B,M",0,G,1,"Strongly agree,Disagree",3,TRUE
+276886,215778815,D,1,B,1,"B,M",0,G,1,"Agree,Agree",3,TRUE
+257763,456074114,D,1,B,1,"B,M",0,G,1,"Agree,Agree",3,TRUE
+253799,344569630,D,1,B,1,"G,M",0,G,1,"Agree,Agree",3,TRUE
+249902,552716754,D,1,B,1,"B,M",0,G,1,"Disagree,Neutral",3,TRUE
+245844,774904494,D,1,B,1,"B,M",0,G,1,"Agree,Agree",3,TRUE
+258451,890585072,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+215116,915937696,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+263561,735637311,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+257707,249783909,D,1,B,1,"E,M",1,G,1,"Strongly agree,Agree",4,TRUE
+268332,609599430,D,1,B,1,"E,M",1,G,1,,4,TRUE
+218107,962480086,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+142387,603019837,D,1,B,1,"E,M",1,G,1,"Strongly disagree,Agree",4,TRUE
+276630,430065930,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+271906,425944586,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+209117,358769887,D,1,B,1,"E,M",1,G,1,"Agree,Strongly agree",4,TRUE
+35583,778875395,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+216964,262790112,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+217035,324879578,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+250306,633535162,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+262123,730364799,D,1,B,1,"E,M",1,G,1,"Agree,Strongly agree",4,TRUE
+258147,711047878,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+266100,754400731,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+257247,893023446,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+252724,463955243,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+255794,906240694,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+234832,273946928,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+236030,697470492,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+272380,574750187,D,1,B,1,"E,M",1,G,1,"Agree,Neutral",4,TRUE
+212237,579693396,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+254707,323059711,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+269027,280378981,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+242338,399421334,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+265495,641748774,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+212162,772558866,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+251929,309166967,D,1,B,1,"E,M",1,G,1,"Agree,Neutral",4,TRUE
+213983,103402645,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+260771,639928800,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+265921,744810761,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+259676,899359514,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+254583,332380801,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+258158,886466732,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+261890,711037063,D,1,B,1,"E,M",1,G,1,"Neutral,Agree",4,TRUE
+253031,844606637,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+230747,711265939,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+272283,731612520,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+193692,679253697,D,1,B,1,"E,M",1,G,1,"Agree,Neutral",4,TRUE
+265553,825448629,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+263348,642296167,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+272288,240898101,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+259992,770911275,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+261229,766589498,D,1,B,1,"E,M",1,G,1,"Neutral,Disagree",4,TRUE
+223465,187172524,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+173689,649574844,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+226913,857973452,D,1,B,1,"E,M",1,G,1,"Neutral,Agree",4,TRUE
+220998,891697674,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+251596,643699259,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+246387,282802723,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+226241,365471806,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+254700,174933822,D,1,B,1,"E,M",1,G,1,"Disagree,Disagree",4,TRUE
+245954,191365388,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+17705,6625028,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+257308,472821159,D,1,B,1,"E,M",1,G,1,"Neutral,Agree",4,TRUE
+268798,986818934,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+257882,660915021,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+267370,715685957,D,1,B,1,"E,M",1,G,1,"Agree,Disagree",4,TRUE
+260099,838244209,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+244710,439766768,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+253294,896205691,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+251907,338397633,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+253929,587620760,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+242668,820399389,D,1,B,1,"E,M",1,G,1,"Agree,Strongly agree",4,TRUE
+255338,707514293,D,1,B,1,"E,M",1,G,1,"Disagree,Neutral",4,TRUE
+286039,802004523,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+279903,202235491,D,1,B,1,"E,M",1,G,1,"Strongly agree,Agree",4,TRUE
+251584,851014408,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+256975,162386753,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+263507,843151052,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+217082,546167955,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+222806,740943727,D,1,B,1,"E,M",1,G,1,"Agree,Neutral",4,TRUE
+260692,246187946,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+258688,548612151,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+253529,207695913,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+255689,357236034,D,1,B,1,"E,M",1,G,1,"Agree,Neutral",4,TRUE
+251417,564312298,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+252895,512563386,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+256311,952359688,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+254530,295898111,D,1,B,1,"E,M",1,G,1,"Agree,Neutral",4,TRUE
+268444,533323197,D,1,B,1,"E,M",1,G,1,"Agree,Neutral",4,TRUE
+286496,882504506,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+253352,641357402,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+211269,147761076,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+254694,880006831,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+255915,605448387,D,1,B,1,"E,M",1,G,1,"Neutral,Agree",4,TRUE
+239214,111592442,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+267144,757495668,D,1,B,1,"E,M",1,G,1,"Disagree,Disagree",4,TRUE
+259483,411519546,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+244484,715068174,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+265119,248870159,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+233350,712157833,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+293151,560501710,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+244961,237423070,D,1,B,1,"E,M",1,G,1,"Neutral,Disagree",4,TRUE
+208823,645810483,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+253994,221165062,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+261683,984536298,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+262319,155646305,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+246195,976470145,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+244061,178878707,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+261325,682154462,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+250090,313593320,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+249485,114329631,D,1,B,1,"E,M",1,G,1,"Agree,Neutral",4,TRUE
+265388,919691099,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+258347,301722885,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+189903,301668946,D,1,B,1,"E,M",1,G,1,"Disagree,Neutral",4,TRUE
+251156,596884987,D,1,B,1,"E,M",1,G,1,"Strongly agree,Agree",4,TRUE
+205054,372646963,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+253007,784209479,D,1,B,1,"E,M",1,G,1,"Strongly agree,Agree",4,TRUE
+246440,808813137,D,1,B,1,"E,M",1,G,1,"Neutral,Agree",4,TRUE
+250257,835115086,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+282515,385567463,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+269234,748171565,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+246803,328557074,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+245019,617940790,D,1,B,1,"E,M",1,G,1,"Agree,Neutral",4,TRUE
+252339,244687891,D,1,B,1,"E,M",1,G,1,"Strongly agree,Agree",4,TRUE
+87657,820729376,D,1,B,1,"E,M",1,G,1,"Strongly disagree,Strongly disagree",4,TRUE
+275747,869343773,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+241855,798907409,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+256371,294286017,D,1,B,1,"E,M",1,G,1,"Agree,Neutral",4,TRUE
+262418,859888980,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+215867,761426817,D,1,B,1,"E,M",1,G,1,"Disagree,Agree",4,TRUE
+201982,641851077,D,1,B,1,"E,M",1,G,1,"Neutral,Agree",4,TRUE
+203389,1601289,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+245110,133049715,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+270520,122476017,D,1,B,1,"E,M",1,G,1,"Strongly agree,Agree",4,TRUE
+226982,677693269,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+244863,849621940,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+238277,904118927,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+253488,707422380,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+263178,822680633,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+270885,979525602,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+250021,866408666,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+257797,868238218,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+254552,308843487,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+259548,555203276,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+294143,945208406,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+248146,819823090,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+200818,719721329,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+261702,769757485,D,1,B,1,"E,M",1,G,1,"Strongly agree,Agree",4,TRUE
+243915,388511596,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+214687,974700867,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+252374,429689551,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+245441,651214418,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+211664,289110631,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+273536,737717585,D,1,B,1,"E,M",1,G,1,"Agree,Neutral",4,TRUE
+234318,755860238,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+253521,718931068,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+196570,890953314,D,1,B,1,"E,M",1,G,1,"Strongly agree,Agree",4,TRUE
+254347,532274936,D,1,B,1,"E,M",1,G,1,"Strongly agree,Agree",4,TRUE
+218608,363105428,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+280853,726338176,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+258426,915512348,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+256869,220335998,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+248894,453995786,D,1,B,1,"E,M",1,G,1,"Neutral,Agree",4,TRUE
+247343,843754953,D,1,B,1,"E,M",1,G,1,"Neutral,Agree",4,TRUE
+244635,201238199,D,1,B,1,"E,M",1,G,1,"Agree,Neutral",4,TRUE
+255868,735024267,D,1,B,1,"E,M",1,G,1,"Strongly agree,Agree",4,TRUE
+259708,326738111,D,1,B,1,"E,M",1,G,1,"Disagree,Disagree",4,TRUE
+259045,577047884,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+262479,658581974,D,1,B,1,"E,M",1,G,1,"Neutral,Agree",4,TRUE
+266077,214778979,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+168453,810194259,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+253198,233038984,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+254333,991193190,D,1,B,1,"E,M",1,G,1,"Strongly agree,Agree",4,TRUE
+247726,103629858,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+258437,321222570,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+227527,279238711,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+255792,649793174,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+243494,836233543,D,1,B,1,"E,M",1,G,1,"Agree,Strongly agree",4,TRUE
+258379,404078324,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+250220,457782542,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+238280,226880153,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+222796,592630920,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+258450,101835914,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+253146,219515561,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+232603,735639528,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+253364,685344827,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+242766,742914108,D,1,B,1,"E,M",1,G,1,"Strongly agree,Strongly agree",4,TRUE
+285713,150309961,D,1,B,1,"E,M",1,G,1,"Agree,Neutral",4,TRUE
+201936,736595416,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+256458,203434628,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+248231,982163993,D,1,B,1,"E,M",1,G,1,"Agree,Neutral",4,TRUE
+263966,447633666,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+253767,772020660,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+179856,106390643,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE
+246735,848051990,D,1,B,1,"E,M",1,G,1,"Neutral,Neutral",4,TRUE
+251143,308496059,D,1,B,1,"E,M",1,G,1,"Agree,Agree",4,TRUE

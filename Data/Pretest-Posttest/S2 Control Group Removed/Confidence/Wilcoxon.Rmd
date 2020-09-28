@@ -1,0 +1,87 @@
+---
+title: "Wilcoxon"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r s1-pretest}
+my_data <- read.csv("./Data/S1-Pretest.csv")
+res <- wilcox.test(my_data$iso_ortho_num, my_data$ortho_iso_num, paired = TRUE, alternative = "two.sided")
+res
+res$p.value
+mean(my_data$iso_ortho_num)
+mean(my_data$ortho_iso_num)
+```
+
+```{r s1-posttest}
+my_data <- read.csv("./Data/S1-Posttest.csv")
+res <- wilcox.test(my_data$iso_ortho_num, my_data$ortho_iso_num, paired = TRUE, alternative = "two.sided")
+res
+res$p.value
+mean(my_data$iso_ortho_num)
+mean(my_data$ortho_iso_num)
+```
+
+```{r s1-pretest-posttest-iso-ortho}
+my_data <- read.csv("./Data/S1-Pretest-Posttest.csv")
+res_iso_to_ortho <- wilcox.test(my_data$pre_iso_ortho_num, my_data$post_iso_ortho_num, paired = TRUE, alternative = "less")
+res_iso_to_ortho
+res_iso_to_ortho$p.value
+```
+
+```{r s1-pretest-posttest-ortho-iso}
+my_data <- read.csv("./Data/S1-Pretest-Posttest.csv")
+res_ortho_to_iso <- wilcox.test(my_data$pre_ortho_iso_num, my_data$post_ortho_iso_num, paired = TRUE, alternative = "less")
+res_ortho_to_iso
+res_ortho_to_iso$p.value
+```
+
+```{r s2-pretest}
+my_data <- read.csv("./Data/S2-Pretest.csv")
+res <- wilcox.test(my_data$iso_ortho_num, my_data$ortho_iso_num, paired = TRUE, alternative = "two.sided")
+res
+res$p.value
+mean(my_data$iso_ortho_num)
+mean(my_data$ortho_iso_num)
+```
+
+```{r s2-posttest}
+my_data <- read.csv("./Data/S2-Posttest.csv")
+res <- wilcox.test(my_data$iso_ortho_num, my_data$ortho_iso_num, paired = TRUE, alternative = "two.sided")
+res
+res$p.value
+mean(my_data$iso_ortho_num)
+mean(my_data$ortho_iso_num)
+```
+
+```{r s2-pretest-posttest-iso-ortho}
+my_data <- read.csv("./Data/S2-Pretest-Posttest.csv")
+res_iso_to_ortho <- wilcox.test(my_data$pre_iso_ortho_num, my_data$post_iso_ortho_num, paired = TRUE, alternative = "less")
+res_iso_to_ortho
+res_iso_to_ortho$p.value
+```
+
+```{r s2-pretest-posttest-ortho-iso}
+my_data <- read.csv("./Data/S2-Pretest-Posttest.csv")
+res_ortho_to_iso <- wilcox.test(my_data$pre_ortho_iso_num, my_data$post_ortho_iso_num, paired = TRUE, alternative = "less")
+res_ortho_to_iso
+res_ortho_to_iso$p.value
+```
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

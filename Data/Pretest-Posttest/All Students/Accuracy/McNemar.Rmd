@@ -1,0 +1,157 @@
+---
+title: "McNemar"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r S1-Q1}
+my_data <-
+  matrix(c(325,57,56,26),
+         nrow=2,
+         dimnames = list("Pretest" = c("Correct", "Incorrect"),
+                         "Posttest" = c("Correct", "Incorrect")))
+
+my_data
+mcnemar.test(my_data)
+```
+
+```{r S1-Q2}
+my_data <-
+  matrix(c(384,30,37,13),
+         nrow=2,
+         dimnames = list("Pretest" = c("Correct", "Incorrect"),
+                         "Posttest" = c("Correct", "Incorrect")))
+
+my_data
+mcnemar.test(my_data)
+```
+
+```{r S1-Q3}
+my_data <-
+  matrix(c(180,81,113,90),
+         nrow=2,
+         dimnames = list("Pretest" = c("Correct", "Incorrect"),
+                         "Posttest" = c("Correct", "Incorrect")))
+
+my_data
+mcnemar.test(my_data)
+```
+
+```{r S1-Q3-Front}
+my_data <-
+  matrix(c(198,80,104,82),
+         nrow=2,
+         dimnames = list("Pretest" = c("Correct", "Incorrect"),
+                         "Posttest" = c("Correct", "Incorrect")))
+
+my_data
+mcnemar.test(my_data)
+```
+
+```{r S1-Q3-Top}
+my_data <-
+  matrix(c(384,16,60,4),
+         nrow=2,
+         dimnames = list("Pretest" = c("Correct", "Incorrect"),
+                         "Posttest" = c("Correct", "Incorrect")))
+
+my_data
+mcnemar.test(my_data)
+```
+
+
+```{r S1-Q4}
+my_data <-
+  matrix(c(375,30,42,17),
+         nrow=2,
+         dimnames = list("Pretest" = c("Correct", "Incorrect"),
+                         "Posttest" = c("Correct", "Incorrect")))
+
+my_data
+mcnemar.test(my_data)
+```
+
+```{r S2-Q1}
+my_data <-
+  matrix(c(291,66,28,15),
+         nrow=2,
+         dimnames = list("Pretest" = c("Correct", "Incorrect"),
+                         "Posttest" = c("Correct", "Incorrect")))
+
+my_data
+mcnemar.test(my_data)
+```
+
+```{r S2-Q2}
+my_data <-
+  matrix(c(330,42,19,9),
+         nrow=2,
+         dimnames = list("Pretest" = c("Correct", "Incorrect"),
+                         "Posttest" = c("Correct", "Incorrect")))
+
+my_data
+mcnemar.test(my_data)
+```
+
+```{r S2-Q3}
+my_data <-
+  matrix(c(166,75,77,82),
+         nrow=2,
+         dimnames = list("Pretest" = c("Correct", "Incorrect"),
+                         "Posttest" = c("Correct", "Incorrect")))
+
+my_data
+mcnemar.test(my_data)
+```
+
+```{r S2-Q3-Front}
+my_data <-
+  matrix(c(177,70,77,76),
+         nrow=2,
+         dimnames = list("Pretest" = c("Correct", "Incorrect"),
+                         "Posttest" = c("Correct", "Incorrect")))
+
+my_data
+mcnemar.test(my_data)
+```
+
+```{r S2-Q3-Top}
+my_data <-
+  matrix(c(328,25,38,9),
+         nrow=2,
+         dimnames = list("Pretest" = c("Correct", "Incorrect"),
+                         "Posttest" = c("Correct", "Incorrect")))
+
+my_data
+mcnemar.test(my_data)
+```
+
+
+```{r S2-Q4}
+my_data <-
+  matrix(c(314,40,31,15),
+         nrow=2,
+         dimnames = list("Pretest" = c("Correct", "Incorrect"),
+                         "Posttest" = c("Correct", "Incorrect")))
+
+my_data
+mcnemar.test(my_data)
+```
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

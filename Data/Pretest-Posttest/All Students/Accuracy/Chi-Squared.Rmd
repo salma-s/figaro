@@ -1,0 +1,121 @@
+---
+title: "Chi-Squared"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r Pretest-Q1}
+my_data <- as.table(rbind(c(381, 83), c(319, 81)))
+dimnames(my_data) <- list(group = c("S1-Control", "S2-Treatment"),
+                    response = c("Correct","Incorrect"))
+my_data
+chisq.test(my_data)  # Prints test summary
+```
+
+```{r Pretest-Q2}
+my_data <- as.table(rbind(c(421, 43), c(349, 51)))
+dimnames(my_data) <- list(group = c("S1-Control", "S2-Treatment"),
+                    response = c("Correct","Incorrect"))
+my_data
+chisq.test(my_data)  # Prints test summary
+```
+
+
+```{r Pretest-Q3}
+my_data <- as.table(rbind(c(293, 171), c(243, 157)))
+dimnames(my_data) <- list(group = c("S1-Control", "S2-Treatment"),
+                    response = c("Correct","Incorrect"))
+my_data
+chisq.test(my_data)  # Prints test summary
+```
+
+```{r Pretest-Q3-Front}
+my_data <- as.table(rbind(c(302, 162), c(254, 146)))
+dimnames(my_data) <- list(group = c("S1-Control", "S2-Treatment"),
+                    response = c("Correct","Incorrect"))
+my_data
+chisq.test(my_data)  # Prints test summary
+```
+
+```{r Pretest-Q3-Top}
+my_data <- as.table(rbind(c(444, 20), c(366, 34)))
+dimnames(my_data) <- list(group = c("S1-Control", "S2-Treatment"),
+                    response = c("Correct","Incorrect"))
+my_data
+chisq.test(my_data)  # Prints test summary
+```
+
+```{r Pretest-Q4}
+my_data <- as.table(rbind(c(417, 47), c(345, 55)))
+dimnames(my_data) <- list(group = c("S1-Control", "S2-Treatment"),
+                    response = c("Correct","Incorrect"))
+my_data
+chisq.test(my_data)  # Prints test summary
+```
+
+```{r Posttest-Q1}
+my_data <- as.table(rbind(c(382, 82), c(357, 43)))
+dimnames(my_data) <- list(group = c("S1-Control", "S2-Treatment"),
+                    response = c("Correct","Incorrect"))
+my_data
+chisq.test(my_data)  # Prints test summary
+```
+
+```{r Posttest-Q2}
+my_data <- as.table(rbind(c(414, 50), c(372, 28)))
+dimnames(my_data) <- list(group = c("S1-Control", "S2-Treatment"),
+                    response = c("Correct","Incorrect"))
+my_data
+chisq.test(my_data)  # Prints test summary
+```
+
+```{r Posttest-Q3}
+my_data <- as.table(rbind(c(261, 203), c(241, 159)))
+dimnames(my_data) <- list(group = c("S1-Control", "S2-Treatment"),
+                    response = c("Correct","Incorrect"))
+my_data
+chisq.test(my_data)  # Prints test summary
+```
+
+```{r Posttest-Q3-Front}
+my_data <- as.table(rbind(c(278, 186), c(247, 153)))
+dimnames(my_data) <- list(group = c("S1-Control", "S2-Treatment"),
+                    response = c("Correct","Incorrect"))
+my_data
+chisq.test(my_data)  # Prints test summary
+```
+
+```{r Posttest-Q3-Top}
+my_data <- as.table(rbind(c(400, 64), c(353, 47)))
+dimnames(my_data) <- list(group = c("S1-Control", "S2-Treatment"),
+                    response = c("Correct","Incorrect"))
+my_data
+chisq.test(my_data)  # Prints test summary
+```
+
+```{r Posttest-Q4}
+my_data <- as.table(rbind(c(405, 59), c(354, 46)))
+dimnames(my_data) <- list(group = c("S1-Control", "S2-Treatment"),
+                    response = c("Correct","Incorrect"))
+my_data
+chisq.test(my_data)  # Prints test summary
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

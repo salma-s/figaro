@@ -1,0 +1,4 @@
+question,iso_ortho_gs,ortho_iso_gs,iso_ortho_hz,ortho_iso_hz
+correct (abs),398,429,275,423
+incorrect (abs),86,55,209,61
+correctness (%),82.23,88.64,56.82,87.40
