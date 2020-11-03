@@ -22,8 +22,22 @@ DISTRACTOR_TYPE = 'DISSIMILAR' # "DISSIMILAR", "SIMILAR", "DIFF_ROTATION"
 
 # MCQ Options per Question. Count is inclusive of correct answer.
 # Not more than 4 is recommended for a DIFF_ROTATION distractor type.
-MCQ_OPTIONS_PER_QUESTION = 1
+MCQ_OPTIONS_PER_QUESTION = 4
 
 NUMBER_OF_MCQS = 1 # The number of MCQs to generate
 
 MCQ_START_NUM = 1 # The question number of the first MCQ outputted
+
+# Path to the project
+# Required to run MCQMergerIsoToOrtho.py, MCQMergerOrthoToIso.py, AddFronLabelToIso
+PROJECT_LOCATION = '/Users/salmas/source/repos/part-iv-project/'
+
+# Path to the individual drawing SVGs to be converted into formatted MCQs
+# Required to run MCQMergerIsoToOrtho.py, MCQMergerOrthoToIso.py, AddFronLabelToIso
+IMAGE_DIRECTORY = '/Users/salmas/Downloads/Ortho To Iso/Simple - Similar/'
+
+# A list of the question ids (in the filename of the individual drawing SVGs) to be converted into MCQs
+# Required to run MCQMergerIsoToOrtho.py, MCQMergerOrthoToIso.py, AddFronLabelToIso
+QUESTION_IDS = [1,2,5,7,8]
+
+IMAGE_DIRECTORY_FOR_SVG_TO_PNG = '/Users/salmas/source/repos/part-iv-project/Macros/Output/IsometricWithFrontLabel'
